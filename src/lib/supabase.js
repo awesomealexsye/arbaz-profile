@@ -219,13 +219,81 @@ export const portfolioAPI = {
   },
 
   async updateSiteSettings(key, value) {
+    // Handle null values properly
+    const settingsData = { key, value: value === null ? null : value }
+    
     const { data, error } = await supabase
       .from('site_settings')
-      .upsert({ key, value })
+      .upsert(settingsData, {
+        onConflict: 'key'
+      })
       .select()
       .single()
     return { data, error }
   }
+}
+
+// Image compression utility
+export const compressImage = (file, maxSizeKB = 100, quality = 0.8) => {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    const img = new Image()
+
+    img.onload = () => {
+      // Calculate new dimensions while maintaining aspect ratio
+      const maxDimension = 800 // Max width or height
+      let { width, height } = img
+
+      if (width > height) {
+        if (width > maxDimension) {
+          height = (height * maxDimension) / width
+          width = maxDimension
+        }
+      } else {
+        if (height > maxDimension) {
+          width = (width * maxDimension) / height
+          height = maxDimension
+        }
+      }
+
+      canvas.width = width
+      canvas.height = height
+
+      // Draw and compress
+      ctx.drawImage(img, 0, 0, width, height)
+
+      // Convert to blob with specified quality
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            // Check if still too large, reduce quality further
+            const sizeKB = blob.size / 1024
+            if (sizeKB > maxSizeKB && quality > 0.1) {
+              // Recursively compress with lower quality
+              const reader = new FileReader()
+              reader.onload = () => {
+                const newFile = new File([blob], file.name, { type: file.type })
+                compressImage(newFile, maxSizeKB, quality * 0.8)
+                  .then(resolve)
+                  .catch(reject)
+              }
+              reader.readAsDataURL(blob)
+            } else {
+              resolve(blob)
+            }
+          } else {
+            reject(new Error('Canvas to Blob conversion failed'))
+          }
+        },
+        file.type,
+        quality
+      )
+    }
+
+    img.onerror = () => reject(new Error('Image load failed'))
+    img.src = URL.createObjectURL(file)
+  })
 }
 
 export default supabase

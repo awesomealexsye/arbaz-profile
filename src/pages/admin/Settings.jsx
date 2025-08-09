@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { Settings as SettingsIcon, Save, Globe, Mail, Shield, RefreshCw, Upload, X, Image } from 'lucide-react'
-import { supabase, portfolioAPI } from '../../lib/supabase'
+import { supabase, portfolioAPI, compressImage } from '../../lib/supabase'
 import toast from 'react-hot-toast'
 
 const Settings = () => {
@@ -25,17 +25,15 @@ const Settings = () => {
         })
         setSiteSettings(settingsMap)
         
-        // Set logo preview if exists
-        if (settingsMap.site_logo) {
-          setLogoPreview(settingsMap.site_logo)
-        }
+        // Set logo preview - handle null values properly
+        setLogoPreview(settingsMap.site_logo || null)
       }
     } catch (error) {
       console.error('Error fetching settings:', error)
     }
   }
 
-  const handleLogoSelect = (event) => {
+  const handleLogoSelect = async (event) => {
     const file = event.target.files?.[0]
     if (!file) return
 
@@ -45,18 +43,26 @@ const Settings = () => {
       return
     }
 
-    // Validate file size (max 2MB)
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error('Logo size should be less than 2MB')
-      return
-    }
+    try {
+      toast.loading('Compressing logo...', { id: 'compress-logo' })
+      
+      // Compress logo to max 100KB
+      const compressedBlob = await compressImage(file, 100)
+      const compressedFile = new File([compressedBlob], file.name, { type: file.type })
+      
+      const sizeKB = Math.round(compressedFile.size / 1024)
+      toast.success(`Logo compressed to ${sizeKB}KB`, { id: 'compress-logo' })
 
-    setSelectedLogoFile(file)
-    
-    // Create preview
-    const reader = new FileReader()
-    reader.onload = (e) => setLogoPreview(e.target?.result)
-    reader.readAsDataURL(file)
+      setSelectedLogoFile(compressedFile)
+      
+      // Create preview
+      const reader = new FileReader()
+      reader.onload = (e) => setLogoPreview(e.target?.result)
+      reader.readAsDataURL(compressedFile)
+    } catch (error) {
+      toast.error('Failed to compress logo', { id: 'compress-logo' })
+      console.error('Logo compression error:', error)
+    }
   }
 
   const uploadLogoToSupabase = async (file) => {
@@ -117,11 +123,27 @@ const Settings = () => {
       const logoUrl = await uploadLogoToSupabase(selectedLogoFile)
       
       // Update site settings
-      await portfolioAPI.updateSiteSettings('site_logo', logoUrl)
+      const { data, error } = await portfolioAPI.updateSiteSettings('site_logo', logoUrl)
+      
+      if (error) {
+        console.error('Settings update error:', error)
+        throw new Error('Failed to save logo settings')
+      }
+      
+      console.log('Logo settings updated:', data)
+      
+      // Update local state immediately
+      setSiteSettings(prev => ({ ...prev, site_logo: logoUrl }))
+      setLogoPreview(logoUrl)
+      setSelectedLogoFile(null)
       
       toast.success('Logo uploaded successfully!')
-      setSelectedLogoFile(null)
+      
+      // Refresh settings to ensure consistency
       await fetchSiteSettings()
+      
+      // Force refresh the main app by dispatching a custom event
+      window.dispatchEvent(new CustomEvent('logoUpdated', { detail: { logoUrl } }))
     } catch (error) {
       toast.error(`Failed to upload logo: ${error.message}`)
       console.error('Logo upload error:', error)
@@ -133,6 +155,44 @@ const Settings = () => {
   const clearLogoSelection = () => {
     setSelectedLogoFile(null)
     setLogoPreview(siteSettings.site_logo || null)
+  }
+
+  const removeLogo = async () => {
+    if (!confirm('Are you sure you want to remove the current logo?')) return
+
+    try {
+      setUploadingLogo(true)
+      
+      console.log('Removing logo from settings...')
+      
+      // Update site settings to remove logo
+      const { data, error } = await portfolioAPI.updateSiteSettings('site_logo', null)
+      
+      if (error) {
+        console.error('Settings removal error:', error)
+        throw new Error('Failed to remove logo from settings')
+      }
+      
+      console.log('Logo removed from settings:', data)
+      
+      // Update local state immediately
+      setSiteSettings(prev => ({ ...prev, site_logo: null }))
+      setLogoPreview(null)
+      setSelectedLogoFile(null)
+      
+      toast.success('Logo removed successfully!')
+      
+      // Refresh settings to ensure consistency
+      await fetchSiteSettings()
+      
+      // Force refresh the main app by dispatching a custom event
+      window.dispatchEvent(new CustomEvent('logoUpdated', { detail: { logoUrl: null } }))
+    } catch (error) {
+      toast.error(`Failed to remove logo: ${error.message}`)
+      console.error('Logo removal error:', error)
+    } finally {
+      setUploadingLogo(false)
+    }
   }
 
   return (
@@ -176,14 +236,32 @@ const Settings = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Current Logo */}
             <div>
-              <h3 className="text-lg font-medium text-white mb-4">Current Logo</h3>
-              <div className="aspect-video rounded-xl bg-slate-700/50 border border-slate-600 flex items-center justify-center">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-white">Current Logo</h3>
+                <button
+                  onClick={fetchSiteSettings}
+                  className="px-3 py-1 text-xs bg-slate-700 text-white rounded hover:bg-slate-600 transition-colors"
+                >
+                  🔄 Refresh
+                </button>
+              </div>
+              <div className="aspect-video rounded-xl bg-slate-700/50 border border-slate-600 flex items-center justify-center relative">
                 {logoPreview ? (
-                  <img 
-                    src={logoPreview} 
-                    alt="Site logo" 
-                    className="max-h-full max-w-full object-contain p-4"
-                  />
+                  <>
+                    <img 
+                      src={logoPreview} 
+                      alt="Site logo" 
+                      className="max-h-full max-w-full object-contain p-4"
+                    />
+                    <button
+                      onClick={removeLogo}
+                      disabled={uploadingLogo}
+                      className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors disabled:opacity-50"
+                      title="Remove logo"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </>
                 ) : (
                   <div className="text-center text-slate-400">
                     <Image className="w-12 h-12 mx-auto mb-2" />
@@ -198,6 +276,13 @@ const Settings = () => {
               <h3 className="text-lg font-medium text-white mb-4">Upload New Logo</h3>
               
               <div className="space-y-4">
+                {/* Debug Info */}
+                <div className="text-xs text-slate-500 p-2 bg-slate-800/30 rounded">
+                  Current logo: {siteSettings.site_logo ? '✅ Set' : '❌ None'} | 
+                  Preview: {logoPreview ? '✅ Loaded' : '❌ None'} | 
+                  Selected: {selectedLogoFile ? '✅ Ready' : '❌ None'}
+                </div>
+
                 {/* Upload Area */}
                 <div className="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-brand-500 transition-colors">
                   <input
@@ -210,8 +295,8 @@ const Settings = () => {
                   <label htmlFor="logo-upload" className="cursor-pointer block">
                     <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
                     <p className="text-slate-300 mb-2">Upload your logo</p>
-                    <p className="text-sm text-slate-500">PNG, JPG, SVG (max 2MB)</p>
-                    <p className="text-xs text-slate-600 mt-1">Recommended: 200x60px</p>
+                    <p className="text-sm text-slate-500">PNG, JPG, SVG (auto-compressed to 100KB)</p>
+                    <p className="text-xs text-slate-600 mt-1">Recommended: 200x60px • Will be optimized automatically</p>
                   </label>
                 </div>
 

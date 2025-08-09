@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import emailjs from '@emailjs/browser'
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle, User } from 'lucide-react'
 import { portfolioAPI, supabase } from '../lib/supabase'
+import callMeImage from '../assets/ 3d/call me.png'
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -381,6 +382,24 @@ export function Contact() {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
+          {/* Character Image */}
+          <Motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center"
+          >
+            <div className="relative">
+              <img 
+                src={callMeImage} 
+                alt="Call Me" 
+                className="w-48 h-48 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-success-500/20 to-transparent rounded-full blur-xl"></div>
+            </div>
+          </Motion.div>
+
           {/* Personal Info Card */}
           <div className="card">
             <h3 className="text-2xl font-bold mb-6">

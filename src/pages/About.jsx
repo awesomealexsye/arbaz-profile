@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { portfolioAPI } from '../lib/supabase'
+import stickerImage from '../assets/ 3d/sticker.png'
 
 export function About() {
   const [personalInfo, setPersonalInfo] = useState(null)
@@ -98,6 +99,24 @@ export function About() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="space-y-6"
         >
+          {/* Character Image */}
+          <Motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center mb-8"
+          >
+            <div className="relative">
+              <img 
+                src={stickerImage} 
+                alt="Arbaz Character" 
+                className="w-64 h-64 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-500/20 to-transparent rounded-full blur-xl"></div>
+            </div>
+          </Motion.div>
+
           <div className="card">
             <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
               📍 <span className="gradient-text">Location</span>

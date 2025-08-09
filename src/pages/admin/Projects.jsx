@@ -22,7 +22,7 @@ import {
   Filter,
   Upload
 } from 'lucide-react'
-import { supabase } from '../../lib/supabase'
+import { supabase, compressImage } from '../../lib/supabase'
 import toast from 'react-hot-toast'
 
 const projectSchema = z.object({
@@ -81,7 +81,7 @@ const Projects = () => {
   }, [])
 
   // Image upload handling
-  const handleImageSelect = (event) => {
+  const handleImageSelect = async (event) => {
     const file = event.target.files?.[0]
     if (!file) return
 
@@ -91,18 +91,26 @@ const Projects = () => {
       return
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size should be less than 5MB')
-      return
-    }
+    try {
+      toast.loading('Compressing image...', { id: 'compress' })
+      
+      // Compress image to max 100KB
+      const compressedBlob = await compressImage(file, 100)
+      const compressedFile = new File([compressedBlob], file.name, { type: file.type })
+      
+      const sizeKB = Math.round(compressedFile.size / 1024)
+      toast.success(`Image compressed to ${sizeKB}KB`, { id: 'compress' })
 
-    setSelectedImageFile(file)
-    
-    // Create preview
-    const reader = new FileReader()
-    reader.onload = (e) => setImagePreview(e.target?.result)
-    reader.readAsDataURL(file)
+      setSelectedImageFile(compressedFile)
+      
+      // Create preview
+      const reader = new FileReader()
+      reader.onload = (e) => setImagePreview(e.target?.result)
+      reader.readAsDataURL(compressedFile)
+    } catch (error) {
+      toast.error('Failed to compress image', { id: 'compress' })
+      console.error('Image compression error:', error)
+    }
   }
 
   const uploadImageToSupabase = async (file) => {
@@ -798,7 +806,8 @@ const Projects = () => {
                         <label htmlFor="project-image-upload" className="cursor-pointer block">
                           <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
                           <p className="text-slate-300 mb-2">Upload project image</p>
-                          <p className="text-sm text-slate-500">JPG, PNG, WebP (max 5MB)</p>
+                          <p className="text-sm text-slate-500">JPG, PNG, WebP (auto-compressed to 100KB)</p>
+                          <p className="text-xs text-slate-600 mt-1">Will be optimized automatically for best performance</p>
                         </label>
                       </div>
 

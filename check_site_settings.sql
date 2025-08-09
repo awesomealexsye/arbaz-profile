@@ -1,0 +1,5 @@
+-- Check if site_settings table exists and its structure
+SELECT table_name, column_name, data_type 
+FROM information_schema.columns 
+WHERE table_name = 'site_settings'
+ORDER BY ordinal_position;
