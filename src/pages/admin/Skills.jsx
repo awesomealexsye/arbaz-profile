@@ -298,6 +298,20 @@ const Skills = () => {
     { from: 'from-info-500', to: 'to-info-600', label: 'Info Cyan' }
   ]
 
+  // Function to get two-character logo from skill name or icon
+  const getSkillLogo = (skill) => {
+    // If skill name is available, use first two characters
+    if (skill.name && skill.name.length >= 2) {
+      return skill.name.substring(0, 2).toUpperCase()
+    }
+    // If icon is a simple string, use first two characters
+    if (skill.icon && typeof skill.icon === 'string' && skill.icon.length >= 2) {
+      return skill.icon.substring(0, 2).toUpperCase()
+    }
+    // Default fallback
+    return 'SK'
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -414,8 +428,8 @@ const Skills = () => {
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skill.category?.gradient_from} ${skill.category?.gradient_to} flex items-center justify-center text-white text-xl`}>
-                      {skill.icon}
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${skill.category?.gradient_from} ${skill.category?.gradient_to} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                      {getSkillLogo(skill)}
                     </div>
                     <div>
                       <h3 className="font-semibold text-white">{skill.name}</h3>
