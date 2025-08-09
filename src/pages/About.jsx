@@ -1,12 +1,46 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
+import { portfolioAPI } from '../lib/supabase'
 
 export function About() {
+  const [personalInfo, setPersonalInfo] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchPersonalInfo()
+  }, [])
+
+  const fetchPersonalInfo = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getPersonalInfo()
+      if (!error && data) {
+        setPersonalInfo(data)
+      }
+    } catch (error) {
+      console.error('Error fetching personal info:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Default highlights if no data available
   const highlights = [
-    { icon: '🚀', text: 'Delivered 30+ production projects across startups and agencies' },
+    { icon: '🚀', text: `Delivered ${personalInfo?.projects_completed || 30}+ production projects across startups and agencies` },
     { icon: '⚡', text: 'Performance-focused: Lighthouse ≥ 90 targets met consistently' },
     { icon: '🎨', text: 'Strong UX eye: animations, micro-interactions, typography' },
-    { icon: '🔧', text: '7+ years mastering modern web technologies' },
+    { icon: '🔧', text: `${personalInfo?.years_experience || 7}+ years mastering modern web technologies` },
   ]
+
+  if (loading) {
+    return (
+      <section className="container-safe py-16 md:py-24 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+          <p className="text-slate-400">Loading...</p>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="container-safe py-16 md:py-24">
@@ -21,9 +55,9 @@ export function About() {
           <span className="gradient-text">About Me</span>
         </h2>
         <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          I'm <span className="font-semibold text-brand-600">Arbaz</span>, a passionate web developer with 7+ years of experience 
+          {personalInfo?.bio || `I'm ${personalInfo?.name || 'Arbaz'}, a passionate web developer with ${personalInfo?.years_experience || 7}+ years of experience 
           building scalable, beautiful, and performant web solutions. I specialize in React, Node.js, Laravel, 
-          and modern tooling with a keen eye for design and user experience.
+          and modern tooling with a keen eye for design and user experience.`}
         </p>
       </Motion.div>
 
@@ -69,7 +103,7 @@ export function About() {
               📍 <span className="gradient-text">Location</span>
             </h3>
             <p className="text-lg text-slate-700 dark:text-slate-300 mb-4">
-              Based in <span className="font-semibold text-brand-600">Ballabgarh, Faridabad</span>
+              Based in <span className="font-semibold text-brand-600">{personalInfo?.location || 'Ballabgarh, Faridabad'}</span>
             </p>
             <p className="text-slate-600 dark:text-slate-400">
               Available for remote work and local collaborations in the Delhi NCR region.

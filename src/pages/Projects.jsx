@@ -1,38 +1,49 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
+import { portfolioAPI } from '../lib/supabase'
 
 export function Projects() {
-  const projects = [
-    {
-      title: '🏢 Enterprise Dashboard',
-      description: 'A scalable analytics dashboard with role-based access and real-time charts.',
-      tech: ['⚛️ React', '🟢 Node.js', '🔗 GraphQL', '🐘 Postgres'],
-      demo: '#',
-      repo: '#',
-      role: 'Full-Stack Developer',
-      outcome: 'Improved reporting efficiency by 40%',
-      gradient: 'from-blue-400/20 via-cyan-400/20 to-teal-400/20',
-    },
-    {
-      title: '🛒 E-Commerce Platform',
-      description: 'Modern e-commerce solution with payment integration and inventory management.',
-      tech: ['⚛️ React', '🐘 Laravel', '💳 Stripe', '📊 MySQL'],
-      demo: '#',
-      repo: '#',
-      role: 'Lead Developer',
-      outcome: '300% increase in conversion rate',
-      gradient: 'from-purple-400/20 via-pink-400/20 to-rose-400/20',
-    },
-    {
-      title: '📱 Mobile-First SaaS',
-      description: 'Progressive web app with offline capabilities and push notifications.',
-      tech: ['⚛️ React', '⚡ Supabase', '🔔 PWA', '🎨 Tailwind'],
-      demo: '#',
-      repo: '#',
-      role: 'Frontend Lead',
-      outcome: '95% mobile user satisfaction',
-      gradient: 'from-green-400/20 via-emerald-400/20 to-teal-400/20',
-    },
-  ]
+  const [projects, setProjects] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getProjects()
+      if (!error && data) {
+        // Transform the data to match the expected format
+        const transformedProjects = data.map(project => ({
+          title: project.title,
+          description: project.description,
+          tech: project.project_technologies?.map(tech => tech.name) || [],
+          demo: project.demo_url || '#',
+          repo: project.github_url || '#',
+          role: project.role || 'Developer',
+          outcome: project.outcome || 'Successfully completed',
+          gradient: project.gradient || 'from-blue-400/20 via-cyan-400/20 to-teal-400/20',
+        }))
+        setProjects(transformedProjects)
+      }
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="container-safe py-16 md:py-24 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+          <p className="text-slate-400">Loading projects...</p>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="container-safe py-16 md:py-24">

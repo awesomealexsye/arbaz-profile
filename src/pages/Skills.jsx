@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadialLinearScale } from 'chart.js'
 import { Line, Radar } from 'react-chartjs-2'
 import { Code, Database, Palette, Server, Zap, Brain } from 'lucide-react'
+import { portfolioAPI } from '../lib/supabase'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, RadialLinearScale)
 
@@ -95,7 +97,58 @@ const progressData = {
   ]
 }
 
+const iconMap = {
+  'Palette': Palette,
+  'Server': Server,
+  'Code': Code,
+  'Database': Database,
+  'Zap': Zap,
+  'Brain': Brain
+}
+
 export function Skills() {
+  const [skillCategories, setSkillCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchSkills()
+  }, [])
+
+  const fetchSkills = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getSkillCategories()
+      if (!error && data) {
+        // Transform data to match component structure
+        const transformedCategories = data.map(category => ({
+          ...category,
+          icon: iconMap[category.icon] || Code,
+          gradient: `${category.gradient_from} ${category.gradient_to}`,
+          skills: category.skills?.map(skill => ({
+            name: `${skill.icon} ${skill.name}`,
+            level: skill.level,
+            years: skill.years_experience
+          })) || []
+        }))
+        setSkillCategories(transformedCategories)
+      }
+    } catch (error) {
+      console.error('Error fetching skills:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="container-safe py-24 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+          <p className="text-slate-400">Loading skills...</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="container-safe py-16 md:py-24">
       {/* Header */}

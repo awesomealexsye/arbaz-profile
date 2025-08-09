@@ -1,7 +1,40 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
+import { AvatarModel } from '../components/AvatarModel'
+import { portfolioAPI } from '../lib/supabase'
 
 export function Home() {
+  const [personalInfo, setPersonalInfo] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchPersonalInfo()
+  }, [])
+
+  const fetchPersonalInfo = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getPersonalInfo()
+      if (!error && data) {
+        setPersonalInfo(data)
+      }
+    } catch (error) {
+      console.error('Error fetching personal info:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="container-safe py-24 md:py-32 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+          <p className="text-slate-400">Loading...</p>
+        </div>
+      </section>
+    )
+  }
   return (
     <section className="container-safe py-24 md:py-32 relative">
       {/* Hero Content */}
@@ -30,11 +63,9 @@ export function Home() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-6xl md:text-7xl font-black tracking-tight leading-[0.9] mb-6"
           >
-            <span className="gradient-text">Arbaz</span>
+            <span className="gradient-text">{personalInfo?.name || 'Arbaz'}</span>
             <br />
-            <span className="text-slate-800 dark:text-slate-200">Senior Web</span>
-            <br />
-            <span className="text-slate-600 dark:text-slate-400">Developer</span>
+            <span className="text-slate-800 dark:text-slate-200">{personalInfo?.title || 'Senior Web Developer'}</span>
           </Motion.h1>
           
           <Motion.p 
@@ -44,8 +75,13 @@ export function Home() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed"
           >
-            Based in <span className="font-semibold text-brand-600">Ballabgarh, Faridabad</span>. 
-            I craft beautiful, performant, and accessible web experiences that users love.
+            {personalInfo?.tagline || 'I craft beautiful, performant, and accessible web experiences that users love.'}
+            {personalInfo?.location && (
+              <>
+                <br />
+                <span className="font-semibold text-brand-600">📍 {personalInfo.location}</span>
+              </>
+            )}
           </Motion.p>
           
           <Motion.div 
@@ -87,7 +123,7 @@ export function Home() {
           </Motion.div>
         </Motion.div>
         
-        {/* Hero Visual */}
+        {/* 3D Avatar Visual */}
         <Motion.div 
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -95,13 +131,7 @@ export function Home() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="relative"
         >
-          <div className="aspect-square surface floating relative overflow-hidden">
-            {/* Animated elements inside */}
-            <div className="absolute inset-4 rounded-2xl bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm border border-white/30" />
-            <div className="absolute top-8 left-8 w-16 h-16 bg-brand-400/30 rounded-2xl rotate-12 floating" style={{ animationDelay: '1s' }} />
-            <div className="absolute top-20 right-12 w-12 h-12 bg-accent-400/30 rounded-full floating" style={{ animationDelay: '2s' }} />
-            <div className="absolute bottom-16 left-16 w-20 h-20 bg-success-400/30 rounded-3xl -rotate-12 floating" style={{ animationDelay: '0.5s' }} />
-          </div>
+          <AvatarModel />
         </Motion.div>
       </div>
     </section>

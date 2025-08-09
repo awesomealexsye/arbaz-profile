@@ -1,9 +1,27 @@
+import React, { useState, useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { portfolioAPI } from './lib/supabase'
 import './App.css'
 
 function App() {
+  const [personalInfo, setPersonalInfo] = useState(null)
+
+  useEffect(() => {
+    fetchPersonalInfo()
+  }, [])
+
+  const fetchPersonalInfo = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getPersonalInfo()
+      if (!error && data) {
+        setPersonalInfo(data)
+      }
+    } catch (error) {
+      console.error('Error fetching personal info:', error)
+    }
+  }
   return (
-    <div className="min-h-dvh flex flex-col">
+    <div className="min-h-dvh flex flex-col website-root">
       {/* Stunning animated background */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-brand-50 to-accent-50 dark:from-slate-950 dark:via-brand-950 dark:to-accent-950" />
@@ -68,24 +86,28 @@ function App() {
         <div className="container-safe py-12 text-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <p className="text-slate-500 dark:text-slate-400">© {new Date().getFullYear()} Arbaz. All rights reserved.</p>
           <div className="flex gap-6 text-slate-600 dark:text-slate-400">
+            {personalInfo?.github_url && (
+              <a 
+                href={personalInfo.github_url} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-brand-600 transition-colors duration-300 hover:scale-110 transform"
+              >
+                🔗 GitHub
+              </a>
+            )}
+            {personalInfo?.linkedin_url && (
+              <a 
+                href={personalInfo.linkedin_url} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="hover:text-brand-600 transition-colors duration-300 hover:scale-110 transform"
+              >
+                💼 LinkedIn
+              </a>
+            )}
             <a 
-              href="https://github.com/" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="hover:text-brand-600 transition-colors duration-300 hover:scale-110 transform"
-            >
-              🔗 GitHub
-            </a>
-            <a 
-              href="https://www.linkedin.com/" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="hover:text-brand-600 transition-colors duration-300 hover:scale-110 transform"
-            >
-              💼 LinkedIn
-            </a>
-            <a 
-              href="mailto:you@example.com" 
+              href={`mailto:${personalInfo?.email || 'ak.khanarbaz777@gmail.com'}`} 
               className="hover:text-brand-600 transition-colors duration-300 hover:scale-110 transform"
             >
               ✉️ Email

@@ -1,10 +1,11 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import emailjs from '@emailjs/browser'
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle, User } from 'lucide-react'
-import { useState } from 'react'
+import { portfolioAPI, supabase } from '../lib/supabase'
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -16,19 +17,74 @@ const schema = z.object({
 
 export function Contact() {
   const [isSuccess, setIsSuccess] = useState(false)
+  const [personalInfo, setPersonalInfo] = useState(null)
+  const [contactSettings, setContactSettings] = useState(null)
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: zodResolver(schema),
   })
 
+  useEffect(() => {
+    fetchContactInfo()
+  }, [])
+
+  const fetchContactInfo = async () => {
+    try {
+      const [personalResult, settingsResult] = await Promise.all([
+        portfolioAPI.getPersonalInfo(),
+        portfolioAPI.getSiteSettings()
+      ])
+
+      if (!personalResult.error && personalResult.data) {
+        setPersonalInfo(personalResult.data)
+      }
+
+      if (!settingsResult.error && settingsResult.data) {
+        const settingsMap = {}
+        settingsResult.data.forEach(setting => {
+          settingsMap[setting.key] = setting.value
+        })
+        setContactSettings(settingsMap.contact_settings)
+      }
+    } catch (error) {
+      console.error('Error fetching contact info:', error)
+    }
+  }
+
   async function onSubmit(values) {
     if (values.hp) return // bot protection
     try {
-      // Configure via environment variables
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'your_service_id'
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'your_template_id'
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'your_public_key'
-      
-      await emailjs.send(serviceId, templateId, values, { publicKey })
+      // Save message to database
+      const { error: dbError } = await supabase
+        .from('contact_messages')
+        .insert({
+          name: values.name,
+          email: values.email,
+          subject: values.subject,
+          message: values.message,
+          status: 'new',
+          ip_address: null, // Could be captured if needed
+          user_agent: navigator.userAgent
+        })
+
+      if (dbError) {
+        console.error('Database error:', dbError)
+        throw new Error('Failed to save message')
+      }
+
+      // Also send email if configured
+      try {
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        
+        if (serviceId && templateId && publicKey) {
+          await emailjs.send(serviceId, templateId, values, { publicKey })
+        }
+      } catch (emailError) {
+        console.error('Email error:', emailError)
+        // Don't throw here - message is already saved to database
+      }
+
       setIsSuccess(true)
       reset()
       
@@ -44,24 +100,24 @@ export function Contact() {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 9625442725',
-      href: 'tel:+919625442725',
+      value: personalInfo?.phone || '+91 9625442725',
+      href: `tel:${personalInfo?.phone?.replace(/\s/g, '') || '+919625442725'}`,
       gradient: 'from-success-500 to-success-600',
-      description: 'Available 9 AM - 8 PM IST'
+      description: contactSettings?.availability || 'Available 9 AM - 8 PM IST'
     },
     {
       icon: Mail,
       label: 'Email',
-      value: 'ak.khanarbaz777@gmail.com',
-      href: 'mailto:ak.khanarbaz777@gmail.com',
+      value: personalInfo?.email || 'ak.khanarbaz777@gmail.com',
+      href: `mailto:${personalInfo?.email || 'ak.khanarbaz777@gmail.com'}`,
       gradient: 'from-brand-500 to-brand-600',
-      description: 'Response within 24 hours'
+      description: `Response within ${contactSettings?.response_time || '24 hours'}`
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Ballabgarh 121004, Faridabad',
-      href: 'https://maps.google.com/?q=Ballabgarh,Faridabad',
+      value: personalInfo?.location || 'Ballabgarh 121004, Faridabad',
+      href: `https://maps.google.com/?q=${encodeURIComponent(personalInfo?.location || 'Ballabgarh,Faridabad')}`,
       gradient: 'from-accent-500 to-accent-600',
       description: 'Available for local meetings'
     }

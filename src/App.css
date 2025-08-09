@@ -1,4 +1,5 @@
-#root {
+/* Website-specific root styles - only apply to main website, not admin */
+.website-root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;

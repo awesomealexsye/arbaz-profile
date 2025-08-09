@@ -1,51 +1,11 @@
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { Bar, Doughnut } from 'react-chartjs-2'
 import { Building2, Calendar, TrendingUp, Award, Users, Code2 } from 'lucide-react'
+import { portfolioAPI } from '../lib/supabase'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement)
-
-const roles = [
-  { 
-    company: 'TechCorp Solutions', 
-    title: 'Senior Frontend Engineer', 
-    period: '2023 — Present', 
-    duration: '1+ year',
-    icon: '🚀',
-    gradient: 'from-brand-500 to-accent-500',
-    achievements: [
-      { icon: '📊', text: 'Led React migration achieving 95% Lighthouse scores', metric: '95%' },
-      { icon: '👥', text: 'Mentored 4 engineers and established design system', metric: '4 devs' },
-      { icon: '⚡', text: 'Reduced bundle size by 40% through optimization', metric: '-40%' }
-    ]
-  },
-  { 
-    company: 'Digital Agency Pro', 
-    title: 'Full-Stack Developer', 
-    period: '2020 — 2023', 
-    duration: '3 years',
-    icon: '💻',
-    gradient: 'from-info-500 to-success-500',
-    achievements: [
-      { icon: '🌐', text: 'Delivered 12 client sites with modern tech stack', metric: '12 sites' },
-      { icon: '🔗', text: 'Built GraphQL APIs reducing errors by 30%', metric: '-30%' },
-      { icon: '📈', text: 'Improved client satisfaction to 98%', metric: '98%' }
-    ]
-  },
-  { 
-    company: 'StartupLaunch', 
-    title: 'Frontend Developer', 
-    period: '2018 — 2020', 
-    duration: '2 years',
-    icon: '⭐',
-    gradient: 'from-warning-500 to-accent-500',
-    achievements: [
-      { icon: '🚀', text: 'Launched MVP in record 8 weeks timeline', metric: '8 weeks' },
-      { icon: '📊', text: 'Implemented analytics and A/B testing', metric: '100%' },
-      { icon: '🎯', text: 'Achieved 85% user retention rate', metric: '85%' }
-    ]
-  },
-]
 
 const skillsData = {
   labels: ['React', 'Node.js', 'Laravel', 'GraphQL', 'Tailwind', 'TypeScript'],
@@ -76,6 +36,60 @@ const experienceData = {
 }
 
 export function Experience() {
+  const [experiences, setExperiences] = useState([])
+  const [personalInfo, setPersonalInfo] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
+    try {
+      const [experienceRes, personalRes] = await Promise.all([
+        portfolioAPI.getExperience(),
+        portfolioAPI.getPersonalInfo()
+      ])
+
+      if (!experienceRes.error && experienceRes.data) {
+        // Transform experience data
+        const transformedExperiences = experienceRes.data.map(exp => ({
+          company: exp.company,
+          title: exp.position,
+          period: `${new Date(exp.start_date).getFullYear()} — ${exp.end_date ? new Date(exp.end_date).getFullYear() : 'Present'}`,
+          duration: exp.duration || '1 year',
+          icon: exp.icon || '💻',
+          gradient: exp.gradient || 'from-brand-500 to-accent-500',
+          achievements: exp.achievements?.map(achievement => ({
+            icon: achievement.icon || '📊',
+            text: achievement.description,
+            metric: achievement.metric || ''
+          })) || []
+        }))
+        setExperiences(transformedExperiences)
+      }
+
+      if (!personalRes.error && personalRes.data) {
+        setPersonalInfo(personalRes.data)
+      }
+    } catch (error) {
+      console.error('Error fetching experience data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <section className="container-safe py-16 md:py-24 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin"></div>
+          <p className="text-slate-400">Loading experience...</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="container-safe py-16 md:py-24">
       {/* Header */}
@@ -97,8 +111,8 @@ export function Experience() {
       {/* Analytics Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         {[
-          { label: 'Years Experience', value: '7+', icon: Calendar, gradient: 'from-brand-500 to-brand-600' },
-          { label: 'Projects Delivered', value: '30+', icon: Code2, gradient: 'from-info-500 to-info-600' },
+          { label: 'Years Experience', value: `${personalInfo?.years_experience || 7}+`, icon: Calendar, gradient: 'from-brand-500 to-brand-600' },
+          { label: 'Projects Delivered', value: `${personalInfo?.projects_completed || 30}+`, icon: Code2, gradient: 'from-info-500 to-info-600' },
           { label: 'Team Members Mentored', value: '12+', icon: Users, gradient: 'from-success-500 to-success-600' },
           { label: 'Client Satisfaction', value: '98%', icon: Award, gradient: 'from-warning-500 to-warning-600' },
         ].map((stat, i) => (
@@ -182,7 +196,7 @@ export function Experience() {
 
       {/* Experience Timeline */}
       <div className="space-y-8">
-        {roles.map((role, index) => (
+        {experiences.map((role, index) => (
           <Motion.div
             key={role.company}
             initial={{ opacity: 0, y: 50 }}
