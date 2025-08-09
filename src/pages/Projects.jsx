@@ -18,12 +18,13 @@ export function Projects() {
         const transformedProjects = data.map(project => ({
           title: project.title,
           description: project.description,
-          tech: project.project_technologies?.map(tech => tech.name) || [],
+          tech: project.project_technologies?.map(tech => tech.technology) || [],
           demo: project.demo_url || '#',
           repo: project.github_url || '#',
           role: project.role || 'Developer',
           outcome: project.outcome || 'Successfully completed',
           gradient: project.gradient || 'from-blue-400/20 via-cyan-400/20 to-teal-400/20',
+          image: project.image_url,
         }))
         setProjects(transformedProjects)
       }
@@ -73,10 +74,20 @@ export function Projects() {
             whileHover={{ y: -10 }}
             className="group card cursor-pointer"
           >
-            <div className={`aspect-video rounded-2xl bg-gradient-to-br ${project.gradient} mb-6 relative overflow-hidden`}>
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-              <div className="absolute bottom-4 right-4 w-8 h-8 bg-white/20 rounded-lg backdrop-blur-sm" />
-              <div className="absolute top-4 left-4 w-12 h-12 bg-white/10 rounded-xl backdrop-blur-sm" />
+            <div className="aspect-video rounded-2xl mb-6 relative overflow-hidden">
+              {project.image ? (
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className={`w-full h-full bg-gradient-to-br ${project.gradient} relative`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+                  <div className="absolute bottom-4 right-4 w-8 h-8 bg-white/20 rounded-lg backdrop-blur-sm" />
+                  <div className="absolute top-4 left-4 w-12 h-12 bg-white/10 rounded-xl backdrop-blur-sm" />
+                </div>
+              )}
             </div>
             
             <h3 className="text-xl font-bold mb-3 group-hover:text-brand-600 transition-colors duration-300">

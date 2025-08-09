@@ -50,6 +50,9 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [filterFeatured, setFilterFeatured] = useState('')
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [selectedImageFile, setSelectedImageFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
 
   const projectForm = useForm({
     resolver: zodResolver(projectSchema),
@@ -76,6 +79,75 @@ const Projects = () => {
   useEffect(() => {
     fetchProjects()
   }, [])
+
+  // Image upload handling
+  const handleImageSelect = (event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file')
+      return
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size should be less than 5MB')
+      return
+    }
+
+    setSelectedImageFile(file)
+    
+    // Create preview
+    const reader = new FileReader()
+    reader.onload = (e) => setImagePreview(e.target?.result)
+    reader.readAsDataURL(file)
+  }
+
+  const uploadImageToSupabase = async (file) => {
+    try {
+      // Check if user is authenticated
+      const { data: { session } } = await supabase.auth.getSession()
+      console.log('Session:', session ? 'Authenticated' : 'Not authenticated')
+
+      const fileExt = file.name.split('.').pop()
+      const fileName = `project-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`
+      const filePath = `projects/${fileName}`
+
+      console.log('Uploading to:', filePath)
+
+      const { data, error } = await supabase.storage
+        .from('my-bucket')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (error) {
+        console.error('Upload error:', error)
+        throw error
+      }
+
+      console.log('Upload successful:', data)
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('my-bucket')
+        .getPublicUrl(filePath)
+
+      console.log('Public URL:', publicUrl)
+      return publicUrl
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      throw error
+    }
+  }
+
+  const clearImageSelection = () => {
+    setSelectedImageFile(null)
+    setImagePreview(null)
+  }
 
   const fetchProjects = async () => {
     try {
@@ -106,11 +178,35 @@ const Projects = () => {
   // Project Management Functions
   const handleProjectSubmit = async (data) => {
     try {
+      setUploadingImage(true)
+      
+      let imageUrl = data.image_url || null
+
+      // Upload image if a file is selected
+      if (selectedImageFile) {
+        try {
+          // Check authentication first
+          const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+          
+          if (sessionError || !session) {
+            toast.error('You must be logged in to upload files')
+            console.error('Authentication error:', sessionError)
+            throw new Error('Authentication required')
+          }
+          
+          imageUrl = await uploadImageToSupabase(selectedImageFile)
+          toast.success('Image uploaded successfully!')
+        } catch (error) {
+          toast.error(`Failed to upload image: ${error.message}`)
+          throw error
+        }
+      }
+
       const projectData = {
         ...data,
         demo_url: data.demo_url || null,
         github_url: data.github_url || null,
-        image_url: data.image_url || null,
+        image_url: imageUrl,
         gradient_colors: ["from-blue-400/20", "via-cyan-400/20", "to-teal-400/20"]
       }
 
@@ -152,9 +248,12 @@ const Projects = () => {
       setShowProjectModal(false)
       setEditingProject(null)
       projectForm.reset()
+      clearImageSelection()
     } catch (error) {
       console.error('Error saving project:', error)
       toast.error('Failed to save project')
+    } finally {
+      setUploadingImage(false)
     }
   }
 
@@ -269,6 +368,8 @@ const Projects = () => {
 
   const openProjectModal = (project = null) => {
     setEditingProject(project)
+    clearImageSelection()
+    
     if (project) {
       projectForm.reset({
         title: project.title,
@@ -280,6 +381,11 @@ const Projects = () => {
         image_url: project.image_url || '',
         is_featured: project.is_featured || false
       })
+      
+      // Set image preview if project has an image
+      if (project.image_url) {
+        setImagePreview(project.image_url)
+      }
     } else {
       projectForm.reset()
     }
@@ -583,6 +689,7 @@ const Projects = () => {
                     setShowProjectModal(false)
                     setEditingProject(null)
                     projectForm.reset()
+                    clearImageSelection()
                   }}
                   className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
                 >
@@ -654,20 +761,61 @@ const Projects = () => {
                     )}
                   </div>
 
-                  {/* Image URL */}
+                  {/* Project Image Upload */}
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-slate-300 mb-2">
-                      Project Image URL (Optional)
+                    <label className="block text-sm font-medium text-slate-300 mb-4">
+                      Project Image
                     </label>
-                    <input
-                      {...projectForm.register('image_url')}
-                      type="url"
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                      placeholder="https://your-image-url.com/image.jpg"
-                    />
-                    {projectForm.formState.errors.image_url && (
-                      <p className="text-red-400 text-sm mt-1">{projectForm.formState.errors.image_url.message}</p>
+                    
+                    {/* Image Preview */}
+                    {imagePreview && (
+                      <div className="mb-4 relative">
+                        <img 
+                          src={imagePreview} 
+                          alt="Project preview" 
+                          className="w-full h-48 object-cover rounded-xl border border-slate-600"
+                        />
+                        <button
+                          type="button"
+                          onClick={clearImageSelection}
+                          className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
                     )}
+
+                    {/* Upload Area */}
+                    <div className="space-y-4">
+                      <div className="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-brand-500 transition-colors">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageSelect}
+                          className="hidden"
+                          id="project-image-upload"
+                        />
+                        <label htmlFor="project-image-upload" className="cursor-pointer block">
+                          <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+                          <p className="text-slate-300 mb-2">Upload project image</p>
+                          <p className="text-sm text-slate-500">JPG, PNG, WebP (max 5MB)</p>
+                        </label>
+                      </div>
+
+                      {/* Or URL Input */}
+                      <div className="text-center text-slate-400 text-sm">or</div>
+                      <div>
+                        <input
+                          {...projectForm.register('image_url')}
+                          type="url"
+                          className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                          placeholder="Paste image URL here..."
+                        />
+                        {projectForm.formState.errors.image_url && (
+                          <p className="text-red-400 text-sm mt-1">{projectForm.formState.errors.image_url.message}</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Description */}
@@ -724,6 +872,7 @@ const Projects = () => {
                       setShowProjectModal(false)
                       setEditingProject(null)
                       projectForm.reset()
+                      clearImageSelection()
                     }}
                     className="flex-1 px-6 py-3 bg-slate-700 text-white font-semibold rounded-xl hover:bg-slate-600 transition-colors"
                   >
@@ -731,13 +880,13 @@ const Projects = () => {
                   </button>
                   <button
                     type="submit"
-                    disabled={projectForm.formState.isSubmitting}
+                    disabled={projectForm.formState.isSubmitting || uploadingImage}
                     className="flex-1 px-6 py-3 bg-gradient-to-r from-brand-500 to-accent-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    {projectForm.formState.isSubmitting ? (
+                    {projectForm.formState.isSubmitting || uploadingImage ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        Saving...
+                        {uploadingImage ? 'Uploading Image...' : 'Saving...'}
                       </>
                     ) : (
                       <>

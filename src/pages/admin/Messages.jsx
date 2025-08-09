@@ -359,6 +359,12 @@ const Messages = () => {
                   </div>
                   
                   <p className="text-sm text-slate-400 mb-1">{message.email}</p>
+                  {message.phone && (
+                    <p className="text-sm text-slate-400 mb-1 flex items-center gap-1">
+                      <Phone className="w-3 h-3" />
+                      {message.phone}
+                    </p>
+                  )}
                   
                   <h4 className="text-lg font-medium text-slate-200 mb-2 truncate">
                     {message.subject}
@@ -449,6 +455,12 @@ const Messages = () => {
                   <div>
                     <h2 className="text-2xl font-bold text-white mb-1">{selectedMessage.name}</h2>
                     <p className="text-slate-400">{selectedMessage.email}</p>
+                    {selectedMessage.phone && (
+                      <p className="text-slate-400 flex items-center gap-1 mt-1">
+                        <Phone className="w-4 h-4" />
+                        {selectedMessage.phone}
+                      </p>
+                    )}
                     <div className="flex items-center gap-2 mt-2">
                       <span className={`inline-flex items-center gap-1 px-3 py-1 text-sm rounded-full border ${getStatusColor(selectedMessage.status)}`}>
                         {getStatusIcon(selectedMessage.status)}

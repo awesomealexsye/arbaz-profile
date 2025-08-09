@@ -5,9 +5,11 @@ import './App.css'
 
 function App() {
   const [personalInfo, setPersonalInfo] = useState(null)
+  const [siteSettings, setSiteSettings] = useState({})
 
   useEffect(() => {
     fetchPersonalInfo()
+    fetchSiteSettings()
   }, [])
 
   const fetchPersonalInfo = async () => {
@@ -18,6 +20,21 @@ function App() {
       }
     } catch (error) {
       console.error('Error fetching personal info:', error)
+    }
+  }
+
+  const fetchSiteSettings = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getSiteSettings()
+      if (!error && data) {
+        const settingsMap = {}
+        data.forEach(setting => {
+          settingsMap[setting.key] = setting.value
+        })
+        setSiteSettings(settingsMap)
+      }
+    } catch (error) {
+      console.error('Error fetching site settings:', error)
     }
   }
   return (
@@ -40,8 +57,18 @@ function App() {
       
       <header className="sticky top-0 z-50 border-b border-white/20 bg-white/10 backdrop-blur-xl supports-[backdrop-filter]:bg-white/10 dark:border-slate-800/20 dark:bg-slate-900/10">
         <div className="container-safe flex h-20 items-center justify-between">
-          <NavLink to="/" className="font-bold tracking-tight text-2xl gradient-text">
-            Arbaz
+          <NavLink to="/" className="flex items-center">
+            {siteSettings.site_logo ? (
+              <img 
+                src={siteSettings.site_logo} 
+                alt="Logo" 
+                className="h-10 w-auto object-contain"
+              />
+            ) : (
+              <span className="font-bold tracking-tight text-2xl gradient-text">
+                Arbaz
+              </span>
+            )}
           </NavLink>
           <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
             {[

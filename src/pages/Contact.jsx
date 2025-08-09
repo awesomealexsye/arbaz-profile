@@ -10,6 +10,7 @@ import { portfolioAPI, supabase } from '../lib/supabase'
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
+  phone: z.string().min(10, 'Phone number must be at least 10 digits').optional().or(z.literal('')),
   subject: z.string().min(3, 'Subject must be at least 3 characters'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   hp: z.string().optional(), // honeypot
@@ -59,6 +60,7 @@ export function Contact() {
         .insert({
           name: values.name,
           email: values.email,
+          phone: values.phone || null,
           subject: values.subject,
           message: values.message,
           status: 'new',
@@ -285,6 +287,25 @@ export function Contact() {
                 <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
                   <span className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs">!</span>
                   {errors.email.message?.toString()}
+                </p>
+              )}
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                Phone Number (Optional)
+              </label>
+              <input
+                type="tel"
+                {...register('phone')}
+                className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white/80 backdrop-blur-sm focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all duration-300 dark:border-slate-700 dark:bg-slate-900/80 dark:text-white"
+                placeholder="+1 (555) 123-4567"
+              />
+              {errors.phone && (
+                <p className="mt-2 text-sm text-red-600 flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xs">!</span>
+                  {errors.phone.message?.toString()}
                 </p>
               )}
             </div>

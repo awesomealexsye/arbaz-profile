@@ -1,9 +1,139 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
-import { Settings as SettingsIcon, Save, Globe, Mail, Shield, RefreshCw } from 'lucide-react'
+import { Settings as SettingsIcon, Save, Globe, Mail, Shield, RefreshCw, Upload, X, Image } from 'lucide-react'
+import { supabase, portfolioAPI } from '../../lib/supabase'
+import toast from 'react-hot-toast'
 
 const Settings = () => {
   const [loading, setLoading] = useState(false)
+  const [siteSettings, setSiteSettings] = useState({})
+  const [uploadingLogo, setUploadingLogo] = useState(false)
+  const [selectedLogoFile, setSelectedLogoFile] = useState(null)
+  const [logoPreview, setLogoPreview] = useState(null)
+
+  useEffect(() => {
+    fetchSiteSettings()
+  }, [])
+
+  const fetchSiteSettings = async () => {
+    try {
+      const { data, error } = await portfolioAPI.getSiteSettings()
+      if (!error && data) {
+        const settingsMap = {}
+        data.forEach(setting => {
+          settingsMap[setting.key] = setting.value
+        })
+        setSiteSettings(settingsMap)
+        
+        // Set logo preview if exists
+        if (settingsMap.site_logo) {
+          setLogoPreview(settingsMap.site_logo)
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error)
+    }
+  }
+
+  const handleLogoSelect = (event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file')
+      return
+    }
+
+    // Validate file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error('Logo size should be less than 2MB')
+      return
+    }
+
+    setSelectedLogoFile(file)
+    
+    // Create preview
+    const reader = new FileReader()
+    reader.onload = (e) => setLogoPreview(e.target?.result)
+    reader.readAsDataURL(file)
+  }
+
+  const uploadLogoToSupabase = async (file) => {
+    try {
+      // Check if user is authenticated
+      const { data: { session } } = await supabase.auth.getSession()
+      console.log('Session:', session ? 'Authenticated' : 'Not authenticated')
+
+      const fileExt = file.name.split('.').pop()
+      const fileName = `logo-${Date.now()}.${fileExt}`
+      const filePath = `branding/${fileName}`
+
+      console.log('Uploading logo to:', filePath)
+
+      const { data, error } = await supabase.storage
+        .from('my-bucket')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+      if (error) {
+        console.error('Logo upload error:', error)
+        throw error
+      }
+
+      console.log('Logo upload successful:', data)
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('my-bucket')
+        .getPublicUrl(filePath)
+
+      console.log('Logo public URL:', publicUrl)
+      return publicUrl
+    } catch (error) {
+      console.error('Error uploading logo:', error)
+      throw error
+    }
+  }
+
+  const handleLogoUpload = async () => {
+    if (!selectedLogoFile) return
+
+    try {
+      setUploadingLogo(true)
+      
+      // Check authentication first
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+      
+      if (sessionError || !session) {
+        toast.error('You must be logged in to upload files')
+        console.error('Authentication error:', sessionError)
+        return
+      }
+      
+      console.log('User authenticated, proceeding with upload...')
+      const logoUrl = await uploadLogoToSupabase(selectedLogoFile)
+      
+      // Update site settings
+      await portfolioAPI.updateSiteSettings('site_logo', logoUrl)
+      
+      toast.success('Logo uploaded successfully!')
+      setSelectedLogoFile(null)
+      await fetchSiteSettings()
+    } catch (error) {
+      toast.error(`Failed to upload logo: ${error.message}`)
+      console.error('Logo upload error:', error)
+    } finally {
+      setUploadingLogo(false)
+    }
+  }
+
+  const clearLogoSelection = () => {
+    setSelectedLogoFile(null)
+    setLogoPreview(siteSettings.site_logo || null)
+  }
 
   return (
     <div className="min-h-screen w-full bg-slate-900 p-6">
@@ -26,6 +156,93 @@ const Settings = () => {
             <div className="flex items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
                 <SettingsIcon className="w-8 h-8 text-white" />
+              </div>
+            </div>
+          </div>
+        </Motion.div>
+
+        {/* Logo Upload Section */}
+        <Motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8"
+        >
+          <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-3">
+            <Image className="w-6 h-6 text-brand-400" />
+            Brand Logo
+          </h2>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Current Logo */}
+            <div>
+              <h3 className="text-lg font-medium text-white mb-4">Current Logo</h3>
+              <div className="aspect-video rounded-xl bg-slate-700/50 border border-slate-600 flex items-center justify-center">
+                {logoPreview ? (
+                  <img 
+                    src={logoPreview} 
+                    alt="Site logo" 
+                    className="max-h-full max-w-full object-contain p-4"
+                  />
+                ) : (
+                  <div className="text-center text-slate-400">
+                    <Image className="w-12 h-12 mx-auto mb-2" />
+                    <p>No logo uploaded</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Upload New Logo */}
+            <div>
+              <h3 className="text-lg font-medium text-white mb-4">Upload New Logo</h3>
+              
+              <div className="space-y-4">
+                {/* Upload Area */}
+                <div className="border-2 border-dashed border-slate-600 rounded-xl p-6 text-center hover:border-brand-500 transition-colors">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoSelect}
+                    className="hidden"
+                    id="logo-upload"
+                  />
+                  <label htmlFor="logo-upload" className="cursor-pointer block">
+                    <Upload className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+                    <p className="text-slate-300 mb-2">Upload your logo</p>
+                    <p className="text-sm text-slate-500">PNG, JPG, SVG (max 2MB)</p>
+                    <p className="text-xs text-slate-600 mt-1">Recommended: 200x60px</p>
+                  </label>
+                </div>
+
+                {/* Upload Actions */}
+                {selectedLogoFile && (
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleLogoUpload}
+                      disabled={uploadingLogo}
+                      className="flex-1 px-4 py-2 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-medium rounded-lg hover:shadow-lg disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      {uploadingLogo ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4" />
+                          Save Logo
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={clearLogoSelection}
+                      className="px-4 py-2 bg-slate-600 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
