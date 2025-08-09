@@ -187,7 +187,7 @@ function App() {
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
               aria-pressed={isDarkMode}
               onClick={toggleDarkMode}
-              className="glass-card size-11 rounded-xl p-0 hover:scale-110 transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/20 group focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
+              className="glass-card size-11 rounded-xl p-0 inline-flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg hover:shadow-brand-500/20 group focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
             >
               {isDarkMode ? (
                 <Sun className="w-5 h-5 text-yellow-500 group-hover:rotate-12 transition-transform duration-300" />
