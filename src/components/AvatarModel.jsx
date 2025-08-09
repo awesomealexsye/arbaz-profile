@@ -11,14 +11,14 @@ function Avatar({ ...props }) {
   // Subtle rotation animation
   useFrame((state) => {
     if (group.current) {
-      group.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.1
-      group.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.05
+      group.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.05
+      group.current.position.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.02
     }
   })
 
   return (
     <group ref={group} {...props}>
-      <primitive object={scene} scale={1.2} position={[0, -1.5, 0]} />
+      <primitive object={scene} scale={2.5} position={[0, -3.2, 0]} />
     </group>
   )
 }
@@ -81,8 +81,8 @@ export function AvatarModel() {
         
         <Canvas
           camera={{ 
-            position: [0, 0, 5], 
-            fov: 50,
+            position: [0, -1.5, 2.5], 
+            fov: 45,
             near: 0.1,
             far: 1000 
           }}
@@ -91,14 +91,15 @@ export function AvatarModel() {
           onError={() => setError(true)}
         >
           {/* Lighting Setup */}
-          <ambientLight intensity={0.4} />
+          <ambientLight intensity={0.6} />
           <directionalLight 
-            position={[10, 10, 5]} 
-            intensity={1}
+            position={[5, 8, 8]} 
+            intensity={1.2}
             castShadow
             shadow-mapSize={[1024, 1024]}
           />
-          <pointLight position={[-10, -10, -10]} intensity={0.3} />
+          <pointLight position={[-5, 2, 5]} intensity={0.4} />
+          <pointLight position={[3, -1, 3]} intensity={0.3} />
           
           {/* Environment for realistic reflections */}
           <Environment preset="studio" />
@@ -107,11 +108,11 @@ export function AvatarModel() {
           <Suspense fallback={null}>
             <Avatar />
             <ContactShadows 
-              position={[0, -1.5, 0]} 
-              opacity={0.3} 
-              scale={3} 
-              blur={2} 
-              far={2} 
+              position={[0, -3.2, 0]} 
+              opacity={0.2} 
+              scale={2} 
+              blur={1.5} 
+              far={1.5} 
             />
           </Suspense>
           
@@ -119,10 +120,13 @@ export function AvatarModel() {
           <OrbitControls 
             enableZoom={false}
             enablePan={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI / 2.2}
+            minPolarAngle={Math.PI / 2.8}
+            maxAzimuthAngle={Math.PI / 6}
+            minAzimuthAngle={-Math.PI / 6}
             autoRotate
-            autoRotateSpeed={0.5}
+            autoRotateSpeed={0.3}
+            target={[0, -1.8, 0]}
           />
         </Canvas>
         
