@@ -1,0 +1,9 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Tailwind-first project: leave minimal custom CSS hooks */
+/* Utility classes should cover most needs */
