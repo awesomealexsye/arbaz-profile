@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiPhone } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiPhone, FiInstagram } from 'react-icons/fi';
 import { personalInfo } from '../data/resumeData';
 import './Hero.css';
 
@@ -94,6 +94,14 @@ export default function Hero() {
                                 className="social-link"
                             >
                                 <FiLinkedin />
+                            </a>
+                            <a
+                                href={`https://instagram.com/${personalInfo.instagram}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-link"
+                            >
+                                <FiInstagram />
                             </a>
                         </div>
                     </div>

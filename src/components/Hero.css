@@ -3,8 +3,8 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding-top: 8rem;
     overflow: hidden;
+    background: transparent;
 }
 
 .hero-bg-elements {
@@ -189,7 +189,7 @@
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
 
-/* Hero Image */
+/* Hero Image with BLACK HOLE Effect */
 .hero-image-container {
     position: relative;
     z-index: 10;
@@ -197,13 +197,116 @@
 
 .hero-image-wrapper {
     position: relative;
-    width: 400px;
-    height: 400px;
-    margin: 0 auto;
-    transition: transform 0.1s ease-out;
+    width: 100%;
+    height: 100%;
+    animation: float 6s ease-in-out infinite;
 }
 
+.hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(from 0deg,
+            transparent 0%,
+            rgba(102, 126, 234, 0.6) 10%,
+            transparent 20%,
+            rgba(236, 72, 153, 0.6) 30%,
+            transparent 40%,
+            rgba(139, 92, 246, 0.6) 50%,
+            transparent 60%,
+            rgba(102, 126, 234, 0.6) 70%,
+            transparent 80%,
+            rgba(236, 72, 153, 0.6) 90%,
+            transparent 100%);
+    border-radius: 50%;
+    animation: blackhole-spin 20s linear infinite;
+    filter: blur(30px);
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.hero-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    background: radial-gradient(circle,
+            rgba(102, 126, 234, 0.3) 0%,
+            rgba(139, 92, 246, 0.2) 30%,
+            rgba(236, 72, 153, 0.2) 60%,
+            transparent 100%);
+    border-radius: 50%;
+    animation: blackhole-pulse 4s ease-in-out infinite;
+    filter: blur(20px);
+    z-index: -1;
+}
+
+@keyframes blackhole-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes blackhole-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Wormhole Particles */
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    inset: -100px;
+    background:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(102, 126, 234, 0.8), transparent),
+        radial-gradient(3px 3px at 50% 50%, rgba(236, 72, 153, 0.8), transparent),
+        radial-gradient(2px 2px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, rgba(139, 92, 246, 0.8), transparent),
+        radial-gradient(1px 1px at 30% 80%, white, transparent),
+        radial-gradient(2px 2px at 40% 20%, rgba(102, 126, 234, 0.8), transparent);
+    background-size: 200% 200%;
+    background-position: 50% 50%;
+    animation: wormhole-particles 15s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+@keyframes wormhole-particles {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Gravitational Distortion */
 .hero-image {
+    filter: brightness(1.1) contrast(1.1);
+    animation: gravity-distortion 8s ease-in-out infinite;
     width: 100%;
     height: 100%;
     object-fit: cover;
