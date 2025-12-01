@@ -1,287 +1,365 @@
-import { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Twinkling Stars
-function TwinklingStars() {
-    const starsRef = useRef();
-    const count = 10000;
+// Shooting Stars Component
+function ShootingStars() {
+    const [shootingStars, setShootingStars] = useState([]);
 
-    const positions = useMemo(() => {
-        const pos = new Float32Array(count * 3);
-        for (let i = 0; i < count; i++) {
-            pos[i * 3] = (Math.random() - 0.5) * 200;
-            pos[i * 3 + 1] = (Math.random() - 0.5) * 200;
-            pos[i * 3 + 2] = (Math.random() - 0.5) * 200;
-        }
-        return pos;
-    }, [count]);
+    useEffect(() => {
+        const createShootingStar = () => {
+            const id = Date.now();
+            setShootingStars(prev => [...prev, { id, top: Math.random() * 100, left: Math.random() * 100 }]);
+            setTimeout(() => {
+                setShootingStars(prev => prev.filter(star => star.id !== id));
+            }, 2000);
+        };
 
-    useFrame((state) => {
-        if (starsRef.current) {
-            starsRef.current.rotation.y = state.clock.elapsedTime * 0.01;
-            // Twinkling effect
-            const time = state.clock.elapsedTime;
-            starsRef.current.material.opacity = 0.6 + Math.sin(time * 2) * 0.4;
-        }
-    });
+        const interval = setInterval(createShootingStar, 3000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <points ref={starsRef}>
-            <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    count={count}
-                    array={positions}
-                    itemSize={3}
+        <>
+            {shootingStars.map(star => (
+                <div
+                    key={star.id}
+                    className="shooting-star"
+                    style={{
+                        top: `${star.top}%`,
+                        left: `${star.left}%`,
+                    }}
                 />
-            </bufferGeometry>
-            <pointsMaterial
-                size={0.15}
-                color="#ffffff"
-                transparent
-                opacity={0.8}
-                sizeAttenuation
-            />
-        </points>
+            ))}
+        </>
     );
 }
 
-// Animated Planet Component
-function Planet({ position, size, color, rotationSpeed, orbitSpeed, orbitRadius, hasRings = false }) {
-    const planetRef = useRef();
-    const orbitRef = useRef();
+// Animated Comets
+function Comets() {
+    const groupRef = useRef();
+    const isMobile = window.innerWidth < 768;
+    const cometCount = isMobile ? 3 : 5;
+
+    const comets = useMemo(() => {
+        const temp = [];
+        for (let i = 0; i < cometCount; i++) {
+            temp.push({
+                position: [
+                    (Math.random() - 0.5) * 100,
+                    (Math.random() - 0.5) * 100,
+                    (Math.random() - 0.5) * 100
+                ],
+                velocity: [
+                    (Math.random() - 0.5) * 0.5,
+                    (Math.random() - 0.5) * 0.5,
+                    (Math.random() - 0.5) * 0.5
+                ]
+            });
+        }
+        return temp;
+    }, [cometCount]);
 
     useFrame((state) => {
-        if (orbitRef.current) {
-            orbitRef.current.rotation.y = state.clock.elapsedTime * orbitSpeed;
-        }
-        if (planetRef.current) {
-            planetRef.current.rotation.y = state.clock.elapsedTime * rotationSpeed;
+        if (groupRef.current) {
+            groupRef.current.rotation.y += 0.001;
+            groupRef.current.children.forEach((comet, i) => {
+                const vel = comets[i].velocity;
+                comet.position.x += vel[0];
+                comet.position.y += vel[1];
+                comet.position.z += vel[2];
+
+                // Reset position if out of bounds
+                if (Math.abs(comet.position.x) > 50) comet.position.x *= -1;
+                if (Math.abs(comet.position.y) > 50) comet.position.y *= -1;
+                if (Math.abs(comet.position.z) > 50) comet.position.z *= -1;
+            });
         }
     });
 
     return (
-        <group ref={orbitRef}>
-            <group position={[orbitRadius, 0, 0]}>
-                <mesh ref={planetRef}>
-                    <sphereGeometry args={[size, 32, 32]} />
-                    <meshStandardMaterial
-                        color={color}
-                        emissive={color}
-                        emissiveIntensity={0.2}
-                        roughness={0.7}
-                    />
+        <group ref={groupRef}>
+            {comets.map((comet, i) => (
+                <mesh key={i} position={comet.position}>
+                    <sphereGeometry args={[0.2, 8, 8]} />
+                    <meshBasicMaterial color="#4fd1c5" emissive="#4fd1c5" emissiveIntensity={2} />
                 </mesh>
-                {hasRings && (
-                    <mesh rotation={[Math.PI / 2.2, 0, 0]}>
-                        <torusGeometry args={[size * 1.8, size * 0.3, 2, 50]} />
-                        <meshStandardMaterial
-                            color="#d4a574"
-                            transparent
-                            opacity={0.6}
-                            side={THREE.DoubleSide}
-                        />
-                    </mesh>
-                )}
-            </group>
+            ))}
         </group>
     );
 }
 
-// Shooting Star Effect
-function ShootingStar() {
-    const starRef = useRef();
-    const [reset, setReset] = useState(false);
+// Floating Asteroids
+function Asteroids() {
+    const groupRef = useRef();
+    const isMobile = window.innerWidth < 768;
+    const asteroidCount = isMobile ? 20 : 40;
+
+    const asteroids = useMemo(() => {
+        const temp = [];
+        for (let i = 0; i < asteroidCount; i++) {
+            temp.push({
+                position: [
+                    (Math.random() - 0.5) * 80,
+                    (Math.random() - 0.5) * 80,
+                    (Math.random() - 0.5) * 80
+                ],
+                rotation: [Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI],
+                scale: 0.1 + Math.random() * 0.3
+            });
+        }
+        return temp;
+    }, [asteroidCount]);
 
     useFrame((state) => {
-        if (starRef.current) {
-            starRef.current.position.x -= 0.5;
-            starRef.current.position.y -= 0.3;
-
-            if (starRef.current.position.x < -100) {
-                starRef.current.position.x = 50 + Math.random() * 50;
-                starRef.current.position.y = -20 + Math.random() * 40;
-                starRef.current.position.z = -50 + Math.random() * 100;
-            }
+        if (groupRef.current) {
+            groupRef.current.rotation.y += 0.0005;
+            groupRef.current.children.forEach((asteroid) => {
+                asteroid.rotation.x += 0.001;
+                asteroid.rotation.y += 0.002;
+            });
         }
     });
 
     return (
-        <mesh ref={starRef} position={[50, 20, -30]}>
-            <sphereGeometry args={[0.1, 8, 8]} />
-            <meshBasicMaterial color="#ffffff" />
-        </mesh>
+        <group ref={groupRef}>
+            {asteroids.map((asteroid, i) => (
+                <mesh key={i} position={asteroid.position} rotation={asteroid.rotation} scale={asteroid.scale}>
+                    <dodecahedronGeometry args={[1, 0]} />
+                    <meshStandardMaterial color="#6b7280" roughness={0.8} metalness={0.2} />
+                </mesh>
+            ))}
+        </group>
+    );
+}
+
+// Enhanced Planets with Orbits
+function Planets() {
+    const planetsRef = useRef();
+
+    useFrame((state) => {
+        if (planetsRef.current) {
+            planetsRef.current.rotation.y += 0.0003;
+        }
+    });
+
+    return (
+        <group ref={planetsRef}>
+            {/* Planet 1 - Blue */}
+            <mesh position={[-20, 10, -30]}>
+                <sphereGeometry args={[2, 32, 32]} />
+                <meshStandardMaterial color="#3b82f6" emissive="#1e40af" emissiveIntensity={0.3} />
+            </mesh>
+
+            {/* Planet 2 - Purple */}
+            <mesh position={[25, -15, -40]}>
+                <sphereGeometry args={[3, 32, 32]} />
+                <meshStandardMaterial color="#8b5cf6" emissive="#6d28d9" emissiveIntensity={0.4} />
+            </mesh>
+
+            {/* Planet 3 - Pink */}
+            <mesh position={[-30, -20, -35]}>
+                <sphereGeometry args={[2.5, 32, 32]} />
+                <meshStandardMaterial color="#ec4899" emissive="#be185d" emissiveIntensity={0.3} />
+            </mesh>
+
+            {/* Planet 4 - Saturn-like with Rings */}
+            <group position={[30, 20, -50]}>
+                <mesh>
+                    <sphereGeometry args={[3.5, 32, 32]} />
+                    <meshStandardMaterial color="#f59e0b" emissive="#d97706" emissiveIntensity={0.3} />
+                </mesh>
+                <mesh rotation={[Math.PI / 2, 0, 0]}>
+                    <torusGeometry args={[5, 0.3, 16, 100]} />
+                    <meshStandardMaterial color="#fbbf24" emissive="#f59e0b" emissiveIntensity={0.2} />
+                </mesh>
+            </group>
+
+            {/* Planet 5 - Teal */}
+            <mesh position={[15, 25, -45]}>
+                <sphereGeometry args={[1.8, 32, 32]} />
+                <meshStandardMaterial color="#14b8a6" emissive="#0d9488" emissiveIntensity={0.3} />
+            </mesh>
+        </group>
+    );
+}
+
+// Pulsing Nebula Clouds
+function NebulaClouds() {
+    const cloudsRef = useRef();
+
+    useFrame((state) => {
+        if (cloudsRef.current) {
+            const scale = 1 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+            cloudsRef.current.scale.set(scale, scale, scale);
+            cloudsRef.current.rotation.z += 0.0002;
+        }
+    });
+
+    return (
+        <group ref={cloudsRef}>
+            <mesh position={[-40, 30, -60]}>
+                <sphereGeometry args={[15, 16, 16]} />
+                <meshBasicMaterial color="#667eea" transparent opacity={0.1} />
+            </mesh>
+            <mesh position={[40, -30, -70]}>
+                <sphereGeometry args={[20, 16, 16]} />
+                <meshBasicMaterial color="#ec4899" transparent opacity={0.08} />
+            </mesh>
+            <mesh position={[0, 0, -80]}>
+                <sphereGeometry args={[25, 16, 16]} />
+                <meshBasicMaterial color="#8b5cf6" transparent opacity={0.06} />
+            </mesh>
+        </group>
+    );
+}
+
+// Cosmic Dust Particles
+function CosmicDust() {
+    const dustRef = useRef();
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 500 : 1000;
+
+    const particles = useMemo(() => {
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 100;
+        }
+        return positions;
+    }, [particleCount]);
+
+    useFrame((state) => {
+        if (dustRef.current) {
+            dustRef.current.rotation.y += 0.0001;
+        }
+    });
+
+    return (
+        <points ref={dustRef}>
+            <bufferGeometry>
+                <bufferAttribute
+                    attach="attributes-position"
+                    count={particles.length / 3}
+                    array={particles}
+                    itemSize={3}
+                />
+            </bufferGeometry>
+            <pointsMaterial size={0.05} color="#ffffff" transparent opacity={0.4} />
+        </points>
     );
 }
 
 // Galaxy Spiral
 function GalaxySpiral() {
-    const particlesRef = useRef();
-    const count = 15000;
+    const galaxyRef = useRef();
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 5000 : 15000;
 
-    const [positions, colors] = useMemo(() => {
+    const particles = useMemo(() => {
         const positions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
 
-        const colorPalette = [
-            new THREE.Color('#667eea'),
-            new THREE.Color('#764ba2'),
-            new THREE.Color('#f093fb'),
-            new THREE.Color('#06b6d4'),
-            new THREE.Color('#ec4899'),
-            new THREE.Color('#8b5cf6'),
-            new THREE.Color('#fbbf24'),
-        ];
+        const colorInside = new THREE.Color('#667eea');
+        const colorOutside = new THREE.Color('#ec4899');
 
         for (let i = 0; i < count; i++) {
-            const radius = Math.random() * 25;
-            const spinAngle = radius * 3;
-            const branchAngle = ((i % 6) / 6) * Math.PI * 2;
+            const i3 = i * 3;
+            const radius = Math.random() * 50;
+            const spinAngle = radius * 0.3;
+            const branchAngle = (i % 3) * ((Math.PI * 2) / 3);
 
-            const x = Math.cos(branchAngle + spinAngle) * radius + (Math.random() - 0.5) * 2;
-            const y = (Math.random() - 0.5) * 2;
-            const z = Math.sin(branchAngle + spinAngle) * radius + (Math.random() - 0.5) * 2;
+            positions[i3] = Math.cos(branchAngle + spinAngle) * radius;
+            positions[i3 + 1] = (Math.random() - 0.5) * 2;
+            positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius;
 
-            positions[i * 3] = x;
-            positions[i * 3 + 1] = y;
-            positions[i * 3 + 2] = z;
+            const mixedColor = colorInside.clone();
+            mixedColor.lerp(colorOutside, radius / 50);
 
-            const color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-            colors[i * 3] = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
+            colors[i3] = mixedColor.r;
+            colors[i3 + 1] = mixedColor.g;
+            colors[i3 + 2] = mixedColor.b;
         }
 
-        return [positions, colors];
+        return { positions, colors };
     }, [count]);
 
     useFrame((state) => {
-        if (particlesRef.current) {
-            particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-            particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.1;
+        if (galaxyRef.current) {
+            galaxyRef.current.rotation.y = state.clock.elapsedTime * 0.05;
         }
     });
 
     return (
-        <points ref={particlesRef}>
+        <points ref={galaxyRef}>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
-                    count={count}
-                    array={positions}
+                    count={particles.positions.length / 3}
+                    array={particles.positions}
                     itemSize={3}
                 />
                 <bufferAttribute
                     attach="attributes-color"
-                    count={count}
-                    array={colors}
+                    count={particles.colors.length / 3}
+                    array={particles.colors}
                     itemSize={3}
                 />
             </bufferGeometry>
-            <pointsMaterial
-                size={0.08}
-                vertexColors
-                transparent
-                opacity={0.9}
-                sizeAttenuation
-                blending={THREE.AdditiveBlending}
-            />
+            <pointsMaterial size={0.1} vertexColors sizeAttenuation />
         </points>
     );
 }
 
-// Nebula Clouds
-function NebulaClouds() {
-    const nebula1 = useRef();
-    const nebula2 = useRef();
-    const nebula3 = useRef();
-
-    useFrame((state) => {
-        if (nebula1.current) nebula1.current.rotation.z = state.clock.elapsedTime * 0.01;
-        if (nebula2.current) nebula2.current.rotation.z = -state.clock.elapsedTime * 0.015;
-        if (nebula3.current) nebula3.current.rotation.z = state.clock.elapsedTime * 0.008;
-    });
-
-    return (
-        <>
-            <mesh ref={nebula1} position={[-15, 10, -20]}>
-                <torusGeometry args={[8, 3, 16, 50]} />
-                <meshBasicMaterial
-                    color="#667eea"
-                    transparent
-                    opacity={0.1}
-                    blending={THREE.AdditiveBlending}
-                />
-            </mesh>
-            <mesh ref={nebula2} position={[15, -8, -25]}>
-                <torusGeometry args={[10, 4, 16, 50]} />
-                <meshBasicMaterial
-                    color="#ec4899"
-                    transparent
-                    opacity={0.08}
-                    blending={THREE.AdditiveBlending}
-                />
-            </mesh>
-            <mesh ref={nebula3} position={[0, 0, -30]}>
-                <torusGeometry args={[12, 2, 16, 50]} />
-                <meshBasicMaterial
-                    color="#8b5cf6"
-                    transparent
-                    opacity={0.12}
-                    blending={THREE.AdditiveBlending}
-                />
-            </mesh>
-        </>
-    );
-}
-
-// Main Galaxy Background
 export default function GalaxyBackground() {
+    const isMobile = window.innerWidth < 768;
+
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: -1,
-            background: 'radial-gradient(ellipse at bottom, #0a0118 0%, #000000 100%)'
-        }}>
-            <Canvas camera={{ position: [0, 0, 20], fov: 75 }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+            <Canvas camera={{ position: [0, 0, 50], fov: isMobile ? 80 : 75 }}>
                 <ambientLight intensity={0.3} />
                 <pointLight position={[10, 10, 10]} intensity={0.5} />
 
-                {/* Background Stars */}
-                <Stars
-                    radius={150}
-                    depth={80}
-                    count={8000}
-                    factor={6}
-                    saturation={0.3}
-                    fade
-                    speed={0.5}
-                />
-
                 {/* Twinkling Stars */}
-                <TwinklingStars />
+                <Stars radius={100} depth={50} count={isMobile ? 3000 : 10000} factor={4} saturation={0} fade speed={1} />
 
-                {/* Galaxy Spiral */}
+                {/* Custom Components */}
                 <GalaxySpiral />
-
-                {/* Nebula Clouds */}
+                <Planets />
                 <NebulaClouds />
-
-                {/* Planets */}
-                <Planet position={[0, 0, 0]} size={0.8} color="#4169e1" rotationSpeed={0.5} orbitSpeed={0.05} orbitRadius={15} />
-                <Planet position={[0, 0, 0]} size={0.6} color="#ff4500" rotationSpeed={0.4} orbitSpeed={0.08} orbitRadius={20} />
-                <Planet position={[0, 0, 0]} size={1.2} color="#daa520" rotationSpeed={0.3} orbitSpeed={0.03} orbitRadius={25} hasRings={true} />
-                <Planet position={[0, 0, 0]} size={0.5} color="#a0522d" rotationSpeed={0.6} orbitSpeed={0.1} orbitRadius={12} />
-
-                {/* Shooting Stars */}
-                <ShootingStar />
+                <CosmicDust />
+                <Asteroids />
+                <Comets />
             </Canvas>
+
+            {/* CSS Shooting Stars */}
+            <ShootingStars />
+
+            {/* Additional CSS animations */}
+            <style>{`
+                .shooting-star {
+                    position: absolute;
+                    width: 2px;
+                    height: 2px;
+                    background: white;
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+                    animation: shoot 2s linear;
+                }
+
+                @keyframes shoot {
+                    0% {
+                        transform: translate(0, 0);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translate(200px, 200px);
+                        opacity: 0;
+                    }
+                }
+            `}</style>
         </div>
     );
 }

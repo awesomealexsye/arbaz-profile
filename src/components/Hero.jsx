@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiPhone, FiInstagram } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiPhone, FiInstagram, FiDownload } from 'react-icons/fi';
 import { personalInfo } from '../data/resumeData';
 import './Hero.css';
 
@@ -66,9 +66,10 @@ export default function Hero() {
                         {/* Action Buttons */}
                         <div className="hero-actions fade-in">
                             <button className="btn btn-primary" onClick={() => {
-                                document.querySelector('#projects').scrollIntoView({ behavior: 'smooth' });
+                                window.open('https://drive.google.com/uc?export=download&id=1Mug2GiCe2r65SPA_ywTRG1zae5UGog20', '_blank');
                             }}>
-                                View My Work
+                                <FiDownload style={{ marginRight: '0.5rem' }} />
+                                Download CV
                             </button>
                             <button className="btn btn-outline" onClick={() => {
                                 document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });

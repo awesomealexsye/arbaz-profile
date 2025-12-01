@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiDownload } from 'react-icons/fi';
 import './Navigation.css';
 
 export default function Navigation() {
@@ -36,6 +36,11 @@ export default function Navigation() {
         }
     };
 
+    const handleDownloadCV = () => {
+        // Direct download link from Google Drive
+        window.open('https://drive.google.com/uc?export=download&id=1Mug2GiCe2r65SPA_ywTRG1zae5UGog20', '_blank');
+    };
+
     return (
         <>
             <nav className={`navigation ${scrolled ? 'scrolled' : ''}`}>
@@ -66,14 +71,31 @@ export default function Navigation() {
                     <button
                         className="mobile-menu-toggle"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle menu"
                     >
                         {mobileMenuOpen ? <FiX /> : <FiMenu />}
                     </button>
                 </div>
             </nav>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Overlay */}
+            <div
+                className={`mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+            />
+
+            {/* Galaxy-Themed Mobile Drawer */}
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+                <div className="mobile-menu-header">
+                    <button
+                        className="mobile-menu-close"
+                        onClick={() => setMobileMenuOpen(false)}
+                        aria-label="Close menu"
+                    >
+                        <FiX />
+                    </button>
+                </div>
+
                 <ul className="mobile-nav-links">
                     {navLinks.map((link, index) => (
                         <li key={index}>
@@ -90,6 +112,14 @@ export default function Navigation() {
                         </li>
                     ))}
                 </ul>
+
+                <button
+                    className="download-cv-btn"
+                    onClick={handleDownloadCV}
+                >
+                    <FiDownload />
+                    <span>Download CV</span>
+                </button>
             </div>
         </>
     );
