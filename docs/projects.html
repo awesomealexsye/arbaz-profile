@@ -1,0 +1,930 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/assets/favicon-BYBYURlN.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paylap</title>
+    <script type="module" crossorigin="" src="/assets/index-BNXSzMEK.js"></script>
+    <link rel="stylesheet" crossorigin="" href="/assets/index-DlTyJZJS.css">
+</head>
+
+<body>
+    <div id="root">
+        <div class="min-h-screen bg-dark text-white selection:bg-purple-500 selection:text-white relative">
+            <div class="fixed inset-0 z-0 pointer-events-none bg-dark">
+                <div style="position: relative; width: 100%; height: 100%; overflow: hidden; pointer-events: auto;">
+                    <div style="width: 100%; height: 100%;"><canvas data-engine="three.js r181" width="828"
+                            height="1792" style="display: block; width: 414px; height: 896px;"></canvas></div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-b from-dark/80 via-transparent to-dark/90"></div>
+            </div>
+            <div class="relative z-10">
+                <div class="fixed top-0 left-0 right-0 z-50 px-4">
+                    <nav class="relative transition-all duration-500 mt-4 bg-dark/40 backdrop-blur-2xl border-2 border-white/10 shadow-2xl shadow-purple-900/20 flex justify-between items-center max-w-7xl mx-auto rounded-full px-6 py-4 group"
+                        style="opacity: 1; transform: none;">
+                        <div
+                            class="absolute -inset-[1px] bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 rounded-full opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-700">
+                        </div>
+                        <div class="absolute w-64 h-64 rounded-full bg-blue-500/10 blur-[80px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"
+                            style="transform: translate(-50%, -50%); left: 642px; top: 60px;"></div>
+                        <div class="relative z-10 flex items-center gap-2 pl-2"><a
+                                class="flex items-center gap-3 group/logo" href="/" data-discover="true">
+                                <div class="relative"><img alt="Paylap" class="h-10 w-auto drop-shadow-lg"
+                                        src="/paylap.png">
+                                    <div class="absolute -top-1 -right-1" style="transform: scale(0);"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-sparkles text-yellow-300" aria-hidden="true">
+                                            <path
+                                                d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z">
+                                            </path>
+                                            <path d="M20 2v4"></path>
+                                            <path d="M22 4h-4"></path>
+                                            <circle cx="4" cy="20" r="2"></circle>
+                                        </svg></div>
+                                </div>
+                            </a></div>
+                        <div class="hidden md:flex items-center gap-2 relative z-10">
+                            <div style="opacity: 1; transform: none;"><a
+                                    class="relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white"
+                                    href="/" data-discover="true"><span class="relative z-10">Home</span>
+                                    <div
+                                        class="absolute inset-0 rounded-full bg-white/5 opacity-0 hover:opacity-100 transition-opacity">
+                                    </div>
+                                </a></div>
+                            <div style="opacity: 1; transform: none;"><a
+                                    class="relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white"
+                                    href="/services" data-discover="true"><span class="relative z-10">Services</span>
+                                    <div
+                                        class="absolute inset-0 rounded-full bg-white/5 opacity-0 hover:opacity-100 transition-opacity">
+                                    </div>
+                                </a></div>
+                            <div style="opacity: 1; transform: none;"><a
+                                    class="relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-white"
+                                    href="/projects" data-discover="true">
+                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg shadow-purple-600/50"
+                                        style="transform: none; transform-origin: 50% 50% 0px; opacity: 1;"></div><span
+                                        class="relative z-10">Projects</span>
+                                </a></div>
+                            <div style="opacity: 1; transform: none;"><a
+                                    class="relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white"
+                                    href="/team" data-discover="true"><span class="relative z-10">Team</span>
+                                    <div
+                                        class="absolute inset-0 rounded-full bg-white/5 opacity-0 hover:opacity-100 transition-opacity">
+                                    </div>
+                                </a></div>
+                            <div style="opacity: 1; transform: none;"><a
+                                    class="relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white"
+                                    href="/contact" data-discover="true"><span class="relative z-10">Contact</span>
+                                    <div
+                                        class="absolute inset-0 rounded-full bg-white/5 opacity-0 hover:opacity-100 transition-opacity">
+                                    </div>
+                                </a></div><a href="/contact" data-discover="true">
+                                <div class="ml-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-sm shadow-lg shadow-blue-600/30 hover:shadow-purple-600/50 transition-all duration-300 cursor-pointer"
+                                    tabindex="0">Get Started</div>
+                            </a>
+                        </div><button
+                            class="md:hidden relative z-10 text-white p-2.5 rounded-full hover:bg-white/10 transition-colors backdrop-blur-xl border border-white/10"
+                            tabindex="0">
+                            <div style="opacity: 1; transform: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"
+                                    aria-hidden="true">
+                                    <path d="M4 5h16"></path>
+                                    <path d="M4 12h16"></path>
+                                    <path d="M4 19h16"></path>
+                                </svg></div>
+                        </button>
+                    </nav>
+                </div>
+                <main>
+                    <div class="pt-20">
+                        <section id="projects"
+                            class="py-40 relative bg-gradient-to-b from-dark via-purple-950/10 to-dark overflow-hidden">
+                            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 40.5735%; top: 11.9499%; width: 1.43607px; height: 1.43607px; transform: scale(1.03687);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 70.7827%; top: 66.2714%; width: 2.37326px; height: 2.37326px; transform: scale(1.48819);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 6.14499%; top: 5.09582%; width: 1.68017px; height: 1.68017px; transform: scale(1.45397);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 46.466%; top: 53.8727%; width: 1.59306px; height: 1.59306px; transform: scale(1.48551);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 99.2213%; top: 51.7786%; width: 1.02977px; height: 1.02977px; transform: scale(1.29735);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 28.8382%; top: 8.4294%; width: 1.02037px; height: 1.02037px; transform: scale(1.40226);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 98.6025%; top: 12.7781%; width: 1.32815px; height: 1.32815px; transform: scale(1.01586);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 70.5871%; top: 41.383%; width: 1.02329px; height: 1.02329px; transform: scale(1.21985);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 9.64638%; top: 28.6411%; width: 1.28357px; height: 1.28357px; transform: scale(1.02877);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 66.7672%; top: 54.442%; width: 1.93975px; height: 1.93975px; transform: scale(1.0012);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 52.8502%; top: 72.8588%; width: 2.74907px; height: 2.74907px; transform: scale(1.00124);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 62.451%; top: 49.4942%; width: 2.05365px; height: 2.05365px; transform: scale(1.07635);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 67.0985%; top: 43.1041%; width: 2.86829px; height: 2.86829px; transform: scale(1.3302);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 66.0541%; top: 38.6273%; width: 2.29297px; height: 2.29297px; transform: scale(1.44802);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 32.2344%; top: 57.2943%; width: 2.18597px; height: 2.18597px; transform: scale(1.46844);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 40.6702%; top: 5.38723%; width: 2.5273px; height: 2.5273px; transform: scale(1.32249);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 18.2349%; top: 34.9949%; width: 2.80492px; height: 2.80492px; transform: scale(1.10163);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 51.4183%; top: 91.8174%; width: 1.89296px; height: 1.89296px; transform: scale(1.43907);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 89.3578%; top: 72.5175%; width: 1.27555px; height: 1.27555px; transform: scale(1.08896);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 88.7496%; top: 98.2358%; width: 1.39937px; height: 1.39937px; transform: scale(1.23189);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 24.6101%; top: 90.7341%; width: 1.46642px; height: 1.46642px; transform: scale(1.01544);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 81.8981%; top: 0.913458%; width: 2.68206px; height: 2.68206px; transform: scale(1.00112);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 94.5243%; top: 19.2432%; width: 2.17114px; height: 2.17114px; transform: scale(1.41729);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 1.24753%; top: 6.43087%; width: 1.87629px; height: 1.87629px; transform: scale(1.20788);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 64.6318%; top: 15.3327%; width: 2.84864px; height: 2.84864px; transform: scale(1.23408);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 91.2519%; top: 20.4917%; width: 1.4048px; height: 1.4048px; transform: scale(1.11268);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 21.9011%; top: 40.9364%; width: 1.69995px; height: 1.69995px; transform: scale(1.00683);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 90.9799%; top: 45.4425%; width: 1.58043px; height: 1.58043px; transform: scale(1.27651);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 41.4124%; top: 40.6768%; width: 1.12952px; height: 1.12952px; transform: scale(1.26994);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 81.0899%; top: 87.7182%; width: 1.17556px; height: 1.17556px; transform: scale(1.18246);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 77.0077%; top: 48.4689%; width: 1.31287px; height: 1.31287px; transform: scale(1.17365);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 27.5069%; top: 18.8356%; width: 2.60193px; height: 2.60193px; transform: scale(1.3665);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 12.5008%; top: 8.52155%; width: 2.45066px; height: 2.45066px; transform: scale(1.39105);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 94.5103%; top: 72.0559%; width: 1.63018px; height: 1.63018px; transform: scale(1.03566);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 30.0745%; top: 87.7827%; width: 2.20465px; height: 2.20465px; transform: scale(1.38826);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 97.3372%; top: 13.7255%; width: 1.46039px; height: 1.46039px; transform: scale(1.18104);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 98.7748%; top: 95.6535%; width: 1.93304px; height: 1.93304px; transform: scale(1.43399);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 5.21789%; top: 38.9764%; width: 2.13422px; height: 2.13422px; transform: scale(1.49914);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 2.64081%; top: 82.7169%; width: 1.49394px; height: 1.49394px; transform: scale(1.23737);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 18.0616%; top: 38.8906%; width: 1.87134px; height: 1.87134px; transform: scale(1.0128);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 77.8902%; top: 94.8896%; width: 1.47557px; height: 1.47557px; transform: scale(1.06069);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 11.503%; top: 80.061%; width: 1.86497px; height: 1.86497px; transform: scale(1.16147);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 73.5026%; top: 87.4623%; width: 2.86145px; height: 2.86145px; transform: scale(1.15598);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 71.5176%; top: 57.2338%; width: 1.75845px; height: 1.75845px; transform: scale(1.2297);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 59.8964%; top: 92.5879%; width: 2.82553px; height: 2.82553px; transform: scale(1.16424);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 10.0517%; top: 38.2915%; width: 2.4043px; height: 2.4043px; transform: scale(1.29789);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 75.0071%; top: 15.2002%; width: 2.64214px; height: 2.64214px; transform: scale(1.36977);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 63.8886%; top: 40.1938%; width: 2.34186px; height: 2.34186px; transform: scale(1.12376);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 44.7639%; top: 6.91573%; width: 2.96831px; height: 2.96831px; transform: scale(1.01699);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 49.5914%; top: 64.6674%; width: 1.76539px; height: 1.76539px; transform: scale(1.49903);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 92.0243%; top: 40.8249%; width: 2.48253px; height: 2.48253px; transform: scale(1.314);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 20.3133%; top: 61.2716%; width: 2.58744px; height: 2.58744px; transform: scale(1.3309);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 38.4236%; top: 12.4569%; width: 1.21341px; height: 1.21341px; transform: scale(1.26482);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 45.2926%; top: 41.7326%; width: 2.34088px; height: 2.34088px; transform: scale(1.30364);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 90.4745%; top: 5.47942%; width: 2.10491px; height: 2.10491px; transform: scale(1.45596);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 42.015%; top: 31.8049%; width: 2.30942px; height: 2.30942px; transform: scale(1.00683);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 8.38346%; top: 63.2967%; width: 2.92307px; height: 2.92307px; transform: scale(1.00524);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 11.8528%; top: 42.6887%; width: 1.92434px; height: 1.92434px; transform: scale(1.26007);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 6.12559%; top: 29.0454%; width: 2.97124px; height: 2.97124px; transform: scale(1.3932);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 54.8028%; top: 81.9211%; width: 2.81432px; height: 2.81432px; transform: scale(1.06524);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 73.2809%; top: 80.6218%; width: 2.65164px; height: 2.65164px; transform: scale(1.37496);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 7.48855%; top: 85.3826%; width: 2.97099px; height: 2.97099px; transform: scale(1.04559);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 72.307%; top: 17.4198%; width: 1.48527px; height: 1.48527px; transform: scale(1.45705);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 58.5183%; top: 19.8949%; width: 1.30902px; height: 1.30902px; transform: scale(1.49917);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 77.8492%; top: 20.647%; width: 1.3492px; height: 1.3492px; transform: scale(1.09804);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 55.8501%; top: 54.5389%; width: 2.95048px; height: 2.95048px; transform: scale(1.28777);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 55.0997%; top: 69.8657%; width: 1.47083px; height: 1.47083px; transform: scale(1.28922);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 7.28072%; top: 72.9826%; width: 2.14515px; height: 2.14515px; transform: scale(1.31648);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 16.5078%; top: 87.4854%; width: 2.95001px; height: 2.95001px; transform: scale(1.46748);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 87.2924%; top: 32.2763%; width: 1.89822px; height: 1.89822px; transform: scale(1.24469);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 15.0833%; top: 67.537%; width: 2.19604px; height: 2.19604px; transform: scale(1.43061);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 52.4206%; top: 13.3201%; width: 1.33383px; height: 1.33383px; transform: scale(1.4533);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 58.8376%; top: 36.2856%; width: 1.31684px; height: 1.31684px; transform: scale(1.18671);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 28.1248%; top: 40.0443%; width: 1.38786px; height: 1.38786px; transform: scale(1.20319);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 75.2828%; top: 85.8848%; width: 1.76502px; height: 1.76502px; transform: scale(1.49917);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 81.5197%; top: 23.1314%; width: 1.1732px; height: 1.1732px; transform: scale(1.41476);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 28.1398%; top: 67.144%; width: 2.57352px; height: 2.57352px; transform: scale(1.14445);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 83.5419%; top: 92.7201%; width: 2.02077px; height: 2.02077px; transform: scale(1.43781);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 68.5151%; top: 0.546136%; width: 1.7979px; height: 1.7979px; transform: scale(1.27432);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 85.2932%; top: 97.6134%; width: 2.66377px; height: 2.66377px; transform: scale(1.41276);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 42.5615%; top: 87.5049%; width: 1.4854px; height: 1.4854px; transform: scale(1.47529);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 10.4781%; top: 51.8617%; width: 1.9989px; height: 1.9989px; transform: scale(1.12504);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 41.2164%; top: 50.6386%; width: 2.4545px; height: 2.4545px; transform: scale(1.01062);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 96.6227%; top: 72.4082%; width: 2.7016px; height: 2.7016px; transform: scale(1.00436);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 12.2782%; top: 53.6004%; width: 1.30147px; height: 1.30147px; transform: scale(1.38513);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 1.25215%; top: 50.7835%; width: 1.297px; height: 1.297px; transform: scale(1.29356);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 78.2494%; top: 85.7976%; width: 1.11335px; height: 1.11335px; transform: scale(1.09273);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 27.1011%; top: 70.0273%; width: 1.01299px; height: 1.01299px; transform: scale(1.05821);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 86.4515%; top: 77.5096%; width: 2.36066px; height: 2.36066px; transform: scale(1.32425);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 64.0088%; top: 70.6206%; width: 1.45226px; height: 1.45226px; transform: scale(1.32002);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 56.232%; top: 19.9747%; width: 2.21847px; height: 2.21847px; transform: scale(1.41645);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 77.7563%; top: 88.2129%; width: 1.00814px; height: 1.00814px; transform: scale(1.32354);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 40.3659%; top: 84.7639%; width: 1.58561px; height: 1.58561px; transform: scale(1.47196);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 53.3552%; top: 27.936%; width: 2.84945px; height: 2.84945px; transform: scale(1.32845);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 12.1444%; top: 95.4472%; width: 1.8945px; height: 1.8945px; transform: scale(1.07744);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 64.442%; top: 20.421%; width: 2.35763px; height: 2.35763px; transform: scale(1.03586);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 39.507%; top: 33.2881%; width: 2.10091px; height: 2.10091px; transform: scale(1.47391);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 40.3045%; top: 18.1843%; width: 2.89052px; height: 2.89052px; transform: scale(1.27651);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 93.9956%; top: 22.956%; width: 1.19022px; height: 1.19022px; transform: scale(1.39473);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 32.2071%; top: 92.8271%; width: 1.18495px; height: 1.18495px; transform: scale(1.26665);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 76.9653%; top: 19.9822%; width: 1.43205px; height: 1.43205px; transform: scale(1.38701);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 66.3559%; top: 19.3734%; width: 1.42084px; height: 1.42084px; transform: scale(1.00112);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 76.5684%; top: 49.7305%; width: 2.27384px; height: 2.27384px; transform: scale(1.02336);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 73.5157%; top: 75.6642%; width: 2.16353px; height: 2.16353px; transform: scale(1.27468);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 6.11493%; top: 89.6439%; width: 1.07558px; height: 1.07558px; transform: scale(1.4988);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 43.0643%; top: 31.1768%; width: 2.64594px; height: 2.64594px; transform: scale(1.09715);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 6.16933%; top: 87.2671%; width: 2.90497px; height: 2.90497px; transform: scale(1.03707);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 39.9002%; top: 50.0121%; width: 1.62141px; height: 1.62141px; transform: scale(1.4285);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 46.4738%; top: 97.9768%; width: 1.23006px; height: 1.23006px; transform: scale(1.10558);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 21.6431%; top: 5.42044%; width: 1.57305px; height: 1.57305px; transform: scale(1.49999);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 51.2372%; top: 19.7908%; width: 2.63197px; height: 2.63197px; transform: scale(1.21767);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 81.4011%; top: 17.3323%; width: 1.22025px; height: 1.22025px; transform: scale(1.02386);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 87.1729%; top: 70.3063%; width: 2.94121px; height: 2.94121px; transform: scale(1.06653);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 75.677%; top: 91.6034%; width: 1.87827px; height: 1.87827px; transform: scale(1.31044);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 44.4663%; top: 35.1062%; width: 2.47095px; height: 2.47095px; transform: scale(1.44006);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 93.4143%; top: 9.99145%; width: 1.82986px; height: 1.82986px; transform: scale(1.43087);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 70.654%; top: 9.41631%; width: 2.27505px; height: 2.27505px; transform: scale(1.47891);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 48.4913%; top: 42.4594%; width: 2.67843px; height: 2.67843px; transform: scale(1.24908);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 0.0309353%; top: 2.62047%; width: 2.56235px; height: 2.56235px; transform: scale(1.48372);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 17.1002%; top: 4.74252%; width: 2.90601px; height: 2.90601px; transform: scale(1.49169);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 20.9119%; top: 49.6394%; width: 1.88225px; height: 1.88225px; transform: scale(1.30687);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 75.3374%; top: 7.71978%; width: 1.30791px; height: 1.30791px; transform: scale(1.28886);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 1.10425%; top: 59.5189%; width: 2.60392px; height: 2.60392px; transform: scale(1.15019);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 94.859%; top: 84.5605%; width: 1.80142px; height: 1.80142px; transform: scale(1.1299);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 9.26382%; top: 44.5253%; width: 1.61018px; height: 1.61018px; transform: scale(1.22532);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 54.5598%; top: 11.7233%; width: 1.59994px; height: 1.59994px; transform: scale(1.09893);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 41.6021%; top: 26.1328%; width: 1.12216px; height: 1.12216px; transform: scale(1.00055);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 22.9883%; top: 90.2584%; width: 1.32924px; height: 1.32924px; transform: scale(1.32143);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 30.8621%; top: 44.1662%; width: 1.19229px; height: 1.19229px; transform: scale(1.23554);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 78.4692%; top: 71.5644%; width: 2.89766px; height: 2.89766px; transform: scale(1.09098);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 99.7705%; top: 11.2177%; width: 1.20555px; height: 1.20555px; transform: scale(1.49917);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 5.01628%; top: 44.6202%; width: 1.68856px; height: 1.68856px; transform: scale(1.00731);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 17.7658%; top: 16.7178%; width: 2.50118px; height: 2.50118px; transform: scale(1.11237);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 6.843%; top: 29.9899%; width: 1.80331px; height: 1.80331px; transform: scale(1.12183);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 64.9816%; top: 16.2953%; width: 2.8641px; height: 2.8641px; transform: scale(1.30436);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 12.6678%; top: 61.7242%; width: 2.69568px; height: 2.69568px; transform: scale(1.29933);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 68.0065%; top: 7.72845%; width: 2.025px; height: 2.025px; transform: scale(1.1105);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 38.8824%; top: 40.8105%; width: 2.17767px; height: 2.17767px; transform: scale(1.01891);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 9.53641%; top: 80.5401%; width: 2.90453px; height: 2.90453px; transform: scale(1.15837);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 22.5056%; top: 0.648151%; width: 2.62012px; height: 2.62012px; transform: scale(1.49975);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 64.8925%; top: 32.5707%; width: 2.92079px; height: 2.92079px; transform: scale(1.21622);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 78.7917%; top: 96.9713%; width: 1.91586px; height: 1.91586px; transform: scale(1.21404);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 57.4904%; top: 36.7747%; width: 2.51641px; height: 2.51641px; transform: scale(1.12763);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 13.7203%; top: 13.6362%; width: 2.5447px; height: 2.5447px; transform: scale(1.00045);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 0.219835%; top: 98.1803%; width: 2.7413px; height: 2.7413px; transform: scale(1.0005);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 73.6049%; top: 17.7667%; width: 1.81207px; height: 1.81207px; transform: scale(1.08982);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 8.83516%; top: 63.7312%; width: 1.71804px; height: 1.71804px; transform: scale(1.47664);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 17.5078%; top: 31.7983%; width: 2.45965px; height: 2.45965px; transform: scale(1.1726);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 2.27396%; top: 20.3276%; width: 1.4144px; height: 1.4144px; transform: scale(1.5);">
+                                </div>
+                                <div class="absolute rounded-full bg-white"
+                                    style="left: 43.725%; top: 21.9568%; width: 1.91506px; height: 1.91506px; transform: scale(1.34846);">
+                                </div>
+                            </div>
+                            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 14.6874%; top: 10.6735%; width: 5.57759px; height: 5.57759px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(-43.1917px) translateY(-49.231px) scale(1.24615);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 93.3962%; top: 68.1062%; width: 4.76602px; height: 4.76602px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(18.05px) translateY(-99.0022px) scale(1.49501);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 45.9591%; top: 74.4858%; width: 4.25111px; height: 4.25111px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-48.4968px) translateY(-64.3565px) scale(1.32178);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 45.9526%; top: 71.9928%; width: 7.62874px; height: 7.62874px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(-12.6656px) translateY(-11.1079px) scale(1.05554);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 8.90895%; top: 15.125%; width: 8.02505px; height: 8.02505px; background: rgb(139, 92, 246); opacity: 0.3; transform: translateX(24.2128px) translateY(-22.3486px) scale(1.11174);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 87.2041%; top: 63.7926%; width: 6.58662px; height: 6.58662px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(18.1395px) translateY(-16.2057px) scale(1.08103);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 85.1697%; top: 15.4839%; width: 5.15432px; height: 5.15432px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(-4.10233px) translateY(-3.57378px) scale(1.01787);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 65.5409%; top: 46.0764%; width: 7.71781px; height: 7.71781px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-12.925px) translateY(-11.3496px) scale(1.05675);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 47.6455%; top: 41.6638%; width: 6.03684px; height: 6.03684px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(3.17517px) translateY(-2.76582px) scale(1.01383);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 81.0267%; top: 91.6494%; width: 6.33616px; height: 6.33616px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(45.7046px) translateY(-55.1554px) scale(1.27578);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 77.5813%; top: 81.2474%; width: 3.16029px; height: 3.16029px; background: rgb(139, 92, 246); opacity: 0.3; transform: translateX(-37.4635px) translateY(-38.9848px) scale(1.19492);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 69.7522%; top: 67.3703%; width: 3.46318px; height: 3.46318px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(49.884px) translateY(-73.4971px) scale(1.36749);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 57.9664%; top: 0.645903%; width: 8.33379px; height: 8.33379px; background: rgb(139, 92, 246); opacity: 0.3; transform: translateX(40.6979px) translateY(-44.4074px) scale(1.22204);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 64.8564%; top: 57.5444%; width: 3.03219px; height: 3.03219px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-47.8535px) translateY(-85.5393px) scale(1.4277);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 37.943%; top: 83.1405%; width: 7.44725px; height: 7.44725px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(48.6898px) translateY(-83.8499px) scale(1.41925);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 37.471%; top: 38.8623%; width: 6.56884px; height: 6.56884px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(43.535px) translateY(-90.5697px) scale(1.45285);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 20.6143%; top: 88.9447%; width: 5.11786px; height: 5.11786px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-10.1333px) translateY(-8.85239px) scale(1.04426);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 33.704%; top: 80.8761%; width: 6.78858px; height: 6.78858px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(46.9942px) translateY(-58.8572px) scale(1.29429);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 74.6462%; top: 84.7393%; width: 6.52439px; height: 6.52439px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(-41.4473px) translateY(-45.72px) scale(1.2286);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 68.5375%; top: 12.7738%; width: 3.73343px; height: 3.73343px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(40.7492px) translateY(-92.5451px) scale(1.46273);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 18.227%; top: 27.672%; width: 5.44262px; height: 5.44262px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(-20.4363px) translateY(-98.6898px) scale(1.49345);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 95.3649%; top: 34.635%; width: 4.08936px; height: 4.08936px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(26.2697px) translateY(-97.6874px) scale(1.48844);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 92.1285%; top: 86.9775%; width: 7.26636px; height: 7.26636px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(23.1032px) translateY(-98.2537px) scale(1.49127);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 71.7508%; top: 19.3336%; width: 3.93302px; height: 3.93302px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-35.4324px) translateY(-95.0581px) scale(1.47529);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 41.7266%; top: 81.6245%; width: 7.78417px; height: 7.78417px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(-20.3013px) translateY(-98.7082px) scale(1.49354);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 23.4173%; top: 91.7054%; width: 8.79612px; height: 8.79612px; background: rgb(139, 92, 246); opacity: 0.3; transform: translateX(44.2277px) translateY(-51.5013px) scale(1.25751);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 24.645%; top: 46.3553%; width: 4.02387px; height: 4.02387px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(49.6228px) translateY(-80.8078px) scale(1.40404);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 97.5131%; top: 15.1547%; width: 7.05784px; height: 7.05784px; background: rgb(6, 182, 212); opacity: 0.3; transform: translateX(-46.5139px) translateY(-57.4097px) scale(1.28705);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 15.5572%; top: 9.15576%; width: 3.57213px; height: 3.57213px; background: rgb(236, 72, 153); opacity: 0.3; transform: translateX(18.3874px) translateY(-16.4849px) scale(1.08242);">
+                                </div>
+                                <div class="absolute rounded-full blur-sm"
+                                    style="left: 42.9302%; top: 25.2492%; width: 7.16074px; height: 7.16074px; background: rgb(59, 130, 246); opacity: 0.3; transform: translateX(-49.3449px) translateY(-68.7365px) scale(1.34368);">
+                                </div>
+                            </div>
+                            <div class="absolute h-[2px] w-[100px] bg-gradient-to-r from-transparent via-white to-transparent"
+                                style="left: 22.47%; top: 4.07273%; transform: translateX(1470px) translateY(398.5px); opacity: 0;">
+                            </div>
+                            <div class="absolute h-[2px] w-[100px] bg-gradient-to-r from-transparent via-white to-transparent"
+                                style="left: 44.9367%; top: 22.4793%; transform: translateX(1183.52px) translateY(320.838px); opacity: 0.630123;">
+                            </div>
+                            <div class="absolute h-[2px] w-[100px] bg-gradient-to-r from-transparent via-white to-transparent"
+                                style="left: 12.2945%; top: 13.9044%; transform: translateX(1470px) translateY(398.5px); opacity: 0;">
+                            </div>
+                            <div class="absolute h-[2px] w-[100px] bg-gradient-to-r from-transparent via-white to-transparent"
+                                style="left: 20.1781%; top: 5.86331%; transform: translateX(1470px) translateY(398.5px); opacity: 0;">
+                            </div>
+                            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                                <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[150px]"
+                                    style="transform: scale(1.04321);"></div>
+                                <div class="absolute top-[30%] right-[-10%] w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[150px]"
+                                    style="transform: scale(1.25288);"></div>
+                                <div class="absolute bottom-[-20%] left-[20%] w-[700px] h-[700px] bg-cyan-600/15 rounded-full blur-[150px]"
+                                    style="transform: scale(1.00745);"></div>
+                            </div>
+                            <div class="container mx-auto px-6 relative z-10">
+                                <div class="text-center mb-28"><span
+                                        class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500 font-bold tracking-[0.3em] uppercase text-sm mb-6"
+                                        style="opacity: 1; transform: none;">✦ Portfolio ✦</span>
+                                    <h2 class="text-6xl md:text-8xl font-bold font-heading text-white mb-6"
+                                        style="opacity: 1; transform: none;">Our Galactic <span
+                                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 animate-gradient-x">Creations</span>
+                                    </h2>
+                                    <p class="text-gray-400 text-xl max-w-3xl mx-auto leading-relaxed"
+                                        style="opacity: 1; transform: none;">Explore our universe of innovative
+                                        projects, where cutting-edge technology meets stunning design</p>
+                                    <div class="flex justify-center mt-16" style="opacity: 1; transform: none;">
+                                        <div
+                                            class="p-2 bg-dark/60 border-2 border-white/10 rounded-full flex gap-3 backdrop-blur-2xl shadow-2xl">
+                                            <button
+                                                class="relative px-10 py-4 rounded-full text-base font-bold transition-all duration-500 text-gray-400 hover:text-white"><span
+                                                    class="relative z-10 flex items-center gap-3 capitalize"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-globe" aria-hidden="true">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20">
+                                                        </path>
+                                                        <path d="M2 12h20"></path>
+                                                    </svg>web Projects</span></button><button
+                                                class="relative px-10 py-4 rounded-full text-base font-bold transition-all duration-500 text-white">
+                                                <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full shadow-xl shadow-purple-500/50"
+                                                    style="transform: none; transform-origin: 50% 50% 0px;"></div><span
+                                                    class="relative z-10 flex items-center gap-3 capitalize"><svg
+                                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-smartphone" aria-hidden="true">
+                                                        <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                                                        <path d="M12 18h.01"></path>
+                                                    </svg>mobile Projects</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+                                    style="opacity: 1; transform: none;">
+                                    <div class="group relative bg-dark/60 backdrop-blur-2xl border-2 border-white/10 rounded-[3rem] p-10 overflow-hidden hover:border-pink-500/40 transition-all duration-700 shadow-2xl shadow-pink-900/20 hover:shadow-pink-600/40"
+                                        style="opacity: 1; transform: none;">
+                                        <div
+                                            class="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-[3rem] opacity-0 group-hover:opacity-75 blur-xl transition-all duration-700 animate-pulse">
+                                        </div>
+                                        <div class="absolute top-0 right-0 p-16 opacity-5 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
+                                            style="transform: none;"><svg xmlns="http://www.w3.org/2000/svg" width="250"
+                                                height="250" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-activity" aria-hidden="true">
+                                                <path
+                                                    d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
+                                                </path>
+                                            </svg></div>
+                                        <div class="relative z-10 flex flex-col h-full">
+                                            <div class="flex justify-between items-start mb-10">
+                                                <div
+                                                    class="w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-600 to-red-500 flex items-center justify-center shadow-2xl shadow-purple-500/40">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-activity text-white drop-shadow-lg"
+                                                        aria-hidden="true">
+                                                        <path
+                                                            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-sm font-bold shadow-xl"
+                                                    style="transform: rotate(6deg);">4.9 ★</div>
+                                            </div>
+                                            <h3
+                                                class="text-3xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 transition-all duration-500">
+                                                PayLap Fitness App</h3>
+                                            <p
+                                                class="text-gray-400 text-base mb-10 leading-relaxed flex-1 group-hover:text-gray-200 transition-colors">
+                                                Health is Wealth. A complete gym management and fitness tracking
+                                                solution.</p>
+                                            <div class="mt-auto grid grid-cols-2 gap-4"><a
+                                                    href="https://apps.apple.com/in/app/paylap-fitness/id6748222119"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-white text-black rounded-2xl font-bold text-sm shadow-xl hover:shadow-2xl transition-all"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-apple"
+                                                        aria-hidden="true">
+                                                        <path d="M12 6.528V3a1 1 0 0 1 1-1h0"></path>
+                                                        <path
+                                                            d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21">
+                                                        </path>
+                                                    </svg> App Store</a><a
+                                                    href="https://play.google.com/store/apps/details?id=com.alexsye1999.PaylapFitness"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-2 border-white/20 text-white rounded-2xl font-bold text-sm backdrop-blur-xl hover:bg-white/10 transition-all shadow-lg"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-play"
+                                                        aria-hidden="true">
+                                                        <path
+                                                            d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z">
+                                                        </path>
+                                                    </svg> Play Store</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="group relative bg-dark/60 backdrop-blur-2xl border-2 border-white/10 rounded-[3rem] p-10 overflow-hidden hover:border-pink-500/40 transition-all duration-700 shadow-2xl shadow-pink-900/20 hover:shadow-pink-600/40"
+                                        style="opacity: 1; transform: none;">
+                                        <div
+                                            class="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-[3rem] opacity-0 group-hover:opacity-75 blur-xl transition-all duration-700 animate-pulse">
+                                        </div>
+                                        <div class="absolute top-0 right-0 p-16 opacity-5 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
+                                            style="transform: scale(1.00008) rotate(0.0119273deg);"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="250" height="250"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-heart" aria-hidden="true">
+                                                <path
+                                                    d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
+                                                </path>
+                                            </svg></div>
+                                        <div class="relative z-10 flex flex-col h-full">
+                                            <div class="flex justify-between items-start mb-10">
+                                                <div
+                                                    class="w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-600 to-red-500 flex items-center justify-center shadow-2xl shadow-purple-500/40">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-heart text-white drop-shadow-lg"
+                                                        aria-hidden="true">
+                                                        <path
+                                                            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                                <div class="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-sm font-bold shadow-xl"
+                                                    style="transform: rotate(6deg);">5 ★</div>
+                                            </div>
+                                            <h3
+                                                class="text-3xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 transition-all duration-500">
+                                                PayLap Pet Care App</h3>
+                                            <p
+                                                class="text-gray-400 text-base mb-10 leading-relaxed flex-1 group-hover:text-gray-200 transition-colors">
+                                                The easiest way to find a pet. Browse listings and find your forever
+                                                friend.</p>
+                                            <div class="mt-auto grid grid-cols-2 gap-4"><a
+                                                    href="https://apps.apple.com/us/app/paylap-pet-care/id6751187034"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-white text-black rounded-2xl font-bold text-sm shadow-xl hover:shadow-2xl transition-all"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-apple"
+                                                        aria-hidden="true">
+                                                        <path d="M12 6.528V3a1 1 0 0 1 1-1h0"></path>
+                                                        <path
+                                                            d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21">
+                                                        </path>
+                                                    </svg> App Store</a><a
+                                                    href="https://play.google.com/store/apps/details?id=com.alexsye1999.paylappets"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-2 border-white/20 text-white rounded-2xl font-bold text-sm backdrop-blur-xl hover:bg-white/10 transition-all shadow-lg"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-play"
+                                                        aria-hidden="true">
+                                                        <path
+                                                            d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z">
+                                                        </path>
+                                                    </svg> Play Store</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="group relative bg-dark/60 backdrop-blur-2xl border-2 border-white/10 rounded-[3rem] p-10 overflow-hidden hover:border-pink-500/40 transition-all duration-700 shadow-2xl shadow-pink-900/20 hover:shadow-pink-600/40"
+                                        style="opacity: 1; transform: none;">
+                                        <div
+                                            class="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-[3rem] opacity-0 group-hover:opacity-75 blur-xl transition-all duration-700 animate-pulse">
+                                        </div>
+                                        <div class="absolute top-0 right-0 p-16 opacity-5 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
+                                            style="transform: scale(1.01279) rotate(1.68696deg);"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="250" height="250"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-trending-up" aria-hidden="true">
+                                                <path d="M16 7h6v6"></path>
+                                                <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                                            </svg></div>
+                                        <div class="relative z-10 flex flex-col h-full">
+                                            <div class="flex justify-between items-start mb-10">
+                                                <div
+                                                    class="w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-500 via-pink-600 to-red-500 flex items-center justify-center shadow-2xl shadow-purple-500/40">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-trending-up text-white drop-shadow-lg"
+                                                        aria-hidden="true">
+                                                        <path d="M16 7h6v6"></path>
+                                                        <path d="m22 7-8.5 8.5-5-5L2 17"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="px-5 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-sm font-bold shadow-xl"
+                                                    style="transform: rotate(6deg);">4.8 ★</div>
+                                            </div>
+                                            <h3
+                                                class="text-3xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 transition-all duration-500">
+                                                PayLap Score App</h3>
+                                            <p
+                                                class="text-gray-400 text-base mb-10 leading-relaxed flex-1 group-hover:text-gray-200 transition-colors">
+                                                Business Hua Aur Bhi Easy. Simplify your financial tracking and credit
+                                                scoring.</p>
+                                            <div class="mt-auto grid grid-cols-2 gap-4"><a
+                                                    href="https://apps.apple.com/us/app/paylap-score/id6736965791"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-white text-black rounded-2xl font-bold text-sm shadow-xl hover:shadow-2xl transition-all"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-apple"
+                                                        aria-hidden="true">
+                                                        <path d="M12 6.528V3a1 1 0 0 1 1-1h0"></path>
+                                                        <path
+                                                            d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21">
+                                                        </path>
+                                                    </svg> App Store</a><a
+                                                    href="https://play.google.com/store/apps/details?id=com.paylap.paylapscore"
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    class="flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-2 border-white/20 text-white rounded-2xl font-bold text-sm backdrop-blur-xl hover:bg-white/10 transition-all shadow-lg"
+                                                    tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="18"
+                                                        height="18" viewBox="0 0 24 24" fill="currentColor"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="lucide lucide-play"
+                                                        aria-hidden="true">
+                                                        <path
+                                                            d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z">
+                                                        </path>
+                                                    </svg> Play Store</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+                <footer class="bg-dark border-t border-white/10 py-12">
+                    <div class="container mx-auto px-6 text-center">
+                        <h2 class="text-2xl font-bold font-heading mb-4">Paylap</h2>
+                        <p class="text-gray-400 mb-8 max-w-md mx-auto">Innovating the Future of IT Solutions</p>
+                        <div class="text-sm text-gray-500">© 2025 Paylap. All rights reserved.</div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
