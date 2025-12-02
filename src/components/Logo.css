@@ -1,237 +1,45 @@
 .logo-container {
-    position: relative;
-    display: inline-block;
-}
-
-.logo-wrapper {
-    position: relative;
-    z-index: 2;
-}
-
-.logo-brackets {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-code);
-    font-weight: 700;
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
-.bracket-left,
-.bracket-right {
-    font-size: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: pulse-glow 2s ease-in-out infinite;
+.logo-container:hover {
+    transform: scale(1.05);
 }
 
-.logo-content {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+.logo-image {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.5));
 }
 
-.logo-slash {
-    font-size: 1.5rem;
-    color: #06b6d4;
-    font-weight: 700;
+/* Sizes */
+.logo-small {
+    height: 40px;
 }
 
-.logo-text {
-    font-size: 1.8rem;
-    font-family: var(--font-heading);
-    background: linear-gradient(135deg, #667eea 0%, #a855f7 50%, #ec4899 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 0.1em;
-    font-weight: 900;
+.logo-medium {
+    height: 60px;
 }
 
-.logo-underline {
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
-    margin-top: 0.5rem;
-    border-radius: 2px;
-    animation: shimmer 2s ease-in-out infinite;
+.logo-large {
+    height: 80px;
 }
 
-@keyframes shimmer {
-
-    0%,
-    100% {
-        opacity: 0.5;
-        transform: scaleX(0.8);
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .logo-small {
+        height: 32px;
     }
 
-    50% {
-        opacity: 1;
-        transform: scaleX(1);
-    }
-}
-
-/* Particles */
-.logo-particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #667eea;
-    box-shadow: 0 0 10px #667eea;
-}
-
-.particle-1 {
-    top: 10%;
-    left: -10%;
-    animation: float-particle 3s ease-in-out infinite;
-}
-
-.particle-2 {
-    top: 30%;
-    right: -15%;
-    background: #764ba2;
-    box-shadow: 0 0 10px #764ba2;
-    animation: float-particle 4s ease-in-out infinite 0.5s;
-}
-
-.particle-3 {
-    bottom: 20%;
-    left: 10%;
-    background: #06b6d4;
-    box-shadow: 0 0 10px #06b6d4;
-    animation: float-particle 3.5s ease-in-out infinite 1s;
-}
-
-.particle-4 {
-    bottom: 40%;
-    right: 5%;
-    background: #ec4899;
-    box-shadow: 0 0 10px #ec4899;
-    animation: float-particle 4.5s ease-in-out infinite 1.5s;
-}
-
-.particle-5 {
-    top: 50%;
-    left: -5%;
-    background: #a855f7;
-    box-shadow: 0 0 10px #a855f7;
-    animation: float-particle 3.8s ease-in-out infinite 0.8s;
-}
-
-.particle-6 {
-    top: 70%;
-    right: -10%;
-    background: #f093fb;
-    box-shadow: 0 0 10px #f093fb;
-    animation: float-particle 4.2s ease-in-out infinite 2s;
-}
-
-@keyframes float-particle {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.6;
+    .logo-medium {
+        height: 48px;
     }
 
-    25% {
-        transform: translate(5px, -10px) scale(1.2);
-        opacity: 1;
-    }
-
-    50% {
-        transform: translate(-5px, -5px) scale(0.8);
-        opacity: 0.4;
-    }
-
-    75% {
-        transform: translate(3px, 5px) scale(1.1);
-        opacity: 0.8;
-    }
-}
-
-/* Size Variants */
-.logo-small .bracket-left,
-.logo-small .bracket-right {
-    font-size: 1.5rem;
-}
-
-.logo-small .logo-text {
-    font-size: 1.3rem;
-}
-
-.logo-small .logo-slash {
-    font-size: 1.1rem;
-}
-
-.logo-medium .bracket-left,
-.logo-medium .bracket-right {
-    font-size: 2rem;
-}
-
-.logo-medium .logo-text {
-    font-size: 1.8rem;
-}
-
-.logo-medium .logo-slash {
-    font-size: 1.5rem;
-}
-
-.logo-large .bracket-left,
-.logo-large .bracket-right {
-    font-size: 3rem;
-}
-
-.logo-large .logo-text {
-    font-size: 2.5rem;
-}
-
-.logo-large .logo-slash {
-    font-size: 2rem;
-}
-
-/* Hover Effect */
-.logo-container:hover .logo-text {
-    animation: gradient-shift 2s ease infinite;
-    background-size: 200% 200%;
-}
-
-.logo-container:hover .bracket-left {
-    animation: bounce-left 0.6s ease;
-}
-
-.logo-container:hover .bracket-right {
-    animation: bounce-right 0.6s ease;
-}
-
-@keyframes bounce-left {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(-10px);
-    }
-}
-
-@keyframes bounce-right {
-
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-
-    50% {
-        transform: translateX(10px);
+    .logo-large {
+        height: 64px;
     }
 }
