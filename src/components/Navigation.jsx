@@ -18,9 +18,10 @@ export default function Navigation() {
     }, []);
 
     const navLinks = [
-        { name: 'Home', path: '#home' },
         { name: 'About', path: '#about' },
         { name: 'Skills', path: '#skills' },
+        { name: 'Services', path: '#services' },
+        { name: 'Process', path: '#process' },
         { name: 'Experience', path: '#experience' },
         { name: 'Projects', path: '#projects' },
         { name: 'Contact', path: '#contact' }

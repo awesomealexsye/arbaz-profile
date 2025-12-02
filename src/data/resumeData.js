@@ -147,3 +147,344 @@ export const aimlFocus = [
     "🌐 AI web app integration - making apps smarter",
     "🧠 TensorFlow & Scikit-learn - the brain tools!"
 ];
+
+// About Data - Extended Personal Information
+export const aboutData = {
+    introduction: "I'm a full-stack developer who believes code is more than just syntax—it's a way to create experiences that matter. With over 5 years of turning coffee into code, I've mastered the art of building applications that users love and businesses rely on. From mobile apps with 50K+ downloads to enterprise systems handling critical operations, I bring both technical expertise and a genuine passion for solving real-world problems.",
+    mission: "To leverage cutting-edge technology and create digital solutions that make a meaningful impact, while constantly learning and evolving in the ever-changing tech landscape.",
+    vision: "To be a catalyst for innovation, pushing the boundaries of what's possible with web and mobile technologies, and inspiring the next generation of developers.",
+    values: [
+        {
+            icon: "code",
+            title: "Quality First",
+            description: "Writing clean, maintainable code isn't optional—it's a responsibility. Every line matters."
+        },
+        {
+            icon: "users",
+            title: "User-Centric",
+            description: "Technology should serve people, not frustrate them. User experience is always the top priority."
+        },
+        {
+            icon: "trending-up",
+            title: "Continuous Growth",
+            description: "The tech world never stops evolving, and neither do I. Always learning, always improving."
+        },
+        {
+            icon: "zap",
+            title: "Innovation",
+            description: "Every project is an opportunity to try something new, push boundaries, and create something amazing."
+        }
+    ],
+    highlights: [
+        { label: "Years of Experience", value: "5+" },
+        { label: "Projects Delivered", value: "20+" },
+        { label: "Happy Clients", value: "15+" },
+        { label: "Technologies Mastered", value: "30+" }
+    ]
+};
+
+// Services Offered
+export const services = [
+    {
+        id: 1,
+        icon: "smartphone",
+        title: "Mobile App Development",
+        description: "Native-quality mobile apps using React Native that work seamlessly on both iOS and Android. From concept to App Store/Play Store publishing, I handle it all.",
+        features: [
+            "Cross-platform development with React Native",
+            "Native iOS & Android features integration",
+            "App Store & Play Store deployment",
+            "Push notifications & real-time updates",
+            "Offline functionality & data sync",
+            "In-app purchases & payment integration"
+        ],
+        gradient: "from-blue-500 via-purple-600 to-pink-500"
+    },
+    {
+        id: 2,
+        icon: "globe",
+        title: "Web Application Development",
+        description: "Modern, responsive web applications built with React and powerful backend technologies. Scalable, secure, and optimized for performance.",
+        features: [
+            "React & Next.js applications",
+            "RESTful API & GraphQL development",
+            "Real-time features with WebSockets",
+            "Progressive Web Apps (PWA)",
+            "E-commerce & payment integration",
+            "Admin dashboards & analytics"
+        ],
+        gradient: "from-cyan-500 via-blue-600 to-indigo-500"
+    },
+    {
+        id: 3,
+        icon: "server",
+        title: "Backend & API Development",
+        description: "Robust backend systems with Laravel, Node.js, and modern databases. Secure, scalable architecture that grows with your business.",
+        features: [
+            "RESTful & GraphQL APIs",
+            "Laravel & Node.js backends",
+            "Database design & optimization",
+            "Authentication & authorization",
+            "Third-party API integrations",
+            "Microservices architecture"
+        ],
+        gradient: "from-green-500 via-emerald-600 to-teal-500"
+    },
+    {
+        id: 4,
+        icon: "cloud",
+        title: "Cloud & DevOps",
+        description: "Complete deployment and server management on AWS, Linux servers. CI/CD pipelines, monitoring, and infrastructure as code.",
+        features: [
+            "AWS cloud infrastructure setup",
+            "Linux server administration",
+            "CI/CD pipeline configuration",
+            "Docker containerization",
+            "SSL, DNS & domain management",
+            "Server monitoring & optimization"
+        ],
+        gradient: "from-orange-500 via-red-600 to-pink-500"
+    },
+    {
+        id: 5,
+        icon: "shield",
+        title: "Full-Stack Solutions",
+        description: "End-to-end application development from database to UI. One person, complete ownership, delivered on time.",
+        features: [
+            "Complete project ownership",
+            "Frontend to backend integration",
+            "Database to deployment",
+            "Code review & quality assurance",
+            "Documentation & handover",
+            "Post-launch support"
+        ],
+        gradient: "from-purple-500 via-pink-600 to-rose-500"
+    },
+    {
+        id: 6,
+        icon: "brain",
+        title: "AI/ML Integration",
+        description: "Bringing intelligence to your applications with machine learning, NLP, and computer vision capabilities.",
+        features: [
+            "ML model integration",
+            "Natural Language Processing",
+            "Computer vision features",
+            "Predictive analytics",
+            "AI-powered recommendations",
+            "TensorFlow & Scikit-learn"
+        ],
+        gradient: "from-indigo-500 via-purple-600 to-pink-500"
+    }
+];
+
+// Development Process Steps
+export const processSteps = [
+    {
+        id: 1,
+        number: "01",
+        icon: "search",
+        title: "Discovery & Analysis",
+        description: "Understanding your needs, goals, and challenges. We dive deep into requirements, research the market, and define the perfect solution.",
+        activities: [
+            "Requirements gathering & analysis",
+            "Competitor research & market study",
+            "Technical feasibility assessment",
+            "Project scope & timeline definition"
+        ],
+        color: "from-blue-500 to-cyan-500"
+    },
+    {
+        id: 2,
+        number: "02",
+        icon: "pen-tool",
+        title: "Design & Planning",
+        description: "Creating the blueprint for success. From wireframes to detailed technical architecture, every detail is planned before a single line of code.",
+        activities: [
+            "UI/UX design & wireframing",
+            "Database schema design",
+            "API architecture planning",
+            "Technology stack selection"
+        ],
+        color: "from-purple-500 to-pink-500"
+    },
+    {
+        id: 3,
+        number: "03",
+        icon: "code",
+        title: "Development",
+        description: "Where ideas become reality. Clean, efficient code written with best practices, version control, and regular progress updates.",
+        activities: [
+            "Agile development methodology",
+            "Clean code & best practices",
+            "Git version control",
+            "Regular progress updates"
+        ],
+        color: "from-green-500 to-emerald-500"
+    },
+    {
+        id: 4,
+        number: "04",
+        icon: "check-circle",
+        title: "Testing & QA",
+        description: "Rigorous testing to ensure everything works perfectly. From unit tests to user acceptance testing, quality is guaranteed.",
+        activities: [
+            "Unit & integration testing",
+            "Cross-browser/device testing",
+            "Performance optimization",
+            "Security vulnerability checks"
+        ],
+        color: "from-orange-500 to-red-500"
+    },
+    {
+        id: 5,
+        number: "05",
+        icon: "upload-cloud",
+        title: "Deployment",
+        description: "Smooth launch to production. Server setup, domain configuration, app store publishing—everything handled professionally.",
+        activities: [
+            "Production server setup",
+            "Domain & SSL configuration",
+            "App store submission & approval",
+            "Launch monitoring & support"
+        ],
+        color: "from-indigo-500 to-purple-500"
+    },
+    {
+        id: 6,
+        number: "06",
+        icon: "settings",
+        title: "Maintenance & Support",
+        description: "Ongoing support and improvements. Bug fixes, updates, new features—your app stays current and performs optimally.",
+        activities: [
+            "Regular updates & maintenance",
+            "Bug fixes & improvements",
+            "Performance monitoring",
+            "Feature enhancements"
+        ],
+        color: "from-pink-500 to-rose-500"
+    }
+];
+
+// Technologies Showcase
+export const technologiesShowcase = {
+    frontend: {
+        name: "Frontend",
+        techs: [
+            { name: "React", icon: "⚛️", proficiency: "expert" },
+            { name: "React Native", icon: "📱", proficiency: "expert" },
+            { name: "JavaScript", icon: "💛", proficiency: "expert" },
+            { name: "TypeScript", icon: "🔷", proficiency: "advanced" },
+            { name: "HTML5/CSS3", icon: "🎨", proficiency: "expert" },
+            { name: "Redux", icon: "🔄", proficiency: "advanced" }
+        ]
+    },
+    backend: {
+        name: "Backend",
+        techs: [
+            { name: "PHP", icon: "🐘", proficiency: "expert" },
+            { name: "Laravel", icon: "✨", proficiency: "expert" },
+            { name: "Node.js", icon: "🟢", proficiency: "advanced" },
+            { name: "REST APIs", icon: "🌐", proficiency: "expert" },
+            { name: "GraphQL", icon: "📊", proficiency: "intermediate" }
+        ]
+    },
+    database: {
+        name: "Database",
+        techs: [
+            { name: "MySQL", icon: "🐬", proficiency: "expert" },
+            { name: "PostgreSQL", icon: "🐘", proficiency: "advanced" },
+            { name: "Supabase", icon: "⚡", proficiency: "advanced" },
+            { name: "Redis", icon: "🔴", proficiency: "intermediate" }
+        ]
+    },
+    devops: {
+        name: "DevOps & Cloud",
+        techs: [
+            { name: "Linux", icon: "🐧", proficiency: "expert" },
+            { name: "AWS", icon: "☁️", proficiency: "advanced" },
+            { name: "Docker", icon: "🐳", proficiency: "intermediate" },
+            { name: "Git", icon: "🔀", proficiency: "expert" },
+            { name: "CI/CD", icon: "🚀", proficiency: "advanced" }
+        ]
+    }
+};
+
+// Statistics/Achievements
+export const stats = [
+    {
+        id: 1,
+        icon: "briefcase",
+        label: "Years Experience",
+        value: 5,
+        suffix: "+",
+        color: "from-blue-500 to-cyan-500"
+    },
+    {
+        id: 2,
+        icon: "folder",
+        label: "Projects Completed",
+        value: 20,
+        suffix: "+",
+        color: "from-purple-500 to-pink-500"
+    },
+    {
+        id: 3,
+        icon: "download",
+        label: "App Downloads",
+        value: 50,
+        suffix: "K+",
+        color: "from-green-500 to-emerald-500"
+    },
+    {
+        id: 4,
+        icon: "users",
+        label: "Happy Clients",
+        value: 15,
+        suffix: "+",
+        color: "from-orange-500 to-red-500"
+    }
+];
+
+// Testimonials
+export const testimonials = [
+    {
+        id: 1,
+        name: "Rajesh Kumar",
+        role: "Founder & CEO",
+        company: "TechStart Solutions",
+        image: "/img/testimonial-placeholder.jpg",
+        rating: 5,
+        text: "Arbaz is an exceptional developer who delivered our mobile app beyond expectations. His full-stack expertise and ability to handle everything from backend to deployment made our project a huge success. 50K+ downloads and counting!",
+        gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+        id: 2,
+        name: "Priya Sharma",
+        role: "Product Manager",
+        company: "EduTech Innovations",
+        image: "/img/testimonial-placeholder.jpg",
+        rating: 5,
+        text: "Working with Arbaz was a game-changer for our education platform. He not only built a robust system but also optimized it for performance. His attention to detail and commitment to quality are unmatched.",
+        gradient: "from-purple-500 to-pink-500"
+    },
+    {
+        id: 3,
+        name: "Amit Patel",
+        role: "Operations Director",
+        company: "FitLife Gyms",
+        image: "/img/testimonial-placeholder.jpg",
+        rating: 5,
+        text: "The gym management app Arbaz built transformed our business operations. QR code check-ins, biometric integration, and seamless payment processing—all working perfectly. Highly recommended!",
+        gradient: "from-green-500 to-emerald-500"
+    },
+    {
+        id: 4,
+        name: "Sneha Reddy",
+        role: "Director",
+        company: "Animal Welfare NGO",
+        image: "/img/testimonial-placeholder.jpg",
+        rating: 5,
+        text: "Arbaz's passion for our animal rescue platform was evident in every feature. The tracking system, adoption portal, and donation management have helped us save countless lives. Thank you!",
+        gradient: "from-orange-500 to-red-500"
+    }
+];
