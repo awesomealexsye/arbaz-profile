@@ -13,9 +13,12 @@ import Stats from './components/Stats';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+import SEO from './components/SEO';
+
 function App() {
   return (
     <div className="App">
+      <SEO />
       <GalaxyBackground />
       <Navigation />
       <Hero />
