@@ -4,12 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arbaz - Senior Full-Stack Software Engineer</title>
-    <!-- Google Fonts for Professional Typography -->
+    <title>Arbaz Khan - Senior Full-Stack Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -20,544 +18,506 @@
 
         @page {
             size: A4;
-            margin: 0;
+            margin: 8mm 10mm;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+                overflow: hidden;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                box-shadow: none;
+                height: 281mm;
+                overflow: hidden;
+            }
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.5;
-            color: #1a202c;
-            background: #fff;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            font-feature-settings: 'kern' 1, 'liga' 1;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.35;
+            color: #1f2937;
+            background: #e5e7eb;
+            font-size: 9pt;
         }
 
         .container {
-            display: grid;
-            grid-template-columns: 285px 1fr;
-            height: 297mm;
             width: 210mm;
-            margin: 0 auto;
+            height: 281mm;
             background: #ffffff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            padding: 15px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
         }
 
-        /* LEFT SIDEBAR */
-        .sidebar {
-            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
-            border-right: 3px solid #dee2e6;
-            padding: 25px 20px;
-        }
-
-        .profile-section {
+        /* Header */
+        .header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #495057;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1e40af;
+            margin-bottom: 10px;
         }
 
         .name {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 30px;
+            font-size: 22pt;
             font-weight: 700;
-            color: #111827;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #1e3a8a;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
         }
 
         .title {
-            font-family: 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 500;
-            color: #374151;
-            line-height: 1.6;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 11px;
+            font-size: 10pt;
             font-weight: 600;
-            color: #111827;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 2px solid #374151;
+            color: #475569;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            margin-bottom: 6px;
         }
 
-        .contact-item {
-            font-size: 8.5px;
-            margin: 6px 0;
-            color: #374151;
+        .contact-row {
             display: flex;
-            align-items: flex-start;
-            line-height: 1.5;
-            font-weight: 400;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            font-size: 8.5pt;
+            color: #475569;
         }
 
-        .contact-icon {
-            min-width: 16px;
-            margin-right: 7px;
-            color: #212529;
-            font-weight: 700;
-            font-size: 10px;
+        .contact-item a {
+            color: #1e40af;
+            text-decoration: none;
         }
 
-        .contact-text {
-            flex: 1;
-            word-break: break-word;
+        .contact-sep {
+            color: #9ca3af;
         }
 
-        .skill-category {
+        /* Main Layout - Two Columns */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            gap: 15px;
+            height: calc(100% - 75px);
+        }
+
+        /* Left Column */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Right Column */
+        .right-column {
+            border-left: 1.5px solid #e5e7eb;
+            padding-left: 15px;
+        }
+
+        /* Section Styling */
+        .section {
             margin-bottom: 8px;
         }
 
-        .skill-label {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 9px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .skill-items {
-            font-size: 8.5px;
-            line-height: 1.6;
-            color: #4b5563;
-            font-weight: 400;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .sidebar li {
-            font-size: 8.5px;
-            color: #4b5563;
-            margin: 5px 0;
-            padding-left: 14px;
-            position: relative;
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        .sidebar li::before {
-            content: "▪";
-            position: absolute;
-            left: 0;
-            color: #212529;
+        .section-title {
+            font-size: 9pt;
             font-weight: 700;
-            font-size: 12px;
-        }
-
-        .education-item {
-            margin-bottom: 10px;
-        }
-
-        .degree {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 9px;
-            font-weight: 600;
-            color: #111827;
-            line-height: 1.4;
-            margin-bottom: 3px;
-        }
-
-        .school {
-            font-size: 8.5px;
-            color: #4b5563;
-            margin-top: 3px;
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        .edu-details {
-            font-size: 8px;
-            color: #6c757d;
-            margin-top: 3px;
-            font-style: italic;
-        }
-
-        /* RIGHT MAIN CONTENT */
-        .main-content {
-            padding: 25px 28px;
-            background: #ffffff;
-        }
-
-        .header-section {
-            margin-bottom: 15px;
-        }
-
-        .summary-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid #495057;
-            padding: 10px 14px;
-            margin-bottom: 14px;
-            border-radius: 2px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .summary-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 6px;
+            color: #1e3a8a;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1px;
+            padding-bottom: 3px;
+            border-bottom: 1.5px solid #dbeafe;
+            margin-bottom: 6px;
         }
 
-        .summary-text {
-            font-size: 9px;
-            line-height: 1.7;
+        /* Summary */
+        .summary {
+            font-size: 8.5pt;
+            line-height: 1.45;
             color: #374151;
             text-align: justify;
-            font-weight: 400;
         }
 
-        .content-section {
-            margin-bottom: 12px;
-        }
-
-        .content-section-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 10px;
-            padding-bottom: 4px;
-            border-bottom: 2px solid #1f2937;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
+        /* Experience */
         .job {
-            margin-bottom: 9px;
-            page-break-inside: avoid;
+            margin-bottom: 7px;
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 4px;
         }
 
         .job-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 10px;
-            font-weight: 600;
-            color: #111827;
+            font-weight: 700;
+            font-size: 9pt;
+            color: #1f2937;
         }
 
         .job-date {
-            font-size: 8px;
+            font-size: 8pt;
             color: #6b7280;
-            font-style: normal;
-            font-weight: 500;
+            font-weight: 600;
             white-space: nowrap;
-            margin-left: 10px;
         }
 
         .company {
-            font-size: 9px;
+            font-size: 8.5pt;
             color: #4b5563;
-            font-weight: 500;
-            margin-bottom: 4px;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
 
         .job-description {
-            font-size: 8.5px;
-            line-height: 1.6;
-            color: #374151;
-            margin-left: 14px;
-            font-weight: 400;
+            margin-left: 12px;
+            margin-top: 2px;
         }
 
         .job-description li {
-            margin: 3px 0;
+            font-size: 8pt;
+            color: #4b5563;
+            margin-bottom: 1px;
+            line-height: 1.4;
         }
 
+        /* Projects */
         .project {
-            margin-bottom: 8px;
-            page-break-inside: avoid;
+            margin-bottom: 5px;
         }
 
-        .project-title {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 9px;
+        .project-name {
+            font-weight: 700;
+            font-size: 8.5pt;
+            color: #1f2937;
+            display: inline;
+        }
+
+        .project-desc {
+            font-size: 8pt;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        .tech-tag {
+            color: #1e40af;
             font-weight: 600;
-            color: #111827;
-            margin-bottom: 3px;
+            font-size: 7.5pt;
         }
 
-        .project-description {
-            font-size: 8.5px;
-            line-height: 1.6;
-            color: #374151;
-            text-align: justify;
-            font-weight: 400;
+        /* Right Column Sections */
+        .skill-group {
+            margin-bottom: 5px;
         }
 
-        .project-highlight {
-            font-weight: 600;
-            color: #111827;
+        .skill-label {
+            font-weight: 700;
+            font-size: 8pt;
+            color: #1e3a8a;
         }
 
+        .skill-items {
+            font-size: 8pt;
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        /* Education */
+        .edu-title {
+            font-weight: 700;
+            font-size: 8.5pt;
+            color: #1f2937;
+        }
+
+        .edu-school {
+            font-size: 8pt;
+            color: #4b5563;
+        }
+
+        .edu-year {
+            font-size: 7.5pt;
+            color: #6b7280;
+        }
+
+        /* Achievements */
         .achievement-list {
-            list-style: none;
-            padding-left: 0;
+            margin-left: 12px;
         }
 
         .achievement-list li {
-            font-size: 8.5px;
-            color: #374151;
-            margin: 4px 0;
-            padding-left: 14px;
-            position: relative;
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: 8pt;
+            color: #4b5563;
+            margin-bottom: 2px;
+            line-height: 1.4;
         }
 
-        .achievement-list li::before {
-            content: "✓";
+        /* Simple List */
+        .simple-list {
+            list-style: none;
+        }
+
+        .simple-list li {
+            font-size: 8pt;
+            color: #4b5563;
+            margin-bottom: 2px;
+            padding-left: 10px;
+            position: relative;
+        }
+
+        .simple-list li::before {
+            content: "•";
             position: absolute;
             left: 0;
-            color: #059669;
-            font-weight: 700;
-            font-size: 10px;
+            color: #1e40af;
+            font-weight: bold;
+        }
+
+        /* Languages inline */
+        .lang-item {
+            font-size: 8pt;
+            color: #4b5563;
+            margin-bottom: 2px;
+        }
+
+        .lang-item strong {
+            color: #1f2937;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- LEFT SIDEBAR -->
-        <div class="sidebar">
-            <div class="profile-section">
-                <div class="name">ARBAZ</div>
-                <div class="title">Senior Full-Stack<br>Software Engineer</div>
+        <!-- HEADER -->
+        <header class="header">
+            <h1 class="name">ARBAZ KHAN</h1>
+            <div class="title">Senior Full-Stack Software Engineer</div>
+            <div class="contact-row">
+                <span class="contact-item">Email: ak.khanarbaz777@gmail.com</span>
+                <span class="contact-sep">|</span>
+                <span class="contact-item">Phone: +91 9625442725</span>
+                <span class="contact-sep">|</span>
+                <span class="contact-item">Location: Faridabad, Haryana, India</span>
             </div>
-
-            <div class="sidebar-section">
-                <div class="section-title">Contact</div>
-                <div class="contact-item">
-                    <span class="contact-icon">✉</span>
-                    <span class="contact-text">ak.khanarbaz777@gmail.com</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">☎</span>
-                    <span class="contact-text">+91 9625442725</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">⌂</span>
-                    <span class="contact-text">Faridabad, Haryana, India</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">⚲</span>
-                    <span class="contact-text">linkedin.com/in/alexsye1999</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">🌐</span>
-                    <span class="contact-text">awesomealexsye.github.io</span>
-                </div>
+            <div class="contact-row">
+                <span class="contact-item">LinkedIn: <a
+                        href="https://linkedin.com/in/alexsye1999">linkedin.com/in/alexsye1999</a></span>
+                <span class="contact-sep">|</span>
+                <span class="contact-item">Portfolio: <a
+                        href="https://awesomealexsye.github.io">awesomealexsye.github.io</a></span>
             </div>
+        </header>
 
-            <div class="sidebar-section">
-                <div class="section-title">Technical Skills</div>
+        <!-- MAIN TWO-COLUMN LAYOUT -->
+        <div class="main-grid">
+            <!-- LEFT COLUMN - Experience & Projects -->
+            <div class="left-column">
 
-                <div class="skill-category">
-                    <div class="skill-label">Frontend</div>
-                    <div class="skill-items">React Native, React.js, JavaScript, HTML5, CSS3, jQuery</div>
-                </div>
+                <!-- SUMMARY -->
+                <section class="section">
+                    <h2 class="section-title">Professional Summary</h2>
+                    <p class="summary">
+                        Senior Full-Stack Engineer with 5+ years in eCommerce, mobile apps, and enterprise security.
+                        Published 4+ mobile applications with 50,000+ combined downloads. Expertise in React Native,
+                        Node.js, Laravel, and AWS. Expanding into Python ML/AI and LLM technologies.
+                    </p>
+                </section>
 
-                <div class="skill-category">
-                    <div class="skill-label">Backend</div>
-                    <div class="skill-items">Node.js, Laravel, PHP, Python, RESTful APIs</div>
-                </div>
+                <!-- EXPERIENCE -->
+                <section class="section">
+                    <h2 class="section-title">Professional Experience</h2>
 
-                <div class="skill-category">
-                    <div class="skill-label">Mobile</div>
-                    <div class="skill-items">React Native, Android, iOS Development</div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-label">AI & ML</div>
-                    <div class="skill-items">Python ML, AI Models, Claude Code, LLM Technologies, OpenAI, Deepgram</div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-label">Database</div>
-                    <div class="skill-items">MySQL, MongoDB, PostgreSQL</div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-label">Cloud & DevOps</div>
-                    <div class="skill-items">AWS (EC2, S3, Rekognition), Linux Administration, Docker</div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-label">Tools</div>
-                    <div class="skill-items">Git, WordPress, Electron, System Design</div>
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title">Education</div>
-                <div class="education-item">
-                    <div class="degree">Diploma in Computer Engineering</div>
-                    <div class="school">Government Polytechnic, Manesar, Gurugaon, Haryana</div>
-                    <div class="edu-details">First Division • June 2019</div>
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title">Languages</div>
-                <ul>
-                    <li>English (Professional Working Proficiency)</li>
-                    <li>Hindi (Native)</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title">Areas of Interest</div>
-                <ul>
-                    <li>AI & Machine Learning / LLMs</li>
-                    <li>System Architecture & Design</li>
-                    <li>Mobile App Development</li>
-                    <li>Cloud Infrastructure</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- RIGHT MAIN CONTENT -->
-        <div class="main-content">
-            <div class="summary-box">
-                <div class="summary-title">Professional Summary</div>
-                <div class="summary-text">
-                    Senior Full-Stack Engineer with 5+ years in eCommerce, mobile apps, and security. Published 4+ apps
-                    with 50,000+ downloads. Expertise in React Native, Node.js, Laravel, AWS, and expanding into Python
-                    ML/AI technologies.
-                </div>
-            </div>
-
-            <div class="content-section">
-                <div class="content-section-title">Professional Experience</div>
-
-                <div class="job">
-                    <div class="job-header">
-                        <div class="job-title">Full-Stack Developer (Project-Based)</div>
-                        <div class="job-date">July 2025 - Present</div>
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-title">Full-Stack Developer (Project-Based)</span>
+                            <span class="job-date">Jul 2025 - Present</span>
+                        </div>
+                        <div class="company">Dhannipay Digital Marketing Pvt Ltd | New Delhi</div>
+                        <ul class="job-description">
+                            <li>Developing HRM/Payroll app with real-time location-based attendance using React Native &
+                                Node.js</li>
+                            <li>Integrating Python ML, AI models (Claude, LLM) for enterprise automation solutions</li>
+                        </ul>
                     </div>
-                    <div class="company">Dhannipay Digital Marketing Pvt Ltd • New Delhi</div>
-                    <ul class="job-description">
-                        <li>Developing HRM/Payroll app with live location-based attendance tracking</li>
-                        <li>Integrating Python ML, AI models (Claude Code, LLM) for enterprise solutions</li>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-title">IT Development Application Developer - Ecommerce</span>
+                            <span class="job-date">Sep 2022 - Jun 2025</span>
+                        </div>
+                        <div class="company">Shipco IT Pvt Ltd | Pune</div>
+                        <ul class="job-description">
+                            <li>Built enterprise eCommerce apps with performance optimization and security hardening
+                            </li>
+                            <li>Resolved critical security vulnerabilities; managed AWS infrastructure and CI/CD
+                                pipelines</li>
+                        </ul>
+                    </div>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-title">Associate L1 - Programmer</span>
+                            <span class="job-date">May - Sep 2022</span>
+                        </div>
+                        <div class="company">Clavax Technologies | Gurgaon</div>
+                        <ul class="job-description">
+                            <li>Developed full-stack web apps using React.js with responsive UI components and REST APIs
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-title">Software Engineer</span>
+                            <span class="job-date">Aug 2021 - May 2022</span>
+                        </div>
+                        <div class="company">Venture7 | Faridabad</div>
+                        <ul class="job-description">
+                            <li>Developed React/Node.js applications with RESTful APIs; conducted code reviews and
+                                testing</li>
+                        </ul>
+                    </div>
+
+                    <div class="job">
+                        <div class="job-header">
+                            <span class="job-title">Web Developer Executive</span>
+                            <span class="job-date">Feb - Jun 2021</span>
+                        </div>
+                        <div class="company">Adivaha Travel Technology | Faridabad</div>
+                        <ul class="job-description">
+                            <li>Built travel tech solutions using PHP, Laravel, WordPress with responsive designs</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- PROJECTS -->
+                <section class="section">
+                    <h2 class="section-title">Key Projects & Applications</h2>
+
+                    <div class="project">
+                        <span class="project-name">Paylap Application Suite (50,000+ Downloads):</span>
+                        <span class="project-desc">Published apps on Play Store & App Store - Score (credit scoring),
+                            Fitness (AWS Rekognition face attendance), HRM (geo-fenced attendance), Pets Care (animal
+                            welfare platform).</span>
+                        <span class="tech-tag">React Native, Node.js, Laravel, AWS, PostgreSQL</span>
+                    </div>
+
+                    <div class="project">
+                        <span class="project-name">AI-Powered Gym Management:</span>
+                        <span class="project-desc">Face detection attendance via AWS Rekognition, automated payments,
+                            subscriptions, analytics.</span>
+                        <span class="tech-tag">React Native, Node.js, AWS Rekognition, MongoDB</span>
+                    </div>
+
+                    <div class="project">
+                        <span class="project-name">Real-time AI Voice Assistant:</span>
+                        <span class="project-desc">Personal AI using Deepgram (speech-to-text) and OpenAI for
+                            intelligent conversations.</span>
+                        <span class="tech-tag">Python, Deepgram, OpenAI API, WebSocket</span>
+                    </div>
+
+                    <div class="project">
+                        <span class="project-name">LinkedIn Data Extraction Tool:</span>
+                        <span class="project-desc">Automated profile extraction with intelligent data processing and
+                            analysis.</span>
+                        <span class="tech-tag">Python, Selenium, BeautifulSoup, Pandas</span>
+                    </div>
+                </section>
+
+                <!-- ACHIEVEMENTS -->
+                <section class="section">
+                    <h2 class="section-title">Key Achievements</h2>
+                    <ul class="achievement-list">
+                        <li>Published 4+ production mobile apps with 50,000+ combined downloads on Play Store & App
+                            Store</li>
+                        <li>Expert in Linux administration, AWS cloud services, and infrastructure management</li>
+                        <li>Strong track record resolving critical security vulnerabilities in production systems</li>
                     </ul>
-                </div>
-
-                <div class="job">
-                    <div class="job-header">
-                        <div class="job-title">IT Development Application Developer - Ecommerce</div>
-                        <div class="job-date">Sep 2022 - Jun 2025 (2Y 10M)</div>
-                    </div>
-                    <div class="company">Shipco IT Pvt Ltd • Pune</div>
-                    <ul class="job-description">
-                        <li>Built enterprise eCommerce apps with security optimization and vulnerability fixes</li>
-                        <li>Managed infrastructure, deployment pipelines, and production environments</li>
-                    </ul>
-                </div>
-
-                <div class="job">
-                    <div class="job-header">
-                        <div class="job-title">Associate L1 - Programmer</div>
-                        <div class="job-date">May - Sep 2022 (5M)</div>
-                    </div>
-                    <div class="company">Clavax Technologies • Gurgaon</div>
-                    <ul class="job-description">
-                        <li>Built full-stack web apps with modern JS frameworks and responsive UI components</li>
-                    </ul>
-                </div>
-
-                <div class="job">
-                    <div class="job-header">
-                        <div class="job-title">Software Engineer</div>
-                        <div class="job-date">Aug 2021 - May 2022 (10M)</div>
-                    </div>
-                    <div class="company">Venture7 • Faridabad</div>
-                    <ul class="job-description">
-                        <li>Developed React/Node.js apps with RESTful APIs, testing, and code reviews</li>
-                    </ul>
-                </div>
-
-                <div class="job">
-                    <div class="job-header">
-                        <div class="job-title">Web Developer Executive</div>
-                        <div class="job-date">Feb - Jun 2021 (5M)</div>
-                    </div>
-                    <div class="company">Adivaha Travel Technology • Faridabad</div>
-                    <ul class="job-description">
-                        <li>Built travel tech solutions using PHP, Laravel, WordPress with responsive designs</li>
-                    </ul>
-                </div>
+                </section>
             </div>
 
-            <div class="content-section">
-                <div class="content-section-title">Key Projects & Applications</div>
+            <!-- RIGHT COLUMN - Skills, Education, Languages -->
+            <div class="right-column">
 
-                <div class="project">
-                    <div class="project-title">Paylap Application Suite (50,000+ Downloads)</div>
-                    <div class="project-description">
-                        <span class="project-highlight">Score:</span> Credit scoring app for shops •
-                        <span class="project-highlight">Fitness:</span> Gym management with AWS Rekognition face
-                        attendance •
-                        <span class="project-highlight">HRM:</span> HR/Payroll with geo-fenced attendance •
-                        <span class="project-highlight">Pets Care:</span> Animal welfare & adoption platform
+                <!-- TECHNICAL SKILLS -->
+                <section class="section">
+                    <h2 class="section-title">Technical Skills</h2>
+
+                    <div class="skill-group">
+                        <span class="skill-label">Frontend:</span>
+                        <span class="skill-items">React Native, React.js, JavaScript, TypeScript, HTML5, CSS3,
+                            jQuery</span>
                     </div>
-                </div>
 
-                <div class="project">
-                    <div class="project-title">AI-Powered Gym Management System</div>
-                    <div class="project-description">
-                        AWS Rekognition face detection attendance, automated payments, subscriptions, and analytics
+                    <div class="skill-group">
+                        <span class="skill-label">Backend:</span>
+                        <span class="skill-items">Node.js, Laravel, PHP, Python, RESTful APIs, GraphQL</span>
                     </div>
-                </div>
 
-                <div class="project">
-                    <div class="project-title">Real-time AI Voice Assistant</div>
-                    <div class="project-description">
-                        Personal AI assistant using Deepgram (speech-to-text) and OpenAI for intelligent voice
-                        conversations
+                    <div class="skill-group">
+                        <span class="skill-label">Mobile:</span>
+                        <span class="skill-items">React Native, Expo, Android, iOS Development</span>
                     </div>
-                </div>
 
-                <div class="project">
-                    <div class="project-title">LinkedIn Data Scraping & Analysis Tool</div>
-                    <div class="project-description">
-                        Automated LinkedIn profile extraction with intelligent data processing and analysis
+                    <div class="skill-group">
+                        <span class="skill-label">AI & ML:</span>
+                        <span class="skill-items">Python ML, LLM Technologies, OpenAI, Claude, Deepgram</span>
                     </div>
-                </div>
-            </div>
 
-            <div class="content-section">
-                <div class="content-section-title">Key Achievements</div>
-                <ul class="achievement-list">
-                    <li>Published 4+ mobile apps with 50,000+ combined downloads on Play Store & App Store</li>
-                    <li>Expert in Linux administration, AWS cloud services, and infrastructure management</li>
-                    <li>Strong track record resolving critical security vulnerabilities in production systems</li>
-                </ul>
+                    <div class="skill-group">
+                        <span class="skill-label">Databases:</span>
+                        <span class="skill-items">MySQL, MongoDB, PostgreSQL, Redis</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="skill-label">Cloud & DevOps:</span>
+                        <span class="skill-items">AWS (EC2, S3, Rekognition), Docker, Linux, CI/CD</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="skill-label">Tools:</span>
+                        <span class="skill-items">Git, GitHub, VS Code, WordPress, Electron, Jira</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <span class="skill-label">Concepts:</span>
+                        <span class="skill-items">System Design, Microservices, Agile/Scrum, Security</span>
+                    </div>
+                </section>
+
+                <!-- EDUCATION -->
+                <section class="section">
+                    <h2 class="section-title">Education</h2>
+                    <div class="edu-title">Diploma in Computer Engineering</div>
+                    <div class="edu-school">Government Polytechnic, Manesar, Gurugram, Haryana</div>
+                    <div class="edu-year">First Division | June 2019</div>
+                </section>
+
+                <!-- LANGUAGES -->
+                <section class="section">
+                    <h2 class="section-title">Languages</h2>
+                    <div class="lang-item"><strong>English:</strong> Professional Working Proficiency</div>
+                    <div class="lang-item"><strong>Hindi:</strong> Native Proficiency</div>
+                </section>
+
+                <!-- AREAS OF INTEREST -->
+                <section class="section">
+                    <h2 class="section-title">Areas of Interest</h2>
+                    <ul class="simple-list">
+                        <li>AI & Machine Learning / LLMs</li>
+                        <li>System Architecture & Design</li>
+                        <li>Mobile App Development</li>
+                        <li>Cloud Infrastructure & DevOps</li>
+                    </ul>
+                </section>
             </div>
         </div>
     </div>
