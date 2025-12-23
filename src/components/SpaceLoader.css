@@ -1,0 +1,520 @@
+.space-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(147, 51, 234, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(236, 72, 153, 0.3) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 80%, rgba(59, 130, 246, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 40%),
+        linear-gradient(180deg,
+            #1e1b4b 0%,
+            #312e81 20%,
+            #4338ca 40%,
+            #6366f1 60%,
+            #3b82f6 80%,
+            #1e40af 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.space-loader.reveal {
+    opacity: 0;
+    transform: scale(1.5);
+    pointer-events: none;
+}
+
+/* Nebula Clouds */
+.nebula-clouds {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.nebula {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.6;
+    animation: nebula-drift 10s ease-in-out infinite;
+}
+
+.nebula-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.5) 0%, transparent 70%);
+    top: -10%;
+    right: -10%;
+    animation-delay: 0s;
+}
+
+.nebula-2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+    bottom: 20%;
+    left: -10%;
+    animation-delay: 2s;
+}
+
+.nebula-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+    top: 40%;
+    right: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes nebula-drift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(20px, -20px) scale(1.1);
+    }
+}
+
+/* Floating Planets */
+.planets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.planet {
+    position: absolute;
+    font-size: 2rem;
+    animation: planet-float 5s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.planet-1 {
+    top: 15%;
+    left: 10%;
+    font-size: 3rem;
+    animation-delay: 0s;
+}
+
+.planet-2 {
+    bottom: 25%;
+    right: 15%;
+    font-size: 2.5rem;
+    animation-delay: 1s;
+}
+
+.planet-3 {
+    top: 60%;
+    left: 5%;
+    font-size: 1.5rem;
+    animation-delay: 2s;
+}
+
+.planet-4 {
+    top: 20%;
+    right: 25%;
+    font-size: 1.2rem;
+    animation-delay: 0.5s;
+}
+
+@keyframes planet-float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+/* Floating Rocket */
+.floating-rocket {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    font-size: 2.5rem;
+    animation: rocket-fly 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 200, 100, 0.8));
+    z-index: 10;
+}
+
+@keyframes rocket-fly {
+    0% {
+        transform: translate(0, 0) rotate(-45deg);
+    }
+
+    50% {
+        transform: translate(30px, -30px) rotate(-40deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-45deg);
+    }
+}
+
+/* Starfield */
+.starfield {
+    position: absolute;
+    inset: 0;
+    perspective: 1000px;
+}
+
+.star {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: white;
+    border-radius: 50%;
+    animation: star-warp var(--duration) var(--delay) linear infinite;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes star-warp {
+    0% {
+        transform: translateZ(0) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateZ(800px) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Warp Speed Lines */
+.warp-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warp-line {
+    position: absolute;
+    width: 2px;
+    height: var(--length);
+    background: linear-gradient(to bottom, transparent, rgba(102, 126, 234, 0.8), rgba(236, 72, 153, 0.8), transparent);
+    transform-origin: center bottom;
+    transform: rotate(var(--angle)) translateY(-50vh);
+    animation: warp-speed 0.8s var(--delay) linear infinite;
+    border-radius: 2px;
+}
+
+@keyframes warp-speed {
+    0% {
+        transform: rotate(var(--angle)) translateY(-50vh) scaleY(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotate(var(--angle)) translateY(50vh) scaleY(1.5);
+        opacity: 0;
+    }
+}
+
+/* Central Vortex / Black Hole */
+.vortex {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vortex-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: vortex-spin 2s linear infinite;
+}
+
+.ring-1 {
+    width: 200px;
+    height: 200px;
+    border-color: rgba(102, 126, 234, 0.6);
+    animation-duration: 3s;
+}
+
+.ring-2 {
+    width: 150px;
+    height: 150px;
+    border-color: rgba(139, 92, 246, 0.6);
+    animation-duration: 2s;
+    animation-direction: reverse;
+}
+
+.ring-3 {
+    width: 100px;
+    height: 100px;
+    border-color: rgba(236, 72, 153, 0.6);
+    animation-duration: 1.5s;
+}
+
+.vortex-core {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a1a2e 0%, #000 60%, transparent 100%);
+    box-shadow:
+        0 0 60px 20px rgba(102, 126, 234, 0.4),
+        0 0 100px 40px rgba(139, 92, 246, 0.2),
+        inset 0 0 30px 10px rgba(0, 0, 0, 0.8);
+    animation: core-pulse 1s ease-in-out infinite;
+}
+
+@keyframes vortex-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes core-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 60px 20px rgba(102, 126, 234, 0.4),
+            0 0 100px 40px rgba(139, 92, 246, 0.2);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow:
+            0 0 80px 30px rgba(102, 126, 234, 0.6),
+            0 0 120px 50px rgba(139, 92, 246, 0.3);
+    }
+}
+
+/* Rocket Window Frame */
+.rocket-window {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.window-frame {
+    position: absolute;
+    inset: 20px;
+    border: 4px solid rgba(40, 40, 60, 0.8);
+    border-radius: 30px;
+    box-shadow:
+        inset 0 0 50px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(102, 126, 234, 0.2);
+}
+
+.frame-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(102, 126, 234, 0.5);
+}
+
+.frame-corner.top-left {
+    top: -2px;
+    left: -2px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 30px 0 0 0;
+}
+
+.frame-corner.top-right {
+    top: -2px;
+    right: -2px;
+    border-left: none;
+    border-bottom: none;
+    border-radius: 0 30px 0 0;
+}
+
+.frame-corner.bottom-left {
+    bottom: -2px;
+    left: -2px;
+    border-right: none;
+    border-top: none;
+    border-radius: 0 0 0 30px;
+}
+
+.frame-corner.bottom-right {
+    bottom: -2px;
+    right: -2px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 30px 0;
+}
+
+.window-reflection {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 60%;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    border-radius: 30px 0 0 0;
+}
+
+/* Loading Text */
+.loading-text {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.text-glow {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: text-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes text-pulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+    }
+
+    50% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(102, 126, 234, 0.8), 0 0 40px rgba(139, 92, 246, 0.4);
+    }
+}
+
+/* Dashboard Lights */
+.dashboard {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.dashboard-light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: blink 0.5s ease-in-out infinite;
+}
+
+.light-1 {
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation-delay: 0s;
+}
+
+.light-2 {
+    background: #f59e0b;
+    box-shadow: 0 0 10px #f59e0b;
+    animation-delay: 0.2s;
+}
+
+.light-3 {
+    background: #667eea;
+    box-shadow: 0 0 10px #667eea;
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .window-frame {
+        inset: 10px;
+        border-radius: 20px;
+    }
+
+    .vortex {
+        width: 200px;
+        height: 200px;
+    }
+
+    .ring-1 {
+        width: 140px;
+        height: 140px;
+    }
+
+    .ring-2 {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ring-3 {
+        width: 70px;
+        height: 70px;
+    }
+
+    .vortex-core {
+        width: 40px;
+        height: 40px;
+    }
+
+    .text-glow {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .frame-corner {
+        width: 25px;
+        height: 25px;
+    }
+
+    .loading-text {
+        bottom: 20%;
+    }
+}
+
+@media (max-width: 480px) {
+    .window-frame {
+        inset: 5px;
+        border-width: 2px;
+    }
+
+    .warp-line {
+        width: 1px;
+    }
+
+    .text-glow {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+}

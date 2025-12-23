@@ -337,6 +337,16 @@ export default function GalaxyBackground() {
             {/* CSS Shooting Stars */}
             <ShootingStars />
 
+            {/* Decorative Floating Elements */}
+            <div className="bg-decorations">
+                <div className="floating-emoji planet-deco-1">🪐</div>
+                <div className="floating-emoji planet-deco-2">🌍</div>
+                <div className="floating-emoji planet-deco-3">🌙</div>
+                <div className="floating-emoji star-deco-1">⭐</div>
+                <div className="floating-emoji star-deco-2">✨</div>
+                <div className="floating-emoji rocket-deco">🚀</div>
+            </div>
+
             {/* Additional CSS animations */}
             <style>{`
                 .shooting-star {
@@ -357,6 +367,96 @@ export default function GalaxyBackground() {
                     100% {
                         transform: translate(200px, 200px);
                         opacity: 0;
+                    }
+                }
+
+                .bg-decorations {
+                    position: fixed;
+                    inset: 0;
+                    pointer-events: none;
+                    z-index: 1;
+                }
+
+                .floating-emoji {
+                    position: absolute;
+                    opacity: 0.6;
+                    animation: emoji-float 8s ease-in-out infinite;
+                    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+                }
+
+                .planet-deco-1 {
+                    top: 10%;
+                    left: 5%;
+                    font-size: 3rem;
+                    animation-delay: 0s;
+                }
+
+                .planet-deco-2 {
+                    bottom: 20%;
+                    right: 8%;
+                    font-size: 2.5rem;
+                    animation-delay: 1s;
+                }
+
+                .planet-deco-3 {
+                    top: 60%;
+                    left: 3%;
+                    font-size: 2rem;
+                    animation-delay: 2s;
+                }
+
+                .star-deco-1 {
+                    top: 25%;
+                    right: 15%;
+                    font-size: 1.5rem;
+                    animation-delay: 0.5s;
+                }
+
+                .star-deco-2 {
+                    bottom: 40%;
+                    left: 10%;
+                    font-size: 1.2rem;
+                    animation-delay: 1.5s;
+                }
+
+                .rocket-deco {
+                    top: 15%;
+                    right: 5%;
+                    font-size: 2rem;
+                    animation: rocket-float 6s ease-in-out infinite;
+                    filter: drop-shadow(0 0 15px rgba(255, 200, 100, 0.5));
+                }
+
+                @keyframes emoji-float {
+                    0%, 100% {
+                        transform: translateY(0) rotate(0deg);
+                    }
+                    50% {
+                        transform: translateY(-20px) rotate(5deg);
+                    }
+                }
+
+                @keyframes rocket-float {
+                    0%, 100% {
+                        transform: translate(0, 0) rotate(-30deg);
+                    }
+                    50% {
+                        transform: translate(15px, -25px) rotate(-25deg);
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .floating-emoji {
+                        opacity: 0.4;
+                    }
+                    .planet-deco-1, .planet-deco-2 {
+                        font-size: 2rem;
+                    }
+                    .planet-deco-3, .rocket-deco {
+                        font-size: 1.5rem;
+                    }
+                    .star-deco-1, .star-deco-2 {
+                        font-size: 1rem;
                     }
                 }
             `}</style>
