@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbaz - Senior Full-Stack Software Engineer</title>
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.5;
+            color: #1a202c;
+            background: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 285px 1fr;
+            height: 297mm;
+            width: 210mm;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* LEFT SIDEBAR */
+        .sidebar {
+            background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+            border-right: 3px solid #dee2e6;
+            padding: 25px 20px;
+        }
+
+        .profile-section {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #495057;
+        }
+
+        .name {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: #374151;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #374151;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .contact-item {
+            font-size: 8.5px;
+            margin: 6px 0;
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .contact-icon {
+            min-width: 16px;
+            margin-right: 7px;
+            color: #212529;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .contact-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .skill-category {
+            margin-bottom: 8px;
+        }
+
+        .skill-label {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-items {
+            font-size: 8.5px;
+            line-height: 1.6;
+            color: #4b5563;
+            font-weight: 400;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar li {
+            font-size: 8.5px;
+            color: #4b5563;
+            margin: 5px 0;
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .sidebar li::before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #212529;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .education-item {
+            margin-bottom: 10px;
+        }
+
+        .degree {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            color: #111827;
+            line-height: 1.4;
+            margin-bottom: 3px;
+        }
+
+        .school {
+            font-size: 8.5px;
+            color: #4b5563;
+            margin-top: 3px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .edu-details {
+            font-size: 8px;
+            color: #6c757d;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        /* RIGHT MAIN CONTENT */
+        .main-content {
+            padding: 25px 28px;
+            background: #ffffff;
+        }
+
+        .header-section {
+            margin-bottom: 15px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #495057;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-title {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .summary-text {
+            font-size: 9px;
+            line-height: 1.7;
+            color: #374151;
+            text-align: justify;
+            font-weight: 400;
+        }
+
+        .content-section {
+            margin-bottom: 12px;
+        }
+
+        .content-section-title {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #1f2937;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .job {
+            margin-bottom: 9px;
+            page-break-inside: avoid;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 4px;
+        }
+
+        .job-title {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .job-date {
+            font-size: 8px;
+            color: #6b7280;
+            font-style: normal;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .company {
+            font-size: 9px;
+            color: #4b5563;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .job-description {
+            font-size: 8.5px;
+            line-height: 1.6;
+            color: #374151;
+            margin-left: 14px;
+            font-weight: 400;
+        }
+
+        .job-description li {
+            margin: 3px 0;
+        }
+
+        .project {
+            margin-bottom: 8px;
+            page-break-inside: avoid;
+        }
+
+        .project-title {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 3px;
+        }
+
+        .project-description {
+            font-size: 8.5px;
+            line-height: 1.6;
+            color: #374151;
+            text-align: justify;
+            font-weight: 400;
+        }
+
+        .project-highlight {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .achievement-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .achievement-list li {
+            font-size: 8.5px;
+            color: #374151;
+            margin: 4px 0;
+            padding-left: 14px;
+            position: relative;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .achievement-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #059669;
+            font-weight: 700;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- LEFT SIDEBAR -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <div class="name">ARBAZ</div>
+                <div class="title">Senior Full-Stack<br>Software Engineer</div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Contact</div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉</span>
+                    <span class="contact-text">ak.khanarbaz777@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">☎</span>
+                    <span class="contact-text">+91 9625442725</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">⌂</span>
+                    <span class="contact-text">Faridabad, Haryana, India</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">⚲</span>
+                    <span class="contact-text">linkedin.com/in/alexsye1999</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span class="contact-text">awesomealexsye.github.io</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Technical Skills</div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Frontend</div>
+                    <div class="skill-items">React Native, React.js, JavaScript, HTML5, CSS3, jQuery</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Backend</div>
+                    <div class="skill-items">Node.js, Laravel, PHP, Python, RESTful APIs</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Mobile</div>
+                    <div class="skill-items">React Native, Android, iOS Development</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">AI & ML</div>
+                    <div class="skill-items">Python ML, AI Models, Claude Code, LLM Technologies, OpenAI, Deepgram</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Database</div>
+                    <div class="skill-items">MySQL, MongoDB, PostgreSQL</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Cloud & DevOps</div>
+                    <div class="skill-items">AWS (EC2, S3, Rekognition), Linux Administration, Docker</div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-label">Tools</div>
+                    <div class="skill-items">Git, WordPress, Electron, System Design</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Education</div>
+                <div class="education-item">
+                    <div class="degree">Diploma in Computer Engineering</div>
+                    <div class="school">Government Polytechnic, Manesar, Gurugaon, Haryana</div>
+                    <div class="edu-details">First Division • June 2019</div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Languages</div>
+                <ul>
+                    <li>English (Professional Working Proficiency)</li>
+                    <li>Hindi (Native)</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">Areas of Interest</div>
+                <ul>
+                    <li>AI & Machine Learning / LLMs</li>
+                    <li>System Architecture & Design</li>
+                    <li>Mobile App Development</li>
+                    <li>Cloud Infrastructure</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RIGHT MAIN CONTENT -->
+        <div class="main-content">
+            <div class="summary-box">
+                <div class="summary-title">Professional Summary</div>
+                <div class="summary-text">
+                    Senior Full-Stack Engineer with 5+ years in eCommerce, mobile apps, and security. Published 4+ apps
+                    with 50,000+ downloads. Expertise in React Native, Node.js, Laravel, AWS, and expanding into Python
+                    ML/AI technologies.
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Professional Experience</div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Full-Stack Developer (Project-Based)</div>
+                        <div class="job-date">July 2025 - Present</div>
+                    </div>
+                    <div class="company">Dhannipay Digital Marketing Pvt Ltd • New Delhi</div>
+                    <ul class="job-description">
+                        <li>Developing HRM/Payroll app with live location-based attendance tracking</li>
+                        <li>Integrating Python ML, AI models (Claude Code, LLM) for enterprise solutions</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">IT Development Application Developer - Ecommerce</div>
+                        <div class="job-date">Sep 2022 - Jun 2025 (2Y 10M)</div>
+                    </div>
+                    <div class="company">Shipco IT Pvt Ltd • Pune</div>
+                    <ul class="job-description">
+                        <li>Built enterprise eCommerce apps with security optimization and vulnerability fixes</li>
+                        <li>Managed infrastructure, deployment pipelines, and production environments</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Associate L1 - Programmer</div>
+                        <div class="job-date">May - Sep 2022 (5M)</div>
+                    </div>
+                    <div class="company">Clavax Technologies • Gurgaon</div>
+                    <ul class="job-description">
+                        <li>Built full-stack web apps with modern JS frameworks and responsive UI components</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Software Engineer</div>
+                        <div class="job-date">Aug 2021 - May 2022 (10M)</div>
+                    </div>
+                    <div class="company">Venture7 • Faridabad</div>
+                    <ul class="job-description">
+                        <li>Developed React/Node.js apps with RESTful APIs, testing, and code reviews</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Web Developer Executive</div>
+                        <div class="job-date">Feb - Jun 2021 (5M)</div>
+                    </div>
+                    <div class="company">Adivaha Travel Technology • Faridabad</div>
+                    <ul class="job-description">
+                        <li>Built travel tech solutions using PHP, Laravel, WordPress with responsive designs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Key Projects & Applications</div>
+
+                <div class="project">
+                    <div class="project-title">Paylap Application Suite (50,000+ Downloads)</div>
+                    <div class="project-description">
+                        <span class="project-highlight">Score:</span> Credit scoring app for shops •
+                        <span class="project-highlight">Fitness:</span> Gym management with AWS Rekognition face
+                        attendance •
+                        <span class="project-highlight">HRM:</span> HR/Payroll with geo-fenced attendance •
+                        <span class="project-highlight">Pets Care:</span> Animal welfare & adoption platform
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">AI-Powered Gym Management System</div>
+                    <div class="project-description">
+                        AWS Rekognition face detection attendance, automated payments, subscriptions, and analytics
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">Real-time AI Voice Assistant</div>
+                    <div class="project-description">
+                        Personal AI assistant using Deepgram (speech-to-text) and OpenAI for intelligent voice
+                        conversations
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-title">LinkedIn Data Scraping & Analysis Tool</div>
+                    <div class="project-description">
+                        Automated LinkedIn profile extraction with intelligent data processing and analysis
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="content-section-title">Key Achievements</div>
+                <ul class="achievement-list">
+                    <li>Published 4+ mobile apps with 50,000+ combined downloads on Play Store & App Store</li>
+                    <li>Expert in Linux administration, AWS cloud services, and infrastructure management</li>
+                    <li>Strong track record resolving critical security vulnerabilities in production systems</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

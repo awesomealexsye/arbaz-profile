@@ -71,7 +71,7 @@ export default function Hero() {
                         {/* Action Buttons */}
                         <div className="hero-actions fade-in">
                             <button className="btn btn-primary" onClick={() => {
-                                window.open('https://drive.google.com/uc?export=download&id=1Mug2GiCe2r65SPA_ywTRG1zae5UGog20', '_blank');
+                                window.open('https://drive.google.com/file/d/1TMkH3GWXQBpQmkG1btNVipCVDGQWKVNl/view?usp=sharing', '_blank');
                             }}>
                                 <FiDownload style={{ marginRight: '0.5rem' }} />
                                 Download CV

@@ -2,7 +2,7 @@ import React from 'react';
 import { skills } from '../data/resumeData';
 import Lottie from 'lottie-react';
 import {
-    FiCode, FiServer, FiDatabase, FiCloud, FiSmartphone, FiCpu
+    FiCode, FiServer, FiDatabase, FiCloud, FiSmartphone, FiCpu, FiTool
 } from 'react-icons/fi';
 import './Skills.css';
 
@@ -12,7 +12,8 @@ const skillIcons = {
     database: FiDatabase,
     devops: FiCloud,
     mobile: FiSmartphone,
-    aiml: FiCpu
+    aiml: FiCpu,
+    tools: FiTool
 };
 
 const skillColors = {
@@ -21,7 +22,8 @@ const skillColors = {
     database: 'from-green-500 to-emerald-500',
     devops: 'from-orange-500 to-red-500',
     mobile: 'from-indigo-500 to-purple-500',
-    aiml: 'from-pink-500 to-rose-500'
+    aiml: 'from-pink-500 to-rose-500',
+    tools: 'from-cyan-500 to-teal-500'
 };
 
 const skillNames = {
@@ -30,7 +32,8 @@ const skillNames = {
     database: 'Database',
     devops: 'DevOps & Cloud',
     mobile: 'Mobile Development',
-    aiml: 'AI/ML'
+    aiml: 'AI/ML',
+    tools: 'Tools'
 };
 
 // Simple Lottie animation data for skills

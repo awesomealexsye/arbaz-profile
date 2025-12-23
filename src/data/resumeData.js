@@ -1,98 +1,134 @@
 // Personal Information
 export const personalInfo = {
     name: "ARBAZ",
-    title: "🚀 Full-Stack Space Architect & Code Astronaut",
+    title: "🚀 Senior Full-Stack Software Engineer",
     email: "ak.khanarbaz777@gmail.com",
     phone: "(+91) 96254-42725",
-    location: "Faridabad, Haryana 🌏",
+    location: "Faridabad, Haryana, India 🌏",
     linkedin: "alexsye1999",
     github: "awesomealexsye",
     instagram: "alexsye1999",
-    summary: "Hey there! 👋 I'm a code adventurer with 5+ years of building awesome stuff on the web and mobile. Think of me as your friendly neighborhood developer who loves turning wild ideas into real apps! I've launched 20+ apps into the digital universe (4 of them on App Store & Play Store with 50K+ downloads! 🎉). I craft experiences with React, React Native, and a sprinkle of magic from PHP/Laravel and Node.js. Oh, and I'm totally geeking out on AI/ML these days - because why not teach computers to be smart, right? 🤖✨",
+    summary: "Senior Full-Stack Engineer with 5+ years in eCommerce, mobile apps, and security. Published 4+ apps with 50,000+ downloads. Expertise in React Native, Node.js, Laravel, AWS, and expanding into Python ML/AI technologies. 🚀",
     image: "/img/me.png"
 };
 
-// Skills organized by category
+// Skills organized by category (matching CV)
 export const skills = {
     frontend: [
-        "React ⚛️", "React Native 📱", "JavaScript 💛", "TypeScript 🔷",
-        "HTML5/CSS3 🎨", "jQuery", "Redux 🔄", "Expo"
+        "React Native 📱", "React.js ⚛️", "JavaScript 💛", "HTML5 🌐",
+        "CSS3 🎨", "jQuery"
     ],
     backend: [
-        "PHP 🐘", "Laravel ✨", "Node.js 🟢", "WordPress 📝",
-        "RESTful APIs 🌐", "GraphQL"
+        "Node.js 🟢", "Laravel ✨", "PHP 🐘", "Python 🐍",
+        "RESTful APIs 🌐"
     ],
     database: [
-        "MySQL 🐬", "PostgreSQL 🐘", "SQLite", "Supabase ⚡", "Redis 🔴"
+        "MySQL 🐬", "MongoDB 🍃", "PostgreSQL 🐘"
     ],
     devops: [
-        "Linux Server Wizard 🧙", "AWS Cloud ☁️", "Ubuntu/CentOS 🐧",
-        "Apache/Nginx 🌐", "Git 🔀", "CI/CD 🚀", "Docker 🐳", "SSH 🔐"
+        "AWS (EC2, S3, Rekognition) ☁️", "Linux Administration 🐧",
+        "Docker 🐳", "Git 🔀"
     ],
     mobile: [
-        "Xcode 🍎", "Android Studio 🤖", "App Store Publishing 📲", "Play Store Publishing 🎮"
+        "React Native 📱", "Android 🤖", "iOS Development 🍎"
     ],
     aiml: [
-        "Python 🐍", "TensorFlow 🧠", "Scikit-learn 📊", "Machine Learning 🤖",
-        "NLP 💬", "Computer Vision 👁️"
+        "Python ML 🐍", "AI Models 🤖", "Claude Code 🧠",
+        "LLM Technologies 💬", "OpenAI", "Deepgram 🎙️"
+    ],
+    tools: [
+        "Git 🔀", "WordPress 📝", "Electron ⚡", "System Design 📐"
     ]
 };
 
-// Work Experience
+// Work Experience (matching CV)
 export const experience = [
     {
-        title: "Application Developer & Digital Problem Solver",
-        company: "Shipco IT Pvt Ltd 🚢",
-        period: "September 2022 - June 2025",
-        location: "Pune, India",
+        title: "Full-Stack Developer (Project-Based)",
+        company: "Dhannipay Digital Marketing Pvt Ltd 🏢",
+        period: "July 2025 - Present",
+        duration: "Present",
+        location: "New Delhi, India",
         responsibilities: [
-            "🔐 Built rock-solid authentication systems (ADFS & AWS Cognito) - basically making sure only the right people get in!",
-            "🚀 Managed smooth-as-butter releases with 99.8% uptime - because nobody likes downtime, right?",
-            "🐛 Squashed bugs and improved code quality, cutting production issues by 35%. Less bugs = happier users!",
-            "⚡ Made apps 45% faster through smart optimizations - because waiting is so last decade!"
+            "🚀 Developing HRM/Payroll app with live location-based attendance tracking",
+            "🤖 Integrating Python ML, AI models (Claude Code, LLM) for enterprise solutions",
+            "📱 Building scalable web applications and digital marketing solutions using modern technology stack"
         ]
     },
     {
-        title: "Web Wizard & WordPress Ninja",
-        company: "Adivaha - Travel Tech Adventure 🌍",
-        period: "January 2020 - August 2022",
-        location: "New Delhi, India",
+        title: "IT Development Application Developer - Ecommerce",
+        company: "Shipco IT Pvt Ltd 🚢",
+        period: "September 2022 - June 2025",
+        duration: "2 Years 10 Months",
+        location: "Pune, India",
         responsibilities: [
-            "🎫 Created plugins that handled 1000+ bookings monthly - that's a lot of happy travelers!",
-            "💳 Integrated payment gateways with 99.9% success rate - money moves smooth!",
-            "🔄 Built real-time APIs that eliminated 90% of booking conflicts - no more double bookings!",
-            "🖥️ Deployed 12+ WordPress sites on Linux servers - wearing my sysadmin hat!"
+            "🔐 Built enterprise eCommerce apps with security optimization and vulnerability fixes",
+            "🚀 Managed infrastructure, deployment pipelines, and production environments",
+            "⚡ Collaborated with cross-functional teams to deliver high-quality software solutions"
+        ]
+    },
+    {
+        title: "Associate L1 - Programmer",
+        company: "Clavax Technologies 💻",
+        period: "May 2022 - September 2022",
+        duration: "5 Months",
+        location: "Gurgaon, India",
+        responsibilities: [
+            "🎨 Built full-stack web apps with modern JS frameworks and responsive UI components",
+            "🔗 Integrated backend APIs for seamless user experience"
+        ]
+    },
+    {
+        title: "Software Engineer",
+        company: "Venture7 🌟",
+        period: "August 2021 - May 2022",
+        duration: "10 Months",
+        location: "Faridabad, India",
+        responsibilities: [
+            "⚛️ Developed React/Node.js apps with RESTful APIs",
+            "✅ Ensured code quality through testing, debugging, and code reviews"
+        ]
+    },
+    {
+        title: "Web Developer Executive",
+        company: "Adivaha Travel Technology 🌍",
+        period: "February 2021 - June 2021",
+        duration: "5 Months",
+        location: "Faridabad, India",
+        responsibilities: [
+            "🎫 Built travel tech solutions using PHP, Laravel, WordPress with responsive designs",
+            "📱 Created dynamic frontend features for travel platforms"
         ]
     }
 ];
 
-// Education
+// Education (matching CV)
 export const education = {
-    degree: "Diploma in Computer Science 🎓",
-    institution: "Government Polytechnic",
-    period: "2016 - 2019",
-    location: "Gurugram, Haryana"
+    degree: "Diploma in Computer Engineering 🎓",
+    institution: "Government Polytechnic, Manesar",
+    period: "June 2019",
+    location: "Gurugram, Haryana",
+    division: "First Division"
 };
 
-// Achievements
+// Achievements (matching CV)
 export const achievements = [
     "📱 4+ apps published on App/Play Stores",
-    "🚀 20+ projects launched into production",
-    "📊 50K+ downloads across all apps",
-    "⏱️ 99.8% uptime for critical systems",
-    "⭐ 4.5+ average rating on stores",
-    "🐧 Linux server administration expert"
+    "🚀 50K+ combined downloads across all apps",
+    "🐧 Expert in Linux administration & AWS cloud services",
+    "🔐 Strong track record resolving critical security vulnerabilities",
+    "⭐ 4.5+ average rating on stores"
 ];
 
-// Key Projects
+// Key Projects (matching CV)
 export const projects = [
     {
         id: 1,
         title: "Paylap Score",
-        subtitle: "Digital Scoring Platform 🎯",
-        description: "Solo mission alert! 🚀 Built this complete scoring platform from scratch - web, mobile, backend, everything! Added JWT authentication for security, real-time analytics for insights, and deployed it all on my own Linux server. Plus got it published on both App Store and Play Store. Talk about a full-stack adventure!",
+        subtitle: "Credit Scoring Platform 🎯",
+        description: "Custom credit scoring application for shop owners and customers, managing transactions and credit assessments with comprehensive financial tracking. Complete solo development with full-stack implementation.",
         tech: ["React", "React Native", "Laravel", "MySQL", "AWS", "Linux"],
-        highlights: ["✨ 100% solo development", "🖥️ Linux deployment mastery", "📱 Both app stores conquered"],
+        highlights: ["✨ Credit assessments", "📊 Transaction tracking", "📱 Both app stores"],
         downloads: "10K+",
         rating: "4.5+",
         icon: "activity",
@@ -103,10 +139,10 @@ export const projects = [
     {
         id: 2,
         title: "Paylap Fitness",
-        subtitle: "Gym Management Magic 💪",
-        description: "Your friendly neighborhood gym app! Built a complete management system with member check-ins via QR codes & biometrics (pretty cool, right?), subscription tracking, custom workout plans, and payment integration. Basically, everything a modern gym needs in one beautiful package. Solo mission accomplished! 🎉",
-        tech: ["React Native", "Node.js", "Laravel", "MySQL", "Linux"],
-        highlights: ["🏋️ Full-stack solo adventure", "☁️ Server deployed like a boss", "🌟 Published on both stores"],
+        subtitle: "Gym Management with AI 💪",
+        description: "Complete gym management system featuring AWS Rekognition-powered face detection attendance, member & trainer management, subscription plans, and payment processing. AI-powered attendance tracking!",
+        tech: ["React Native", "Node.js", "Laravel", "MySQL", "AWS Rekognition", "Linux"],
+        highlights: ["👁️ AWS Rekognition face detection", "💳 Automated payments", "📊 Analytics"],
         rating: "4.6",
         icon: "heart",
         gradient: "from-blue-500 via-cyan-600 to-teal-500",
@@ -115,13 +151,13 @@ export const projects = [
     },
     {
         id: 3,
-        title: "Paylap Education",
-        subtitle: "Learning Platform 📚",
-        description: "Education meets innovation! Created this awesome learning platform with video streaming, quizzes, course management, and role-based access for students, teachers, and admins. Set up the entire deployment pipeline - Linux server, CDN, database optimization, and app store publishing. Making learning digital and fun! 🎓",
-        tech: ["React", "React Native", "Laravel", "Supabase", "Linux"],
-        highlights: ["🏗️ Architected from ground up", "🐧 Linux server wizard", "🚀 Complete deployment pipeline"],
-        users: "5K+ active learners",
-        icon: "book",
+        title: "Paylap HRM",
+        subtitle: "HR & Payroll Solution 📋",
+        description: "Enterprise HR management and payroll solution with live location-based attendance tracking, employee management, and automated salary processing. Geo-fenced attendance for modern workplaces!",
+        tech: ["React Native", "Laravel", "MySQL", "Expo", "Linux"],
+        highlights: ["📍 Geo-fenced attendance", "💰 Automated payroll", "👥 Employee management"],
+        users: "Active enterprise users",
+        icon: "users",
         gradient: "from-indigo-500 via-purple-600 to-pink-500",
         appStore: "#",
         playStore: "#"
@@ -129,30 +165,55 @@ export const projects = [
     {
         id: 4,
         title: "Paylap Pets Care",
-        subtitle: "Animal Rescue Platform 🐾",
-        description: "Saving lives, one paw at a time! 💚 Built this comprehensive platform for animal rescue NGOs. Features include tracking injured pets, pet adoption browsing, donation management, live location tracking for rescued animals, health records, and vet consultation booking. Deployed it all independently on AWS & Linux. Every rescue counts!",
+        subtitle: "Animal Welfare Platform 🐾",
+        description: "Compassionate animal welfare platform enabling rescue of injured street animals, medical treatment management, and pet adoption services. Built with love for our furry friends! 💚",
         tech: ["React Native", "Laravel", "MySQL", "AWS S3", "Linux"],
-        highlights: ["❤️ Built with love (solo!)", "☁️ AWS & Linux deployment", "📲 Published independently"],
+        highlights: ["❤️ Animal rescue tracking", "🏥 Medical management", "🐕 Pet adoption"],
         icon: "paw",
         gradient: "from-green-500 via-emerald-600 to-teal-500",
         appStore: "https://apps.apple.com/us/app/paylap-pet-care/id6751187034",
         playStore: "https://play.google.com/store/apps/details?id=com.alexsye1999.paylappets"
+    },
+    {
+        id: 5,
+        title: "Real-time AI Voice Assistant",
+        subtitle: "Intelligent Voice Companion 🎙️",
+        description: "Personal AI assistant using Deepgram for real-time speech-to-text conversion and OpenAI for intelligent conversational responses with natural voice interaction.",
+        tech: ["Python", "Deepgram API", "OpenAI", "Node.js"],
+        highlights: ["🎙️ Real-time speech-to-text", "🤖 OpenAI integration", "💬 Natural conversations"],
+        icon: "mic",
+        gradient: "from-orange-500 via-red-600 to-pink-500",
+        appStore: "#",
+        playStore: "#"
+    },
+    {
+        id: 6,
+        title: "LinkedIn Data Scraping Tool",
+        subtitle: "Data Analysis Platform 📊",
+        description: "Automated LinkedIn profile extraction with intelligent data processing, storage, and analysis capabilities for business insights.",
+        tech: ["Python", "Selenium", "PostgreSQL", "Node.js"],
+        highlights: ["🔍 Automated extraction", "📊 Data analysis", "💾 Smart storage"],
+        icon: "database",
+        gradient: "from-cyan-500 via-blue-600 to-indigo-500",
+        appStore: "#",
+        playStore: "#"
     }
 ];
 
-// AI/ML Focus
+// AI/ML Focus (matching CV)
 export const aimlFocus = [
-    "🤖 ML predictive models - teaching machines to think!",
-    "💬 NLP & 👁️ Computer Vision - understanding text and images",
-    "🌐 AI web app integration - making apps smarter",
-    "🧠 TensorFlow & Scikit-learn - the brain tools!"
+    "🐍 Python ML - Building intelligent models",
+    "🤖 AI Models Integration - Claude Code & LLM Technologies",
+    "🎙️ Deepgram API - Real-time speech-to-text",
+    "🧠 OpenAI - Intelligent conversational AI",
+    "👁️ AWS Rekognition - Face detection & computer vision"
 ];
 
 // About Data - Extended Personal Information
 export const aboutData = {
-    introduction: "I'm a full-stack developer who believes code is more than just syntax—it's a way to create experiences that matter. With over 5 years of turning coffee into code, I've mastered the art of building applications that users love and businesses rely on. From mobile apps with 50K+ downloads to enterprise systems handling critical operations, I bring both technical expertise and a genuine passion for solving real-world problems.",
-    mission: "To leverage cutting-edge technology and create digital solutions that make a meaningful impact, while constantly learning and evolving in the ever-changing tech landscape.",
-    vision: "To be a catalyst for innovation, pushing the boundaries of what's possible with web and mobile technologies, and inspiring the next generation of developers.",
+    introduction: "I'm a Senior Full-Stack Software Engineer with 5+ years of comprehensive experience in eCommerce applications, mobile app development, and security implementations. I've successfully published and maintained 4+ mobile applications with over 50,000 combined downloads. Currently expanding expertise in Python, Machine Learning, and AI/LLM technologies while working on enterprise-level applications.",
+    mission: "To leverage cutting-edge technology including AI/ML and create digital solutions that make a meaningful impact, while constantly learning and evolving in the ever-changing tech landscape.",
+    vision: "To be a catalyst for innovation, pushing the boundaries of what's possible with web, mobile, and AI technologies, and inspiring the next generation of developers.",
     values: [
         {
             icon: "code",
@@ -178,7 +239,7 @@ export const aboutData = {
     highlights: [
         { label: "Years of Experience", value: "5+" },
         { label: "Projects Delivered", value: "20+" },
-        { label: "Happy Clients", value: "15+" },
+        { label: "App Downloads", value: "50K+" },
         { label: "Technologies Mastered", value: "30+" }
     ]
 };
@@ -234,9 +295,9 @@ export const services = [
         id: 4,
         icon: "cloud",
         title: "Cloud & DevOps",
-        description: "Complete deployment and server management on AWS, Linux servers. CI/CD pipelines, monitoring, and infrastructure as code.",
+        description: "Complete deployment and server management on AWS (EC2, S3, Rekognition), Linux servers. CI/CD pipelines, monitoring, and infrastructure as code.",
         features: [
-            "AWS cloud infrastructure setup",
+            "AWS cloud infrastructure (EC2, S3, Rekognition)",
             "Linux server administration",
             "CI/CD pipeline configuration",
             "Docker containerization",
@@ -264,14 +325,14 @@ export const services = [
         id: 6,
         icon: "brain",
         title: "AI/ML Integration",
-        description: "Bringing intelligence to your applications with machine learning, NLP, and computer vision capabilities.",
+        description: "Bringing intelligence to your applications with Python ML, LLM technologies, OpenAI, Deepgram, and AWS Rekognition.",
         features: [
-            "ML model integration",
-            "Natural Language Processing",
-            "Computer vision features",
-            "Predictive analytics",
-            "AI-powered recommendations",
-            "TensorFlow & Scikit-learn"
+            "Python ML model integration",
+            "LLM & Claude Code implementation",
+            "OpenAI API integration",
+            "Deepgram speech-to-text",
+            "AWS Rekognition face detection",
+            "AI-powered recommendations"
         ],
         gradient: "from-indigo-500 via-purple-600 to-pink-500"
     }
@@ -365,46 +426,54 @@ export const processSteps = [
     }
 ];
 
-// Technologies Showcase
+// Technologies Showcase (matching CV)
 export const technologiesShowcase = {
     frontend: {
         name: "Frontend",
         techs: [
-            { name: "React", icon: "⚛️", proficiency: "expert" },
             { name: "React Native", icon: "📱", proficiency: "expert" },
+            { name: "React.js", icon: "⚛️", proficiency: "expert" },
             { name: "JavaScript", icon: "💛", proficiency: "expert" },
-            { name: "TypeScript", icon: "🔷", proficiency: "advanced" },
-            { name: "HTML5/CSS3", icon: "🎨", proficiency: "expert" },
-            { name: "Redux", icon: "🔄", proficiency: "advanced" }
+            { name: "HTML5", icon: "🌐", proficiency: "expert" },
+            { name: "CSS3", icon: "🎨", proficiency: "expert" },
+            { name: "jQuery", icon: "📜", proficiency: "advanced" }
         ]
     },
     backend: {
         name: "Backend",
         techs: [
-            { name: "PHP", icon: "🐘", proficiency: "expert" },
+            { name: "Node.js", icon: "🟢", proficiency: "expert" },
             { name: "Laravel", icon: "✨", proficiency: "expert" },
-            { name: "Node.js", icon: "🟢", proficiency: "advanced" },
-            { name: "REST APIs", icon: "🌐", proficiency: "expert" },
-            { name: "GraphQL", icon: "📊", proficiency: "intermediate" }
+            { name: "PHP", icon: "🐘", proficiency: "expert" },
+            { name: "Python", icon: "🐍", proficiency: "advanced" },
+            { name: "REST APIs", icon: "🌐", proficiency: "expert" }
         ]
     },
     database: {
         name: "Database",
         techs: [
             { name: "MySQL", icon: "🐬", proficiency: "expert" },
-            { name: "PostgreSQL", icon: "🐘", proficiency: "advanced" },
-            { name: "Supabase", icon: "⚡", proficiency: "advanced" },
-            { name: "Redis", icon: "🔴", proficiency: "intermediate" }
+            { name: "MongoDB", icon: "🍃", proficiency: "advanced" },
+            { name: "PostgreSQL", icon: "🐘", proficiency: "advanced" }
         ]
     },
     devops: {
-        name: "DevOps & Cloud",
+        name: "Cloud & DevOps",
         techs: [
+            { name: "AWS (EC2, S3, Rekognition)", icon: "☁️", proficiency: "advanced" },
             { name: "Linux", icon: "🐧", proficiency: "expert" },
-            { name: "AWS", icon: "☁️", proficiency: "advanced" },
             { name: "Docker", icon: "🐳", proficiency: "intermediate" },
-            { name: "Git", icon: "🔀", proficiency: "expert" },
-            { name: "CI/CD", icon: "🚀", proficiency: "advanced" }
+            { name: "Git", icon: "🔀", proficiency: "expert" }
+        ]
+    },
+    aiml: {
+        name: "AI & ML",
+        techs: [
+            { name: "Python ML", icon: "🐍", proficiency: "advanced" },
+            { name: "Claude Code", icon: "🧠", proficiency: "advanced" },
+            { name: "LLM Technologies", icon: "💬", proficiency: "advanced" },
+            { name: "OpenAI", icon: "🤖", proficiency: "advanced" },
+            { name: "Deepgram", icon: "🎙️", proficiency: "intermediate" }
         ]
     }
 };
@@ -437,9 +506,9 @@ export const stats = [
     },
     {
         id: 4,
-        icon: "users",
-        label: "Happy Clients",
-        value: 15,
+        icon: "smartphone",
+        label: "Published Apps",
+        value: 4,
         suffix: "+",
         color: "from-orange-500 to-red-500"
     }
@@ -474,7 +543,7 @@ export const testimonials = [
         company: "FitLife Gyms",
         image: "/img/testimonial-placeholder.jpg",
         rating: 5,
-        text: "The gym management app Arbaz built transformed our business operations. QR code check-ins, biometric integration, and seamless payment processing—all working perfectly. Highly recommended!",
+        text: "The gym management app Arbaz built with AWS Rekognition face detection transformed our business operations. QR code check-ins, biometric integration, and seamless payment processing—all working perfectly!",
         gradient: "from-green-500 to-emerald-500"
     },
     {

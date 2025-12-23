@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { stats } from '../data/resumeData';
-import { FiBriefcase, FiFolder, FiDownload, FiUsers } from 'react-icons/fi';
+import { FiBriefcase, FiFolder, FiDownload, FiUsers, FiSmartphone } from 'react-icons/fi';
 import './Stats.css';
 
 const iconMap = {
     briefcase: FiBriefcase,
     folder: FiFolder,
     download: FiDownload,
-    users: FiUsers
+    users: FiUsers,
+    smartphone: FiSmartphone
 };
 
 export default function Stats() {

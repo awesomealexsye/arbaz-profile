@@ -33,6 +33,9 @@ export default function Projects() {
                                     {project.icon === 'heart' && '❤️'}
                                     {project.icon === 'book' && '📚'}
                                     {project.icon === 'paw' && '🐾'}
+                                    {project.icon === 'users' && '👥'}
+                                    {project.icon === 'mic' && '🎙️'}
+                                    {project.icon === 'database' && '📊'}
                                 </div>
 
                                 {project.rating && (
@@ -109,6 +112,9 @@ export default function Projects() {
                                 {selectedProject.icon === 'heart' && '❤️'}
                                 {selectedProject.icon === 'book' && '📚'}
                                 {selectedProject.icon === 'paw' && '🐾'}
+                                {selectedProject.icon === 'users' && '👥'}
+                                {selectedProject.icon === 'mic' && '🎙️'}
+                                {selectedProject.icon === 'database' && '📊'}
                             </div>
                         </div>
 

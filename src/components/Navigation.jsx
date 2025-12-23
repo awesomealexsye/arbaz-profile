@@ -39,7 +39,7 @@ export default function Navigation() {
 
     const handleDownloadCV = () => {
         // Direct download link from Google Drive
-        window.open('https://drive.google.com/uc?export=download&id=1Mug2GiCe2r65SPA_ywTRG1zae5UGog20', '_blank');
+        window.open('https://drive.google.com/file/d/1TMkH3GWXQBpQmkG1btNVipCVDGQWKVNl/view?usp=sharing', '_blank');
     };
 
     return (

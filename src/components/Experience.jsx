@@ -40,6 +40,11 @@ export default function Experience() {
                                             <FiCalendar />
                                             <span>{job.period}</span>
                                         </div>
+                                        {job.duration && (
+                                            <div className="meta-item duration-badge">
+                                                <span>({job.duration})</span>
+                                            </div>
+                                        )}
                                         <div className="meta-item">
                                             <FiMapPin />
                                             <span>{job.location}</span>
