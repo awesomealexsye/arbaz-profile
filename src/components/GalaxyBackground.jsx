@@ -314,16 +314,132 @@ function GalaxySpiral() {
 }
 
 export default function GalaxyBackground() {
-    const isMobile = window.innerWidth < 768;
+    const [isMobile, setIsMobile] = useState(false);
+    const [isClient, setIsClient] = useState(false);
 
+    useEffect(() => {
+        setIsClient(true);
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // CSS-only background for mobile/tablet (no WebGL)
+    if (isMobile || !isClient) {
+        return (
+            <div className="galaxy-bg-mobile" style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                zIndex: -1,
+                background: 'transparent'
+            }}>
+                {/* CSS Stars for Mobile */}
+                <div className="mobile-stars">
+                    {[...Array(80)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="mobile-star"
+                            style={{
+                                left: `${Math.random() * 100}%`,
+                                top: `${Math.random() * 100}%`,
+                                animationDelay: `${Math.random() * 3}s`,
+                                width: `${1 + Math.random() * 2}px`,
+                                height: `${1 + Math.random() * 2}px`,
+                            }}
+                        />
+                    ))}
+                </div>
+
+                {/* CSS Shooting Stars */}
+                <ShootingStars />
+
+                {/* Decorative Floating Elements */}
+                <div className="bg-decorations">
+                    <div className="floating-emoji planet-deco-1">🪐</div>
+                    <div className="floating-emoji planet-deco-2">🌍</div>
+                    <div className="floating-emoji rocket-deco">🚀</div>
+                </div>
+
+                <style>{`
+                    .mobile-stars {
+                        position: fixed;
+                        inset: 0;
+                        pointer-events: none;
+                    }
+
+                    .mobile-star {
+                        position: absolute;
+                        background: white;
+                        border-radius: 50%;
+                        animation: twinkle 2s ease-in-out infinite;
+                    }
+
+                    @keyframes twinkle {
+                        0%, 100% { opacity: 0.3; transform: scale(1); }
+                        50% { opacity: 1; transform: scale(1.2); }
+                    }
+
+                    .shooting-star {
+                        position: absolute;
+                        width: 2px;
+                        height: 2px;
+                        background: white;
+                        border-radius: 50%;
+                        box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+                        animation: shoot 2s linear;
+                    }
+
+                    @keyframes shoot {
+                        0% { transform: translate(0, 0); opacity: 1; }
+                        100% { transform: translate(100px, 100px); opacity: 0; }
+                    }
+
+                    .bg-decorations {
+                        position: fixed;
+                        inset: 0;
+                        pointer-events: none;
+                        z-index: 1;
+                    }
+
+                    .floating-emoji {
+                        position: absolute;
+                        opacity: 0.5;
+                        animation: emoji-float 8s ease-in-out infinite;
+                    }
+
+                    .planet-deco-1 { top: 10%; left: 5%; font-size: 2rem; }
+                    .planet-deco-2 { bottom: 20%; right: 5%; font-size: 1.5rem; animation-delay: 1s; }
+                    .rocket-deco { top: 15%; right: 5%; font-size: 1.5rem; animation: rocket-float 6s ease-in-out infinite; }
+
+                    @keyframes emoji-float {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-15px); }
+                    }
+
+                    @keyframes rocket-float {
+                        0%, 100% { transform: translate(0, 0) rotate(-30deg); }
+                        50% { transform: translate(10px, -15px) rotate(-25deg); }
+                    }
+                `}</style>
+            </div>
+        );
+    }
+
+    // Desktop: Full Three.js experience
     return (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
-            <Canvas camera={{ position: [0, 0, 50], fov: isMobile ? 80 : 75 }}>
+            <Canvas camera={{ position: [0, 0, 50], fov: 75 }}>
                 <ambientLight intensity={0.3} />
                 <pointLight position={[10, 10, 10]} intensity={0.5} />
 
                 {/* Twinkling Stars */}
-                <Stars radius={100} depth={50} count={isMobile ? 3000 : 10000} factor={4} saturation={0} fade speed={1} />
+                <Stars radius={100} depth={50} count={10000} factor={4} saturation={0} fade speed={1} />
 
                 {/* Custom Components */}
                 <GalaxySpiral />

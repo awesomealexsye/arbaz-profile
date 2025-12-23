@@ -52,8 +52,16 @@ function App() {
 
       {/* Smooth Entrance Animation Styles */}
       <style>{`
+        .App {
+          overflow-x: hidden;
+          width: 100%;
+          max-width: 100vw;
+        }
+
         .main-content-wrapper {
           transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          overflow-x: hidden;
+          width: 100%;
         }
 
         .entering-space {

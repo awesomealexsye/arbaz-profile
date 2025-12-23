@@ -501,6 +501,18 @@
     .loading-text {
         bottom: 20%;
     }
+
+    .planet {
+        font-size: 1.5rem !important;
+    }
+
+    .floating-rocket {
+        font-size: 1.5rem;
+    }
+
+    .nebula {
+        opacity: 0.4;
+    }
 }
 
 @media (max-width: 480px) {
@@ -514,7 +526,46 @@
     }
 
     .text-glow {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         letter-spacing: 1px;
+    }
+
+    .vortex {
+        width: 150px;
+        height: 150px;
+    }
+
+    .ring-1 {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ring-2 {
+        width: 70px;
+        height: 70px;
+    }
+
+    .ring-3 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .vortex-core {
+        width: 30px;
+        height: 30px;
+    }
+
+    .planets {
+        display: none;
+    }
+
+    .floating-rocket {
+        font-size: 1.2rem;
+        top: 5%;
+        left: 10%;
+    }
+
+    .loading-text {
+        bottom: 15%;
     }
 }
