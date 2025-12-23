@@ -316,6 +316,16 @@
     animation: morph 8s ease-in-out infinite;
 }
 
+/* Video Styling */
+.hero-video {
+    width: 450px;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+}
+
 @keyframes morph {
 
     0%,

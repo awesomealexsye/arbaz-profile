@@ -2,11 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiPhone, FiInstagram, FiDownload } from 'react-icons/fi';
 import { personalInfo } from '../data/resumeData';
 import './Hero.css';
-import LottieReact from 'lottie-react';
-import animationData from '../assets/lottie/astranaut.json';
-
-// Handle potential default export mismatch
-const Lottie = LottieReact.default || LottieReact;
 
 export default function Hero() {
     const imageRef = useRef(null);
@@ -116,11 +111,16 @@ export default function Hero() {
                     <div className="hero-image-container fade-in">
                         <div className="hero-image-wrapper" ref={imageRef}>
                             <div className="image-glow"></div>
-                            <Lottie
-                                animationData={animationData}
-                                loop={true}
-                                className="hero-image"
-                            />
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="hero-image hero-video"
+                            >
+                                <source src="/me-animate.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
                             <div className="image-border"></div>
                         </div>
 
