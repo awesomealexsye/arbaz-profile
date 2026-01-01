@@ -91,9 +91,9 @@ export const experience = [
     },
     {
         title: "Web Developer Executive",
-        company: "Adivaha Travel Technology 🌍",
-        period: "February 2021 - June 2021",
-        duration: "5 Months",
+        company: "Next Innovations 🌍",
+        period: "July 2019 - June 2021",
+        duration: "2 Years",
         location: "Faridabad, India",
         responsibilities: [
             "🎫 Built travel tech solutions using PHP, Laravel, WordPress with responsive designs",
